@@ -1,0 +1,99 @@
+/* styles.css */
+
+/* App container */
+.App {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+}
+
+/* Form styling */
+form {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+input, select, button {
+  margin-bottom: 10px;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+}
+
+button {
+  background-color: #007bff;
+  color: #fff;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+/* Table styling */
+table {
+  width: 100%;
+  margin-top: 20px;
+  border-collapse: collapse;
+}
+
+th, td {
+  padding: 8px;
+  border-bottom: 1px solid #ddd;
+  text-align: left;
+}
+
+/* Buttons within table */
+.delete-button {
+  background-color: #dc3545;
+  color: #fff;
+  border: none;
+  padding: 6px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.delete-button:hover {
+  background-color: #c82333;
+}
+
+/* Group names color differentiation */
+tr.group-1 {
+  background-color: #ffe5e5; /* Light red */
+}
+
+tr.group-2 {
+  background-color: #e5e5ff; /* Light blue */
+}
+
+tr.group-3 {
+  background-color: #e5ffe5; /* Light green */
+}
+
+tr.group-4 {
+  background-color: #ffffe5; /* Light yellow */
+}
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+  .App {
+    padding: 10px;
+  }
+  
+  form {
+    margin-top: 10px;
+  }
+
+  input, select, button {
+    margin-bottom: 8px;
+    padding: 6px;
+    font-size: 14px;
+  }
+
+  button {
+    padding: 6px 10px;
+  }
+}

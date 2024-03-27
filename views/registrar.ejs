@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Course Information</title>
+  <link rel="stylesheet" href="stylesheets/style.css">
+</head>
+<body>
+  <div class="App">
+    <% if (typeof messages !== 'undefined' && messages.error) { %>
+      <div class="alert alert-danger">
+          <%= messages.error %>
+      </div>
+    <% } else if (typeof messages !== 'undefined' && messages.success) { %>
+      <div class="alert alert-success">
+          <%= messages.success %>
+      </div>
+    <% } %>
+    <h1>Course Information</h1>
+    <div>
+      <button id="addEntryButton">Add Entry</button>
+      <button id="saveButton" style="background-color: green;">Save</button> <!-- Save button -->
+    </div>
+    <form id="courseForm" style="display: none;">
+      <input type="text" id="courseNameInput" placeholder="Course Name">
+      <input type="text" id="courseIdInput" placeholder="Course ID">
+      <select id="departmentSelect">
+        <option value="">Select Department</option>
+        <option value="CSE">CSE</option>
+        <option value="CCE">CCE</option>
+        <option value="MME">MME</option>
+        <option value="ECE">ECE</option>
+        <option value="DCS">DCS</option>
+        <option value="DCE">DCE</option>
+      </select>
+      <input type="number" id="studentsInput" placeholder="No. of Students">
+      <select id="yearSelect">
+        <option value="">Select Year</option>
+        <option value="1st">1st</option>
+        <option value="2nd">2nd</option>
+        <option value="3rd">3rd</option>
+        <option value="4th">4th</option>
+      </select>
+      <button id="addProfessorButton" type="button">Add Professor</button>
+      <button type="submit">Add</button>
+    </form>
+    <table id="courseTable">
+      <thead>
+        <tr>
+          <th>Course Name</th>
+          <th>Course ID</th>
+          <th>Department</th>
+          <th>No. of Students</th>
+          <th>Year</th>
+          <th>Professors</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Course entries will be inserted here dynamically -->
+      </tbody>
+    </table>
+    <button id="generateButton">Generate</button>
+    <button id="sendButton">Send</button>
+    <!-- Logout button -->
+    <form action="/logout" method="POST">
+      <button type="submit">Logout</button>
+    </form>
+  </div>
+
+  <script src="javascripts/script.js"></script>
+</body>
+</html>
