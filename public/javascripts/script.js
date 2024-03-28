@@ -25,7 +25,16 @@ document.addEventListener("DOMContentLoaded", function() {
                 <td>${course.name}</td>
                 <td>${course.id}</td>
                 <td>${course.department}</td>
-                <td>${course.students}</td>
+                <td>${course.cseStudents}</td>
+                <td>${course.cceStudents}</td>
+                <td>${course.eceStudents}</td>
+                <td>${course.cseDDStudents}</td>
+                <td>${course.eceDDStudents}</td>
+                <td>${course.mmeStudents}</td>
+                <td>${course.credits}</td>
+                <td>${course.semester}</td>
+                <td>${course.courseType}</td>
+                <td>${course.sharingType}</td>
                 <td>${course.year}</td>
                 <td>${course.professors.join(", ")}</td>
                 <td><button class="save-button" data-index="${index}">Save</button></td>
@@ -125,7 +134,41 @@ document.addEventListener("DOMContentLoaded", function() {
         saveData();
     });
 
-    // Remaining code remains the same
+    sendButton.addEventListener("click", function() {
+        const hodDepartment = document.getElementById("hodDepartment").value;
+        if (!hodDepartment) {
+            alert("Please select a HOD department");
+            return;
+        }
+        const filteredCourses = courses.filter(course => course.department === hodDepartment);
+        sendDataToHOD(filteredCourses, hodDepartment);
+    });
+
+    // Function to send data to the respective HOD
+    function sendDataToHOD(data, department) {
+        // Send data to the server
+        fetch("/sendToHOD", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ data: data, department: department })
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error("Network response was not ok.");
+            }
+            return response.json();
+        })
+        .then(data => {
+            console.log("Data sent to HOD successfully:", data);
+            alert("Data sent to HOD successfully.");
+        })
+        .catch(error => {
+            console.error("Error sending data to HOD:", error);
+            alert("Error occurred while sending data to HOD. Please try again.");
+        });
+    }
 
     addEntryButton.addEventListener("click", function() {
         courseForm.style.display = "block";
@@ -153,14 +196,21 @@ document.addEventListener("DOMContentLoaded", function() {
             name: document.getElementById("courseNameInput").value,
             id: document.getElementById("courseIdInput").value,
             department: selectedDepartmentId,
-            students: document.getElementById("studentsInput").value,
+            cseStudents: document.getElementById("cseStudentsInput").value,
+            cceStudents: document.getElementById("cceStudentsInput").value,
+            eceStudents: document.getElementById("eceStudentsInput").value,
+            cseDDStudents: document.getElementById("cseDDStudentsInput").value,
+            eceDDStudents: document.getElementById("eceDDStudentsInput").value,
+            mmeStudents: document.getElementById("mmeStudentsInput").value,
+            credits: document.getElementById("creditsInput").value,
+            semester: document.getElementById("semesterSelect").value,
+            courseType: document.getElementById("courseTypeSelect").value,
+            sharingType: document.getElementById("sharingTypeSelect").value,
             year: document.getElementById("yearSelect").value,
             professors: Array.from(document.querySelectorAll(".professors-container input")).map(input => input.value),
-            numberOfStudents: document.getElementById("studentsInput").value,
-            semester: "Spring"
         };
 
-        if (!newCourse.name || !newCourse.id || !newCourse.department || !newCourse.students || !newCourse.year) {
+        if (!newCourse.name || !newCourse.id || !newCourse.department || !newCourse.cseStudents || !newCourse.cceStudents || !newCourse.eceStudents || !newCourse.cseDDStudents || !newCourse.eceDDStudents || !newCourse.mmeStudents || !newCourse.credits || !newCourse.semester || !newCourse.courseType || !newCourse.sharingType || !newCourse.year) {
             alert("Please fill in all fields");
             return;
         }
@@ -178,10 +228,6 @@ document.addEventListener("DOMContentLoaded", function() {
 
     generateButton.addEventListener("click", function() {
         // Generate button logic goes here
-    });
-
-    sendButton.addEventListener("click", function() {
-        // Send button logic goes here
     });
 
     // Optional: Add event listener for logout button
