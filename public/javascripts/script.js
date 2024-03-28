@@ -1,130 +1,200 @@
-// script.js
-
 document.addEventListener("DOMContentLoaded", function() {
-  const courses = [];
-  const courseForm = document.getElementById("courseForm");
-  const addEntryButton = document.getElementById("addEntryButton");
-  const addProfessorButton = document.getElementById("addProfessorButton");
-  const courseTableBody = document.querySelector("#courseTable tbody");
-  const generateButton = document.getElementById("generateButton");
-  const sendButton = document.getElementById("sendButton");
-  const saveButton = document.getElementById("saveButton");
+    const courses = [];
+    const courseForm = document.getElementById("courseForm");
+    const courseTableBody = document.querySelector("#courseTable tbody");
+    const saveButton = document.getElementById("saveButton"); // Get the save button
 
-  addEntryButton.addEventListener("click", function() {
-      courseForm.style.display = "block";
-  });
+    // Load saved data when the page loads
+    const savedData = localStorage.getItem("savedCourses");
+    if (savedData) {
+        courses.push(...JSON.parse(savedData));
+        renderCourses();
+    }
 
-  addProfessorButton.addEventListener("click", function() {
-      const professorsContainer = document.createElement("div");
-      professorsContainer.classList.add("professors-container");
+    // Function to save form data to local storage
+    function saveData() {
+        localStorage.setItem("savedCourses", JSON.stringify(courses));
+    }
 
-      const professorInput = document.createElement("input");
-      professorInput.type = "text";
-      professorInput.placeholder = "Professor";
-      professorsContainer.appendChild(professorInput);
+    function renderCourses() {
+        courseTableBody.innerHTML = "";
 
-      courseForm.insertBefore(professorsContainer, addProfessorButton);
-  });
+        courses.forEach((course, index) => {
+            const row = document.createElement("tr");
+            row.innerHTML = `
+                <td>${course.name}</td>
+                <td>${course.id}</td>
+                <td>${course.department}</td>
+                <td>${course.students}</td>
+                <td>${course.year}</td>
+                <td>${course.professors.join(", ")}</td>
+                <td><button class="save-button" data-index="${index}">Save</button></td>
+                <td><button class="delete-button" data-index="${index}">Delete</button></td>
+            `;
+            courseTableBody.appendChild(row);
+        });
 
-  courseForm.addEventListener("submit", function(event) {
-      event.preventDefault();
+        // Add event listener for save buttons
+        document.querySelectorAll(".save-button").forEach(button => {
+            button.addEventListener("click", () => {
+                const index = button.getAttribute("data-index");
+                saveCourse(index);
+            });
+        });
 
-      const newCourse = {
-          name: document.getElementById("courseNameInput").value,
-          id: document.getElementById("courseIdInput").value,
-          department: document.getElementById("departmentSelect").value,
-          students: document.getElementById("studentsInput").value,
-          year: document.getElementById("yearSelect").value,
-          professors: Array.from(document.querySelectorAll(".professors-container input")).map(input => input.value)
-      };
+        // Add event listener for delete buttons
+        document.querySelectorAll(".delete-button").forEach(button => {
+            button.addEventListener("click", () => {
+                const index = button.getAttribute("data-index");
+                confirmDelete(index);
+            });
+        });
+    }
 
-      if (!newCourse.name || !newCourse.id || !newCourse.department || !newCourse.students || !newCourse.year) {
-          alert("Please fill in all fields");
-          return;
-      }
+    function saveCourse(index) {
+        const course = courses[index];
+        console.log("Saving course:", course); // Debugging statement
 
-      courses.push(newCourse);
-      renderCourses();
-      resetForm();
-  });
+        // Save data to local storage
+        saveData();
 
-  function renderCourses() {
-      courseTableBody.innerHTML = "";
+        // Send data to server
+        fetch("/save", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(course)
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error("Network response was not ok.");
+            }
+            return response.json();
+        })
+        .then(data => {
+            console.log("Data saved successfully:", data);
+            alert("Hurray! Data saved successfully.");
+        })
+        .catch(error => {
+            console.error("Error saving data:", error);
+            alert("Error occurred while saving data. Please try again.");
+        });
+    }
 
-      ["1st", "2nd", "3rd", "4th"].forEach(year => {
-          const yearGroup = courses.filter(course => course.year === year);
-          if (yearGroup.length > 0) {
-              const yearRow = document.createElement("tr");
-              const yearCell = document.createElement("td");
-              yearCell.colSpan = 7;
-              yearCell.textContent = `Year ${year}`;
-              yearRow.appendChild(yearCell);
-              courseTableBody.appendChild(yearRow);
+    function deleteCourse(index) {
+        // Remove the course at the specified index from the courses array
+        const deletedCourse = courses.splice(index, 1)[0];
+        // Re-render the courses table
+        renderCourses();
+        // Save the updated data to local storage
+        saveData();
 
-              yearGroup.forEach((course, index) => {
-                  const row = document.createElement("tr");
-                  row.innerHTML = `
-                      <td>${course.name}</td>
-                      <td>${course.id}</td>
-                      <td>${course.department}</td>
-                      <td>${course.students}</td>
-                      <td>${course.year}</td>
-                      <td>${course.professors.join(", ")}</td>
-                      <td><button class="delete-button" data-index="${index}">Delete</button></td>
-                  `;
-                  courseTableBody.appendChild(row);
-              });
-          }
-      });
+        // Send request to server to delete the course
+        fetch("/delete", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(deletedCourse)
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error("Network response was not ok.");
+            }
+            return response.json();
+        })
+        .then(data => {
+            console.log("Course deleted successfully:", data);
+        })
+        .catch(error => {
+            console.error("Error deleting course:", error);
+        });
+    }
 
-      document.querySelectorAll(".delete-button").forEach(button => {
-          button.addEventListener("click", () => {
-              const index = button.getAttribute("data-index");
-              deleteCourse(index);
-          });
-      });
-  }
+    // Function to confirm delete action
+    function confirmDelete(index) {
+        if (confirm("Are you sure you want to delete this course?")) {
+            deleteCourse(index);
+        }
+    }
 
-  function deleteCourse(index) {
-      courses.splice(index, 1);
-      renderCourses();
-  }
+    // Add event listener for Save button
+    saveButton.addEventListener("click", () => {
+        // When Save button is clicked, save data to local storage
+        saveData();
+    });
 
-  function resetForm() {
-      courseForm.reset();
-      courseForm.style.display = "none";
-      document.querySelectorAll(".professors-container").forEach(container => container.remove());
-  }
+    // Remaining code remains the same
 
-  saveButton.addEventListener("click", () => {
-      fetch("/save", {
-          method: "POST",
-          headers: {
-              "Content-Type": "application/json"
-          },
-          body: JSON.stringify(courses)
-      })
-      .then(response => {
-          if (!response.ok) {
-              throw new Error("Network response was not ok.");
-          }
-          return response.json();
-      })
-      .then(data => {
-          console.log("Data saved successfully:", data);
-          alert("Hurray! Data saved successfully.");
-      })
-      .catch(error => {
-          console.error("Error saving data:", error);
-          alert("Error occurred while saving data. Please try again.");
-      });
-  });
+    addEntryButton.addEventListener("click", function() {
+        courseForm.style.display = "block";
+    });
 
-  generateButton.addEventListener("click", () => {
-      // Handle generate button click
-  });
+    addProfessorButton.addEventListener("click", function() {
+        const professorsContainer = document.createElement("div");
+        professorsContainer.classList.add("professors-container");
 
-  sendButton.addEventListener("click", () => {
-      // Handle send button click
-  });
+        const professorInput = document.createElement("input");
+        professorInput.type = "text";
+        professorInput.placeholder = "Professor";
+        professorsContainer.appendChild(professorInput);
+
+        courseForm.insertBefore(professorsContainer, addProfessorButton);
+    });
+
+    courseForm.addEventListener("submit", function(event) {
+        event.preventDefault();
+
+        const departmentSelect = document.getElementById("departmentSelect");
+        const selectedDepartmentId = departmentSelect.options[departmentSelect.selectedIndex].value;
+
+        const newCourse = {
+            name: document.getElementById("courseNameInput").value,
+            id: document.getElementById("courseIdInput").value,
+            department: selectedDepartmentId,
+            students: document.getElementById("studentsInput").value,
+            year: document.getElementById("yearSelect").value,
+            professors: Array.from(document.querySelectorAll(".professors-container input")).map(input => input.value),
+            numberOfStudents: document.getElementById("studentsInput").value,
+            semester: "Spring"
+        };
+
+        if (!newCourse.name || !newCourse.id || !newCourse.department || !newCourse.students || !newCourse.year) {
+            alert("Please fill in all fields");
+            return;
+        }
+
+        courses.push(newCourse);
+        renderCourses();
+        resetForm();
+    });
+
+    function resetForm() {
+        courseForm.reset();
+        courseForm.style.display = "none";
+        document.querySelectorAll(".professors-container").forEach(container => container.remove());
+    }
+
+    generateButton.addEventListener("click", function() {
+        // Generate button logic goes here
+    });
+
+    sendButton.addEventListener("click", function() {
+        // Send button logic goes here
+    });
+
+    // Optional: Add event listener for logout button
+    // document.querySelector("form[action='/logout']").addEventListener("submit", function() {
+    //     // Logout logic goes here
+    // });
+
+    // Optional: Add event listener for delete buttons
+    // document.querySelectorAll(".delete-button").forEach(button => {
+    //     button.addEventListener("click", function() {
+    //         const index = button.getAttribute("data-index");
+    //         confirmDelete(index);
+    //     });
+    // });
+
 });
