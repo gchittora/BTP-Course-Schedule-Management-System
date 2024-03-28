@@ -23,6 +23,21 @@ router.get('/registrar', isLoggedIn, function(req, res, next) {
     res.render('registrar');
 });
 
+const departments = ['CSE', 'CCE', 'ECE', 'MME'];
+departments.forEach(department => {
+    router.get(`/${department}`, isLoggedIn, function(req, res, next) {
+        // Retrieve and display data for the respective department HOD
+        Course.find({ department: department })
+            .then(courses => {
+                res.render('hod', { department: department, courses: courses });
+            })
+            .catch(err => {
+                console.error('Error fetching data:', err);
+                res.status(500).send('Error fetching data');
+            });
+    });
+});
+
 router.post('/register', function(req, res, next) {
     const data = new userModel({
         username: req.body.username,
@@ -41,62 +56,74 @@ router.post('/register', function(req, res, next) {
 });
 
 router.post('/save', async (req, res) => {
-  try {
-      // Extract data from the request body
-      const { name, id, department, numberOfStudents, year, professors, instructor } = req.body;
+    try {
+        // Extract data from the request body
+        const { name, id, department, numberOfStudents, year, professors, instructor, methodOfDelivery, credits, semester, courseType, sharingType } = req.body;
 
-      // Find or create the department
-      let foundDepartment = await Department.findOne({ name: department });
-      if (!foundDepartment) {
-          foundDepartment = await Department.create({ name: department });
-      }
+        // Find or create the department
+        let foundDepartment = await Department.findOne({ name: department });
+        if (!foundDepartment) {
+            foundDepartment = await Department.create({ name: department });
+        }
 
-      // Create a new Course document
-      const newCourse = new Course({
-          name: name,
-          id: id,
-          department: foundDepartment._id,
-          numberOfStudents: numberOfStudents,
-          year: year,
-          professors: [], // Initialize professors array
-          instructor: instructor // Assuming instructor ID is provided in the request
-      });
+        // Create a new Course document
+        const newCourse = new Course({
+            name: name,
+            id: id,
+            department: foundDepartment._id,
+            numberOfStudents: numberOfStudents,
+            year: year,
+            professors: [], // Initialize professors array
+            instructor: instructor,
+            methodOfDelivery: methodOfDelivery,
+            credits: credits,
+            semester: semester,
+            courseCode: courseCode, // Corrected here
+            courseType: courseType,
+            sharingType: sharingType
+        });
 
-      // Save the new course to the database
-      await newCourse.save();
+        // Save the new course to the database
+        await newCourse.save();
 
-      // Find or create professors and update courses array
-      const foundProfessors = [];
-      for (const professorName of professors) {
-          let professor = await Professor.findOne({ name: professorName });
-          if (!professor) {
-              professor = await Professor.create({ name: professorName, department: foundDepartment._id });
-          }
-          // Push the course ID into the professor's courses array
-          professor.courses.push(newCourse._id);
-          await professor.save();
-          foundProfessors.push(professor);
-      }
+        // Find or create professors and update courses array
+        const foundProfessors = [];
+        for (const professorName of professors) {
+            let professor = await Professor.findOne({ name: professorName });
+            if (!professor) {
+                professor = await Professor.create({ name: professorName, department: foundDepartment._id });
+            }
+            // Push the course ID into the professor's courses array
+            professor.courses.push(newCourse._id);
+            await professor.save();
+            foundProfessors.push(professor);
+        }
 
-      // Update the professors array in the new course
-      newCourse.professors = foundProfessors.map(professor => professor._id);
-      await newCourse.save();
+        // Update the professors array in the new course
+        newCourse.professors = foundProfessors.map(professor => professor._id);
+        await newCourse.save();
 
-      // Push the course ID into the department's courses array
-      foundDepartment.courses.push(newCourse._id);
-      await foundDepartment.save();
+        // Push the course ID into the department's courses array
+        foundDepartment.courses.push(newCourse._id);
+        await foundDepartment.save();
 
-      // Respond with success message
-      res.status(200).json({ message: "Course saved successfully" });
-  } catch (error) {
-      // Handle errors
-      console.error("Error saving course:", error);
-      res.status(500).json({ error: "Error occurred while saving course" });
-  }
+        // Respond with success message
+        res.status(200).json({ message: "Course saved successfully" });
+    } catch (error) {
+        // Handle errors
+        console.error("Error saving course:", error);
+        res.status(500).json({ error: "Error occurred while saving course" });
+    }
 });
 
-  
-     
+router.post('/sendToHOD', function(req, res) {
+    const { data, department } = req.body;
+    // Here you would send the data to the respective HOD based on the department
+    // For demonstration purposes, we're just logging the data to the console
+    console.log(`Sending data to HOD ${department}:`, data);
+    res.json({ message: "Data sent to HOD successfully" });
+});
+
 router.get('/login', function(req, res) {
     if (req.isAuthenticated()) {
         res.redirect('/registrar');
