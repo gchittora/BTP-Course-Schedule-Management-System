@@ -1,105 +1,115 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Course Information</title>
   <link rel="stylesheet" href="stylesheets/style.css">
 </head>
+
 <body>
   <div class="App" style="margin-left: 20px;">
-    <% if (typeof messages !== 'undefined' && messages.error) { %>
+    <% if (typeof messages !=='undefined' && messages.error) { %>
       <div class="alert alert-danger">
-          <%= messages.error %>
+        <%= messages.error %>
       </div>
-    <% } else if (typeof messages !== 'undefined' && messages.success) { %>
-      <div class="alert alert-success">
+      <% } else if (typeof messages !=='undefined' && messages.success) { %>
+        <div class="alert alert-success">
           <%= messages.success %>
-      </div>
-    <% } %>
-    <h1>Course Information</h1>
-    <div>
-      <button id="addEntryButton">Add Entry</button>
-      <button id="saveButton" style="background-color: green;">Save</button> <!-- Save button -->
-    </div>
-    <form id="courseForm" style="display: none;">
-      <input type="text" id="courseNameInput" placeholder="Course Name">
-      <input type="text" id="courseIdInput" placeholder="Course ID">
-      <select id="departmentSelect">
-        <option value="">Select Department</option>
-        <option value="CSE">CSE</option>
-        <option value="CCE">CCE</option>
-        <option value="MME">MME</option>
-        <option value="ECE">ECE</option>
-        <option value="DCS">DCS</option>
-        <option value="DCE">DCE</option>
-      </select>
-      <input type="number" id="cseStudentsInput" placeholder="No. of CSE students">
-      <input type="number" id="cceStudentsInput" placeholder="No. of CCE students">
-      <input type="number" id="eceStudentsInput" placeholder="No. of ECE students">
-      <input type="number" id="cseDDStudentsInput" placeholder="No. of CSE DD students">
-      <input type="number" id="eceDDStudentsInput" placeholder="No. of ECE DD students">
-      <input type="number" id="mmeStudentsInput" placeholder="No. of MME students">
-      <input type="number" id="creditsInput" placeholder="Credits">
-      <select id="semesterSelect">
-        <option value="">Select Semester</option>
-        <option value="Odd">Odd</option>
-        <option value="Even">Even</option>
-      </select>
-      <select id="courseTypeSelect">
-        <option value="">Select Course Type</option>
-        <option value="Core">Core</option>
-        <option value="Elective">Elective</option>
-        <option value="Other">Other</option>
-      </select>
-      <select id="sharingTypeSelect">
-        <option value="">Select Sharing Type</option>
-        <option value="Vertical">Vertical</option>
-        <option value="Horizontal">Horizontal</option>
-      </select>
-      <select id="yearSelect">
-        <option value="">Select Year</option>
-        <option value="1st">1st</option>
-        <option value="2nd">2nd</option>
-        <option value="3rd">3rd</option>
-        <option value="4th">4th</option>
-      </select>
-      <button id="addProfessorButton" type="button">Add Professor</button>
-      <button type="submit">Add</button>
-    </form>
-    <table id="courseTable">
-      <thead>
-        <tr>
-            <th>Course Name</th>
-            <th>Course ID</th>
-            <th>Department</th>
-            <th>No. of CSE Students</th>
-            <th>No. of CCE Students</th>
-            <th>No. of ECE Students</th>
-            <th>No. of CSE DD Students</th>
-            <th>No. of ECE DD Students</th>
-            <th>No. of MME Students</th>
-            <th>Credits</th>
-            <th>Semester</th>
-            <th>Course Type</th>
-            <th>Sharing Type</th>
-            <th>Year</th>
-            <th>Professors</th>
-            <th>Action</th>
-        </tr>
-    </thead>
-    <tbody>
-        <!-- Course entries will be inserted here dynamically -->
-    </tbody>
-    </table>
-    <button id="generateButton">Generate</button>
-    <button id="sendButton">Send</button>
-    <!-- Logout button -->
-    <form action="/logout" method="POST">
-      <button type="submit">Logout</button>
-    </form>
+        </div>
+        <% } %>
+          <h1>Course Information</h1>
+          <div>
+            <button id="addEntryButton">Add Entry</button>
+            <button id="saveButton" style="background-color: green;">Save</button> <!-- Save button -->
+          </div>
+          <form id="courseForm" style="display: none;">
+            <input type="text" id="courseNameInput"  placeholder="Course Name">
+            <input type="text" id="courseCodeInput" name="courseCode" placeholder="Course Code">
+            <select id="departmentSelect">
+              <option value="">Select Department</option>
+              <option value="CSE">CSE</option>
+              <option value="CCE">CCE</option>
+              <option value="MME">MME</option>
+              <option value="ECE">ECE</option>
+              <option value="DCS">DCS</option>
+              <option value="DCE">DCE</option>
+            </select>
+            <input type="number" id="cseStudentsInput" name="numberOfStudents.CSE" placeholder="No. of CSE students">
+            <input type="number" id="cceStudentsInput" name="numberOfStudents.CCE" placeholder="No. of CCE students">
+            <input type="number" id="eceStudentsInput" name="numberOfStudents.ECE" placeholder="No. of ECE students">
+            <input type="number" id="cseDDStudentsInput" name="numberOfStudents.CSE_DD"
+              placeholder="No. of CSE DD students">
+            <input type="number" id="eceDDStudentsInput" name="numberOfStudents.ECE_DD"
+              placeholder="No. of ECE DD students">
+            <input type="number" id="mmeStudentsInput" name="numberOfStudents.MME" placeholder="No. of MME students">
+
+
+            <input type="number" id="creditsInput" placeholder="Credits">
+            <select id="semesterSelect">
+              <option value="">Select Semester</option>
+              <option value="Odd">Odd</option>
+              <option value="Even">Even</option>
+            </select>
+            <select id="courseTypeSelect">
+              <option value="">Select Course Type</option>
+              <option value="Core">Core</option>
+              <option value="Elective">Elective</option>
+              <option value="Other">Other</option>
+            </select>
+            <select id="sharingTypeSelect">
+              <option value="">Select Sharing Type</option>
+              <option value="Vertical">Vertical</option>
+              <option value="Horizontal">Horizontal</option>
+            </select>
+            <select id="yearSelect">
+              <option value="">Select Year</option>
+              <option value="1st">1st</option>
+              <option value="2nd">2nd</option>
+              <option value="3rd">3rd</option>
+              <option value="4th">4th</option>
+            </select>
+            <button id="addProfessorButton" type="button">Add Professor</button>
+            <button type="submit">Add</button>
+          </form>
+          <table id="courseTable">
+            <thead>
+              <tr>
+                <th>Course Name</th>
+                <th>Course ID</th>
+                <th>Department</th>
+                <th>No. of CSE Students</th>
+                <th>No. of CCE Students</th>
+                <th>No. of ECE Students</th>
+                <th>No. of CSE DD Students</th>
+                <th>No. of ECE DD Students</th>
+                <th>No. of MME Students</th>
+                <th>Credits</th>
+                <th>Semester</th>
+                <th>Course Type</th>
+                <th>Sharing Type</th>
+                <th>Year</th>
+                <th>Professors</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- Course entries will be inserted here dynamically -->
+            </tbody>
+          </table>
+          <button id="generateButton">Generate</button>
+
+          <button id="sendButton">Send</button>
+
+
+          <!-- Logout button -->
+          <form action="/logout" method="POST">
+            <button type="submit">Logout</button>
+          </form>
   </div>
 
   <script src="javascripts/script.js"></script>
 </body>
+
 </html>
