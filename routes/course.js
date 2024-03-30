@@ -6,28 +6,18 @@ const courseSchema = new Schema({
     name: { type: String, required: true },
     year: { type: String, required: true },
     semester: { type: String },
-    courseCode: { type: String }, // Modified field name
+    courseCode: { type: String , default: "null" },
     numberOfStudents: {
-        type: Map,
-        of: Number,
-        required: true,
-        validate: {
-            validator: function(v) {
-                let sum = 0;
-                for (const value of Object.values(v)) {
-                    if (typeof value !== 'number' || value < 0) {
-                        return false;
-                    }
-                    sum += value;
-                }
-                return sum > 0;
-            },
-            message: 'Invalid number of students'
-        }
+        CSE: { type: Number, default: 0 },
+        CCE: { type: Number, default: 0 },
+        ECE: { type: Number, default: 0 },
+        CSE_DD: { type: Number, default: 0 },
+        ECE_DD: { type: Number, default: 0 },
+        MME: { type: Number, default: 0 }
     },
-    department: { type: Schema.Types.ObjectId, ref: 'Department', required: true },
-    instructor: { type: Schema.Types.ObjectId, ref: 'Professor' },
-    methodOfDelivery: { type: String, enum: ['horizontal', 'vertical'] },
+    department: { type: Schema.Types.ObjectId, ref:'Department'}, 
+    courseType: { type: String, enum: ['Core','Elective','Other']},
+    sharingType: { type: String},
     credits: { type: Number },
     professors: [{ type: Schema.Types.ObjectId, ref: 'Professor' }]
 });
