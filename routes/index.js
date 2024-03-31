@@ -28,14 +28,18 @@ router.get('/registrar', isLoggedIn, function(req, res, next) {
 
 router.get('/fetchSavedCourses', async (req, res) => {
   try {
-      const savedCourses = await Course.find();
-      console.log(savedCourses);
-      res.json(savedCourses);
+    const savedCourses = await Course.find()
+      .populate('department', 'name') // Populate department name
+      .populate('courseType', 'typeName') // Populate course type name
+      .populate('sharingType', 'typeName') // Populate sharing type name
+      .populate('professors', 'name'); // Populate professors' names
+    res.json(savedCourses);
   } catch (error) {
-      console.error("Error fetching saved courses:", error);
-      res.status(500).json({ error: "Error occurred while fetching saved courses" });
+    console.error("Error fetching saved courses:", error);
+    res.status(500).json({ error: "Error occurred while fetching saved courses" });
   }
 });
+
 // Render department-specific pages for HOD (requires authentication)
 
 
