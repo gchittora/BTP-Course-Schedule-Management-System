@@ -175,6 +175,10 @@
         </tbody>
       </table>
       <button id="sendButton">Send</button>
+      <!-- Add a link to add weekly load for professors -->
+      <form action="/hod/<%= department %>/add-weekly-load" method="POST">
+        <button type="submit">Add Weekly Load for Professors</button>
+    </form>
       <!-- Logout button -->
       <form action="/logout" method="POST">
         <button type="submit">Logout</button>
