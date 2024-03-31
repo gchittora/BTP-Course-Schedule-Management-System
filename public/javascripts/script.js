@@ -33,10 +33,10 @@ document.addEventListener("DOMContentLoaded", function () {
                 savedCourses.forEach(course => {
                     // Handle course ID
                     course.id = course.courseCode; // Adjust the property name as per your actual data structure
-
+    
                     // Handle department
-                    course.department = course.department.populate("name"); // Adjust the property name as per your actual data structure
-
+                    course.department = course.department.name; // Assuming 'name' is the property that holds the department's name
+    
                     // Handle number of students
                     course.cseStudents = course.numberOfStudents.CSE; // Adjust the property name as per your actual data structure
                     course.cceStudents = course.numberOfStudents.CCE; // Adjust the property name as per your actual data structure
@@ -44,15 +44,17 @@ document.addEventListener("DOMContentLoaded", function () {
                     course.eceStudents = course.numberOfStudents.ECE; // Adjust the property name as per your actual data structure
                     course.eceDDStudents = course.numberOfStudents.ECE_DD; // Adjust the property name as per your actual data structure
                     course.cseDDStudents = course.numberOfStudents.CSE_DD; // Adjust the property name as per your actual data structure
-
-                    // Handle course type and sharing type
-                    course.courseType = course.courseType.typeName; // Adjust the property name as per your actual data structure
-                    course.sharingType = course.sharingType.typeName; // Adjust the property name as per your actual data structure
-                    
+    
+                    // Handle course type
+                    course.courseType = course.courseType || ''; // Ensure courseType is not undefined
+                    course.sharingType = course.sharingType || ''; // Ensure sharingType is not undefined
+                    // Handle credits
+                    course.credits = course.credits; // Adjust the property name as per your actual data structure
+    
                     // Handle professors' names
                     course.professors = course.professors.map(professor => professor.name); // Assuming 'name' is the property that holds the professor's name
                 });
-
+    
                 // Filter out deleted courses
                 const filteredCourses = savedCourses.filter(course => !course.deleted);
                 courses.length = 0;
@@ -63,6 +65,13 @@ document.addEventListener("DOMContentLoaded", function () {
                 console.error("Error fetching saved courses:", error);
             });
     }
+    
+      function renderCourses(courses) {
+        // Render the courses on the Registrar page
+        // Use courses data to populate the table or other elements on the page
+      }
+      
+    
 
 
 
