@@ -185,27 +185,31 @@ router.post('/sendToHOD', async (req, res) => {
 // Route to send data to HOD
 // Add a route to render HOD pages
 // Route to render HOD pages
-router.get('/hod/:department', isLoggedIn, function(req, res, next) {
+// Route to render HOD pages
+router.get('/hod/:department', isLoggedIn, isHOD, async function(req, res, next) {
   const department = req.params.department;
-  // Find the department document by name
-  Department.findOne({ name: department })
-      .then(departmentDoc => {
-          // Check if department exists
-          if (!departmentDoc) {
-              // Handle case where department is not found
-              throw new Error('Department not found');
-          }
-          // Find courses by department ID
-          return Course.find({ department: departmentDoc._id });
-      })
-      .then(courses => {
-          res.render('hod', { department: department, courses: courses });
-      })
-      .catch(err => {
-          console.error('Error fetching data:', err);
-          res.status(500).send('Error fetching data');
-      });
+  try {
+    // Find the department document by name
+    const departmentDoc = await Department.findOne({ name: department });
+
+    if (!departmentDoc) {
+      // Handle case where department is not found
+      throw new Error('Department not found');
+    }
+
+    // Find courses by department ID
+    const courses = await Course.find({ department: departmentDoc._id });
+
+    // Filter courses to show only those that have not been filled by the HOD
+    const unfilledCourses = courses.filter(course => !course.credits);
+
+    res.render('hod', { department: department, courses: unfilledCourses });
+  } catch (error) {
+    console.error('Error fetching data:', error);
+    res.status(500).send('Error fetching data');
+  }
 });
+
 
 // POST route to update the course data
 router.post('/save-course', async (req, res) => {
@@ -219,13 +223,20 @@ router.post('/save-course', async (req, res) => {
       return res.status(404).json({ error: 'Course not found' });
     }
 
+    // Determine the department associated with the course
+    const department = course.department; // Assuming the department is stored in the course document
+
     // Check if professors exist, create new if not
     const professorIds = [];
     for (const professorName of professors) {
       let professor = await Professor.findOne({ name: professorName });
       if (!professor) {
         // Professor does not exist, create a new one
-        professor = await Professor.create({ name: professorName });
+        professor = await Professor.create({ name: professorName, department: department });
+      } else {
+        // If professor exists, ensure the department is updated
+        professor.department = department;
+        await professor.save();
       }
       professorIds.push(professor._id);
       // Push the course id into the professor's courses array
@@ -247,6 +258,7 @@ router.post('/save-course', async (req, res) => {
     res.status(500).json({ error: 'Failed to update course' });
   }
 });
+
 
 
 function determineDepartment(email) {
@@ -326,5 +338,27 @@ function isLoggedIn(req, res, next) {
     }
     res.redirect('/login');
 }
+function isRegistrar(req, res, next) {
+  if (req.isAuthenticated() && req.user.email === 'registrar@gmail.com') {
+      return next();
+  }
+  res.redirect('/login'); // Redirect to login if not authenticated as registrar
+}
+// Middleware to check if user is a HOD and accessing their own department page
+function isHOD(req, res, next) {
+  const email = req.user.email;
+  const hodDepartments = {
+      'HODCSE@gmail.com': 'CSE',
+      'HODCCE@gmail.com': 'CCE',
+      'HODECE@gmail.com': 'ECE',
+      'HODMME@gmail.com': 'MME'
+  };
 
+  const requestedDepartment = req.params.department;
+
+  if (req.isAuthenticated() && hodDepartments[email] === requestedDepartment) {
+      return next();
+  }
+  res.redirect('/login'); // Redirect to login if not authenticated as HOD or accessing another department
+}
 module.exports = router;
