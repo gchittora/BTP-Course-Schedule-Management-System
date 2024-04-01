@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 
 // Define the course schema
 const courseSchema = new Schema({
-    name: { type: String, required: true },
+    name: { type: String, required: true,unique:true },
     year: { type: String, required: true },
     semester: { type: String },
     courseCode: { type: String , default: "null" },
