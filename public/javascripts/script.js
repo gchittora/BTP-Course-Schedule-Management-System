@@ -2,7 +2,6 @@ document.addEventListener("DOMContentLoaded", function () {
     const courses = [];
     const courseForm = document.getElementById("courseForm");
     const courseTableBody = document.querySelector("#courseTable tbody");
-    const saveButton = document.getElementById("saveButton"); // Get the save button
 
     // Load saved data when the page loads
     const savedData = localStorage.getItem("savedCourses");
@@ -202,10 +201,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     // Add event listener for Save button
-    saveButton.addEventListener("click", () => {
-        // When Save button is clicked, save data to local storage
-        saveData();
-    });
+    
 
 
 
@@ -257,6 +253,7 @@ document.addEventListener("DOMContentLoaded", function () {
             });
     }
 
+    const addEntryButton=document.querySelector('#addEntryButton');
 
     addEntryButton.addEventListener("click", function () {
         courseForm.style.display = "block";
