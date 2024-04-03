@@ -206,7 +206,7 @@ router.get('/hod/:department', isLoggedIn, isHOD, async function(req, res, next)
     res.render('hod', { department: department, courses: unfilledCourses });
   } catch (error) {
     console.error('Error fetching data:', error);
-    res.status(500).send('Error fetching data');
+    res.render('emptydata');
   }
 });
 
@@ -271,8 +271,17 @@ function determineDepartment(email) {
   else if(email==="HODECE@gmail.com"){
     return "ECE";
   }
-  else{
+  else if(email==="HODMME@gmail.com"){
     return "MME";
+  }
+  else if(email==="HODHSS@gmail.com"){
+    return "HSS";
+  }
+  else if(email==="HODMTH@gmail.com"){
+    return "MTH";
+  }
+  else{
+    return "PHY"
   }
 }
 
@@ -307,13 +316,22 @@ router.get('/login', function(req, res) {
           res.redirect('/hod/ECE');
       } else if (userEmail === 'HODMME@gmail.com') {
           res.redirect('/hod/MME');
-      } else {
+      } else if(userEmail ==='HODHSS@gmail.com'){
           // Redirect to login page if user's email domain is not recognized
-          res.redirect('/');
+          res.redirect('/hod/HSS');
+      }
+      else if(userEmail==='HODMTH@gmail.com'){
+        res.redirect('/hod/MTH');
+      }
+      else if(userEmail==='HODPHY@gmail.com'){
+        res.redirect('/hod/PHY')
+      }
+      else{
+        res.redirect('/');
       }
   } else {
       // If not authenticated, render the login page
-      res.render('login');
+      res.render('index');
   }
 });
 
@@ -351,7 +369,11 @@ function isHOD(req, res, next) {
       'HODCSE@gmail.com': 'CSE',
       'HODCCE@gmail.com': 'CCE',
       'HODECE@gmail.com': 'ECE',
-      'HODMME@gmail.com': 'MME'
+      'HODMME@gmail.com': 'MME',
+      'HODHSS@gmail.com' : 'HSS',
+      'HODMTH@gmail.com' :'MTH',
+      'HODPHY@gmail.com' :'PHY'
+
   };
 
   const requestedDepartment = req.params.department;
