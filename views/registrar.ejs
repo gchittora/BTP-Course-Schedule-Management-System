@@ -55,9 +55,10 @@
             </select>
             <select id="courseTypeSelect">
               <option value="">Select Course Type</option>
-              <option value="Core">Core</option>
-              <option value="Elective">Elective</option>
-              <option value="Other">Other</option>
+              <option value="Institute Core">Institute Core</option>
+              <option value="Program Core">Program Core</option>
+              <option value="Program Elective">Program Elective</option>
+              <option value="Other Elective">Other Elective</option>
             </select>
             <select id="sharingTypeSelect">
               <option value="">Select Sharing Type</option>
@@ -99,10 +100,11 @@
               <!-- Course entries will be inserted here dynamically -->
             </tbody>
           </table>
-          <button id="generateButton">Generate</button>
-
           <button id="sendButton">Send</button>
+          <button id="generateButton" >Generate</button>
 
+          
+          <button id="viewTimetableButton">View Timetable</button>
 
           <!-- Logout button -->
           <form action="/logout" method="POST">
