@@ -309,10 +309,26 @@ document.addEventListener("DOMContentLoaded", function () {
         document.querySelectorAll(".professors-container").forEach(container => container.remove());
     }
 
-    generateButton.addEventListener("click", function () {
-        // Generate button logic goes here
+    document.getElementById('generateButton').addEventListener('click', async () => {
+        try {
+            const response = await fetch('/generate-timetable', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+            const data = await response.json();
+            alert(data.message); // Display success message
+        } catch (error) {
+            console.error('Error generating timetable:', error);
+            alert('Error generating timetable. Please try again.');
+        }
     });
 
+    document.getElementById('viewTimetableButton').addEventListener('click', function() {
+        // Redirect the user to the /timetable route
+        window.location.href = '/timetable';
+      });
     // Optional: Add event listener for logout button
     // document.querySelector("form[action='/logout']").addEventListener("submit", function() {
     //     // Logout logic goes here
@@ -325,5 +341,5 @@ document.addEventListener("DOMContentLoaded", function () {
     //          confirmDelete(index);
     //     });
     //  });
-
+    
 });
