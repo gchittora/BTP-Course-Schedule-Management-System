@@ -174,11 +174,9 @@
           <% }); %>
         </tbody>
       </table>
-      <button id="sendButton">Send</button>
+      
       <!-- Add a link to add weekly load for professors -->
-      <form action="/hod/<%= department %>/add-weekly-load" method="POST">
-        <button type="submit">Add Weekly Load for Professors</button>
-    </form>
+      
       <!-- Logout button -->
       <form action="/logout" method="POST">
         <button type="submit">Logout</button>
@@ -187,11 +185,12 @@
   </div>
   <script>
     document.addEventListener("DOMContentLoaded", function () {
-      const addProfessorButtons = document.querySelectorAll(".addProfessorButton");
-      const saveButtons = document.querySelectorAll(".save-button");
-
-      addProfessorButtons.forEach(function (button) {
-        button.addEventListener("click", function () {
+      const formContainer = document.getElementById("formContainer");
+      
+      formContainer.addEventListener("click", function (event) {
+        const target = event.target;
+        
+        if (target.classList.contains("addProfessorButton")) {
           const professorsContainer = document.createElement("div");
           professorsContainer.classList.add("professors-container");
 
@@ -200,10 +199,20 @@
           professorInput.placeholder = "Professor";
           professorsContainer.appendChild(professorInput);
 
+          const deleteButton = document.createElement("button");
+          deleteButton.textContent = "Delete";
+          deleteButton.classList.add("deleteProfessorButton");
+          professorsContainer.appendChild(deleteButton);
+
           // Insert before the next sibling element within the same parent
-          button.parentNode.insertBefore(professorsContainer, button.nextSibling);
-        });
+          target.parentNode.insertBefore(professorsContainer, target.nextSibling);
+        } else if (target.classList.contains("deleteProfessorButton")) {
+          const professorsContainer = target.parentNode;
+          professorsContainer.remove();
+        }
       });
+
+      const saveButtons = document.querySelectorAll(".save-button");
 
       saveButtons.forEach(function (button) {
         button.addEventListener("click", function () {
