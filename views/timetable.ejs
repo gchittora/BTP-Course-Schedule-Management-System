@@ -9,7 +9,7 @@
 </head>
 <body>
     <h1>Timetable</h1>
-    <h2>Monday,Wednesday,Friday</h2>
+    <h2>Monday, Wednesday, Friday</h2>
     <table>
         <thead>
             <tr>
@@ -19,6 +19,7 @@
                 <th>Lecture Hall</th>
                 <th>Start Time</th>
                 <th>End Time</th>
+                <th>Action</th>
             </tr>
         </thead>
         <tbody>
@@ -34,12 +35,13 @@
                     <td><%= entry.lectureHall %></td>
                     <td><%= entry.startTime.hours %>:<%= entry.startTime.minutes %></td>
                     <td><%= entry.endTime.hours %>:<%= entry.endTime.minutes %></td>
+                    <td><button class="edit-button">Edit</button></td>
                 </tr>
             <% }) %>
         </tbody>
     </table>
     
-    <h2>Tuesday,Thursday</h2>
+    <h2>Tuesday, Thursday</h2>
     <table>
         <thead>
             <tr>
@@ -49,6 +51,7 @@
                 <th>Lecture Hall</th>
                 <th>Start Time</th>
                 <th>End Time</th>
+                <th>Action</th>
             </tr>
         </thead>
         <tbody>
@@ -64,6 +67,7 @@
                     <td><%= entry.lectureHall %></td>
                     <td><%= entry.startTime.hours %>:<%= entry.startTime.minutes %></td>
                     <td><%= entry.endTime.hours %>:<%= entry.endTime.minutes %></td>
+                    <td><button class="edit-button">Edit</button></td>
                 </tr>
             <% }) %>
         </tbody>
