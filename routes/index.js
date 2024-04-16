@@ -14,125 +14,125 @@ passport.deserializeUser(userModel.deserializeUser());
 const firstYearSection = ['A1', 'A2', 'B1', 'B2'];
 const secondyearSection = ['A1_MME', 'A1_CSE', 'A2_CSE', 'B1_CCE', 'B2_ECE'];
 const secondyearSectionTimeMapping = {
-    "A1_MME": {
-        "MON":[
-            { startTime: { hours: 9, minutes: 0 }, endTime: { hours: 10, minutes: 0 } },
-            { startTime: { hours: 10, minutes: 0 }, endTime: { hours: 11, minutes: 0 } },
-            { startTime: { hours: 11, minutes: 0 }, endTime: { hours: 12, minutes: 0 } }
-        ],
-        "TUE":[
-            { startTime: { hours: 9, minutes: 30 }, endTime: { hours: 11, minutes: 0 } },
-            { startTime: { hours: 11, minutes: 0 }, endTime: { hours: 12, minutes: 30 } }
-        ]
-    },
-    "A1_CSE": {
-        "MON":[
-            { startTime: { hours: 8, minutes: 0 }, endTime: { hours: 9, minutes: 0 } },
-            { startTime: { hours: 9, minutes: 0 }, endTime: { hours: 10, minutes: 0 } },
-            { startTime: { hours: 10, minutes: 0 }, endTime: { hours: 11, minutes: 0 } },
-            { startTime: { hours: 11, minutes: 0 }, endTime: { hours: 12, minutes: 0 } },
-            { startTime: { hours: 12, minutes: 0 }, endTime: { hours: 13, minutes: 0 } }
-        ],
-        "TUE":[
-            { startTime: { hours: 8, minutes: 0 }, endTime: { hours: 9, minutes: 30 } }
-        ]
-    },
-    "A2_CSE": {
-        "MON":[
-            { startTime: { hours: 8, minutes: 0 }, endTime: { hours: 9, minutes: 0 } },
-            { startTime: { hours: 9, minutes: 0 }, endTime: { hours: 10, minutes: 0 } },
-            { startTime: { hours: 10, minutes: 0 }, endTime: { hours: 11, minutes: 0 } },
-            { startTime: { hours: 11, minutes: 0 }, endTime: { hours: 12, minutes: 0 } },
-            { startTime: { hours: 12, minutes: 0 }, endTime: { hours: 13, minutes: 0 } }
-        ],
-        "TUE":[
-            { startTime: { hours: 8, minutes: 0 }, endTime: { hours: 9, minutes: 30 } }
-        ]
-    },
-    "B1_CCE": {
-        "MON":[
-            { startTime: { hours: 13, minutes: 0 }, endTime: { hours: 14, minutes: 0 } },
-            { startTime: { hours: 14, minutes: 0 }, endTime: { hours: 15, minutes: 0 } },
-            { startTime: { hours: 15, minutes: 0 }, endTime: { hours: 16, minutes: 0 } },
-            { startTime: { hours: 16, minutes: 0 }, endTime: { hours: 17, minutes: 0 } },
-            { startTime: { hours: 17, minutes: 0 }, endTime: { hours: 18, minutes: 0 } }
-        ],
-        "TUE":[
-            { startTime: { hours: 13, minutes: 0 }, endTime: { hours: 14, minutes: 30 } }
-        ]
-    },
-    "B2_ECE": {
-        "MON":[
-            { startTime: { hours: 13, minutes: 0 }, endTime: { hours: 14, minutes: 0 } },
-            { startTime: { hours: 15, minutes: 0 }, endTime: { hours: 16, minutes: 0 } },
-            { startTime: { hours: 16, minutes: 0 }, endTime: { hours: 17, minutes: 0 } },
-            { startTime: { hours: 17, minutes: 0 }, endTime: { hours: 18, minutes: 0 } }
-        ],
-        "TUE":[
-            { startTime: { hours: 13, minutes: 0 }, endTime: { hours: 14, minutes: 30 } }
-        ]
-    }
+  "A1_MME": {
+    "MON": [
+      { startTime: { hours: 9, minutes: 0 }, endTime: { hours: 10, minutes: 0 } },
+      { startTime: { hours: 10, minutes: 0 }, endTime: { hours: 11, minutes: 0 } },
+      { startTime: { hours: 11, minutes: 0 }, endTime: { hours: 12, minutes: 0 } }
+    ],
+    "TUE": [
+      { startTime: { hours: 9, minutes: 30 }, endTime: { hours: 11, minutes: 0 } },
+      { startTime: { hours: 11, minutes: 0 }, endTime: { hours: 12, minutes: 30 } }
+    ]
+  },
+  "A1_CSE": {
+    "MON": [
+      { startTime: { hours: 8, minutes: 0 }, endTime: { hours: 9, minutes: 0 } },
+      { startTime: { hours: 9, minutes: 0 }, endTime: { hours: 10, minutes: 0 } },
+      { startTime: { hours: 10, minutes: 0 }, endTime: { hours: 11, minutes: 0 } },
+      { startTime: { hours: 11, minutes: 0 }, endTime: { hours: 12, minutes: 0 } },
+      { startTime: { hours: 12, minutes: 0 }, endTime: { hours: 13, minutes: 0 } }
+    ],
+    "TUE": [
+      { startTime: { hours: 8, minutes: 0 }, endTime: { hours: 9, minutes: 30 } }
+    ]
+  },
+  "A2_CSE": {
+    "MON": [
+      { startTime: { hours: 8, minutes: 0 }, endTime: { hours: 9, minutes: 0 } },
+      { startTime: { hours: 9, minutes: 0 }, endTime: { hours: 10, minutes: 0 } },
+      { startTime: { hours: 10, minutes: 0 }, endTime: { hours: 11, minutes: 0 } },
+      { startTime: { hours: 11, minutes: 0 }, endTime: { hours: 12, minutes: 0 } },
+      { startTime: { hours: 12, minutes: 0 }, endTime: { hours: 13, minutes: 0 } }
+    ],
+    "TUE": [
+      { startTime: { hours: 8, minutes: 0 }, endTime: { hours: 9, minutes: 30 } }
+    ]
+  },
+  "B1_CCE": {
+    "MON": [
+      { startTime: { hours: 13, minutes: 0 }, endTime: { hours: 14, minutes: 0 } },
+      { startTime: { hours: 14, minutes: 0 }, endTime: { hours: 15, minutes: 0 } },
+      { startTime: { hours: 15, minutes: 0 }, endTime: { hours: 16, minutes: 0 } },
+      { startTime: { hours: 16, minutes: 0 }, endTime: { hours: 17, minutes: 0 } },
+      { startTime: { hours: 17, minutes: 0 }, endTime: { hours: 18, minutes: 0 } }
+    ],
+    "TUE": [
+      { startTime: { hours: 13, minutes: 0 }, endTime: { hours: 14, minutes: 30 } }
+    ]
+  },
+  "B2_ECE": {
+    "MON": [
+      { startTime: { hours: 13, minutes: 0 }, endTime: { hours: 14, minutes: 0 } },
+      { startTime: { hours: 15, minutes: 0 }, endTime: { hours: 16, minutes: 0 } },
+      { startTime: { hours: 16, minutes: 0 }, endTime: { hours: 17, minutes: 0 } },
+      { startTime: { hours: 17, minutes: 0 }, endTime: { hours: 18, minutes: 0 } }
+    ],
+    "TUE": [
+      { startTime: { hours: 13, minutes: 0 }, endTime: { hours: 14, minutes: 30 } }
+    ]
+  }
 };
 
-const firstYearSectionTimeMapping ={
-    "A1": {
-        "MON":[
-            { startTime: { hours: 9, minutes: 0 }, endTime: { hours: 10, minutes: 0 } },
-            { startTime: { hours: 10, minutes: 0 }, endTime: { hours: 11, minutes: 0 } },
-            { startTime: { hours: 11, minutes: 0 }, endTime: { hours: 12, minutes: 0 } },
-            { startTime: { hours: 12, minutes: 0 }, endTime: { hours: 13, minutes: 0 } }
-        ],
-        "TUE":[
-            { startTime: { hours: 8, minutes: 0 }, endTime: { hours: 9, minutes: 30 } },
-            { startTime: { hours: 9, minutes: 30 }, endTime: { hours: 11, minutes: 0 } }
-        ]
-    },
-    "A2": {
-        "MON":[
-            { startTime: { hours: 9, minutes: 0 }, endTime: { hours: 10, minutes: 0 } },
-            { startTime: { hours: 10, minutes: 0 }, endTime: { hours: 11, minutes: 0 } },
-            { startTime: { hours: 11, minutes: 0 }, endTime: { hours: 12, minutes: 0 } },
-            { startTime: { hours: 12, minutes: 0 }, endTime: { hours: 13, minutes: 0 } }
-        ],
-        "TUE":[
-            { startTime: { hours: 8, minutes: 0 }, endTime: { hours: 9, minutes: 30 } },
-            { startTime: { hours: 9, minutes: 30 }, endTime: { hours: 11, minutes: 0 } }
-        ]
-    },
-    "B1": {
-        "MON":[
-            { startTime: { hours: 14, minutes: 0 }, endTime: { hours: 15, minutes: 0 } },
-            { startTime: { hours: 15, minutes: 0 }, endTime: { hours: 16, minutes: 0 } },
-            { startTime: { hours: 16, minutes: 0 }, endTime: { hours: 17, minutes: 0 } },
-            { startTime: { hours: 17, minutes: 0 }, endTime: { hours: 18, minutes: 0 } }
-        ],
-        "TUE":[
-            { startTime: { hours: 13, minutes: 0 }, endTime: { hours: 14, minutes: 30 } },
-            { startTime: { hours: 14, minutes: 30 }, endTime: { hours: 16, minutes: 0 } }
-           
-        ]
-    },
-    "B2": {
-        "MON":[
-            { startTime: { hours: 14, minutes: 0 }, endTime: { hours: 15, minutes: 0 } },
-            { startTime: { hours: 15, minutes: 0 }, endTime: { hours: 16, minutes: 0 } },
-            { startTime: { hours: 16, minutes: 0 }, endTime: { hours: 17, minutes: 0 } },
-            { startTime: { hours: 17, minutes: 0 }, endTime: { hours: 18, minutes: 0 } }
-        ],
-        "TUE":[
-            { startTime: { hours: 13, minutes: 0 }, endTime: { hours: 14, minutes: 30 } },
-            { startTime: { hours: 14, minutes: 30 }, endTime: { hours: 16, minutes: 0 } }
-         
-        ]
-    }
+const firstYearSectionTimeMapping = {
+  "A1": {
+    "MON": [
+      { startTime: { hours: 9, minutes: 0 }, endTime: { hours: 10, minutes: 0 } },
+      { startTime: { hours: 10, minutes: 0 }, endTime: { hours: 11, minutes: 0 } },
+      { startTime: { hours: 11, minutes: 0 }, endTime: { hours: 12, minutes: 0 } },
+      { startTime: { hours: 12, minutes: 0 }, endTime: { hours: 13, minutes: 0 } }
+    ],
+    "TUE": [
+      { startTime: { hours: 8, minutes: 0 }, endTime: { hours: 9, minutes: 30 } },
+      { startTime: { hours: 9, minutes: 30 }, endTime: { hours: 11, minutes: 0 } }
+    ]
+  },
+  "A2": {
+    "MON": [
+      { startTime: { hours: 9, minutes: 0 }, endTime: { hours: 10, minutes: 0 } },
+      { startTime: { hours: 10, minutes: 0 }, endTime: { hours: 11, minutes: 0 } },
+      { startTime: { hours: 11, minutes: 0 }, endTime: { hours: 12, minutes: 0 } },
+      { startTime: { hours: 12, minutes: 0 }, endTime: { hours: 13, minutes: 0 } }
+    ],
+    "TUE": [
+      { startTime: { hours: 8, minutes: 0 }, endTime: { hours: 9, minutes: 30 } },
+      { startTime: { hours: 9, minutes: 30 }, endTime: { hours: 11, minutes: 0 } }
+    ]
+  },
+  "B1": {
+    "MON": [
+      { startTime: { hours: 14, minutes: 0 }, endTime: { hours: 15, minutes: 0 } },
+      { startTime: { hours: 15, minutes: 0 }, endTime: { hours: 16, minutes: 0 } },
+      { startTime: { hours: 16, minutes: 0 }, endTime: { hours: 17, minutes: 0 } },
+      { startTime: { hours: 17, minutes: 0 }, endTime: { hours: 18, minutes: 0 } }
+    ],
+    "TUE": [
+      { startTime: { hours: 13, minutes: 0 }, endTime: { hours: 14, minutes: 30 } },
+      { startTime: { hours: 14, minutes: 30 }, endTime: { hours: 16, minutes: 0 } }
+
+    ]
+  },
+  "B2": {
+    "MON": [
+      { startTime: { hours: 14, minutes: 0 }, endTime: { hours: 15, minutes: 0 } },
+      { startTime: { hours: 15, minutes: 0 }, endTime: { hours: 16, minutes: 0 } },
+      { startTime: { hours: 16, minutes: 0 }, endTime: { hours: 17, minutes: 0 } },
+      { startTime: { hours: 17, minutes: 0 }, endTime: { hours: 18, minutes: 0 } }
+    ],
+    "TUE": [
+      { startTime: { hours: 13, minutes: 0 }, endTime: { hours: 14, minutes: 30 } },
+      { startTime: { hours: 14, minutes: 30 }, endTime: { hours: 16, minutes: 0 } }
+
+    ]
+  }
 };
 
-const lectureHallProximityMapping ={
-    AcademicHallLarge:["LT1","LT2","LT9","LT10"],
-    AcademicHallSmall:["LT3","LT4","LT5","LT6","LT7","LT8"],
-    Incubation:["LT16","LT17","LT18","LT19"],
-    MmeBuilding:["LT11","LT12","LT13"],
-    MysteryHalls:["LT14","LT15"]
+const lectureHallProximityMapping = {
+  AcademicHallLarge: ["LT1", "LT2", "LT9", "LT10"],
+  AcademicHallSmall: ["LT3", "LT4", "LT5", "LT6", "LT7", "LT8"],
+  Incubation: ["LT16", "LT17", "LT18", "LT19"],
+  MmeBuilding: ["LT11", "LT12", "LT13"],
+  MysteryHalls: ["LT14", "LT15"]
 };
 
 // Render the index page
@@ -254,15 +254,15 @@ router.post('/save', async (req, res) => {
 router.post('/saveTimetableEntries', async (req, res) => {
   try {
     const { entries } = req.body;
-    
+
     // Assuming TimeTable is your Mongoose model
     await TimeTable.insertMany(entries);
 
     res.status(201).json({ message: 'Timetable entries saved successfully' });
-} catch (error) {
+  } catch (error) {
     console.error('Error saving timetable entries:', error);
     res.status(500).json({ error: 'Internal server error' });
-}
+  }
 });
 
 
@@ -311,6 +311,47 @@ router.post('/sendToHOD', async (req, res) => {
   }
 });
 
+router.post('/update', async (req, res) => {
+    const updatedCourse = req.body;
+
+    try {
+        // Map professor names to their corresponding IDs
+        const professorIds = await Promise.all(
+            updatedCourse.professors.map(async professorName => {
+                const professor = await Professor.findOne({ name: professorName });
+                return professor ? professor._id : null;
+            })
+        );
+
+        // Update the course in the database with the professor IDs
+        updatedCourse.professors = professorIds.filter(id => id !== null);
+        const query = { id: updatedCourse.id };
+        const options = { new: true }; // Return the updated document
+        const updatedDocument = await Course.findOneAndUpdate(query, updatedCourse, options);
+
+        if (updatedDocument) {
+            res.json({ message: 'Course updated successfully', course: updatedDocument });
+        } else {
+            res.status(404).json({ error: 'Course not found' });
+        }
+    } catch (error) {
+        console.error('Error updating course:', error);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+});
+
+
+// Define a route to fetch professor IDs by their names
+router.post('/getProfessorIds', async (req, res) => {
+  const professorNames = req.body;
+  try {
+      const professorIds = await Professor.find({ name: { $in: professorNames } }, '_id');
+      res.json(professorIds);
+  } catch (error) {
+      console.error('Error fetching professor IDs:', error);
+      res.status(500).json({ error: 'Internal server error' });
+  }
+});
 
 // Route to render HOD pages
 router.get('/hod/:department', isLoggedIn, isHOD, async function (req, res, next) {
@@ -671,32 +712,33 @@ async function allocateCoursesToSections_II(courses) {
   }
 }
 
-async function checkProfmapping(professors, it, timeSlot) {
-  let flag=true;
-  for (let prof in professors) {
-    // Check if professor and iteration exist in professorMapping
-    if (professorMapping.hasOwnProperty(prof) && professorMapping[prof].hasOwnProperty(it)) {
-      const entries = professorMapping[prof][it];
-      
-      const notfreeandbacktoback = entries.some(entry => (
-        // Check for conditions inside the professorMapping
-        (entry.startTime.hours === timeSlot.startTime.hours && entry.startTime.minutes === timeSlot.startTime.minutes) ||
-        (entry.startTime.hours === timeSlot.endTime.hours && entry.startTime.minutes === timeSlot.endTime.minutes) ||
-        (entry.endTime.hours === timeSlot.startTime.hours && entry.endTime.minutes === timeSlot.startTime.minutes) ||
-        (entry.sharingType === "Vertical")
-      ));
-        flag=flag && notfreeandbacktoback;
-      // Do something with freeandnotbacktoback
-      console.log(freeandnotbacktoback);
-    } else {
-      // Handle the case where professor or iteration is not found in professorMapping
-      console.log(`Professor '${prof}' or iteration '${it}' not found in professorMapping.`);
+async function checkProfmapping(professorNames, it, timeSlot) {
+  try {
+    let flag = false;
+    for (let prof of professorNames) {
+      // Check if professor and iteration exist in professorMapping
+      if (professorMapping.hasOwnProperty(prof) && professorMapping[prof].hasOwnProperty(it)) {
+        const entries = professorMapping[prof][it];
+
+        const notFreeAndBackToBack = entries.some(entry => (
+          // Check for conditions inside the professorMapping
+          (entry.startTime.hours === timeSlot.startTime.hours && entry.startTime.minutes === timeSlot.startTime.minutes) ||
+          (entry.startTime.hours === timeSlot.endTime.hours && entry.startTime.minutes === timeSlot.endTime.minutes) ||
+          (entry.endTime.hours === timeSlot.startTime.hours && entry.endTime.minutes === timeSlot.startTime.minutes)
+        ));
+
+        flag = flag || notFreeAndBackToBack;
+      } else {
+        // Handle the case where professor or iteration is not found in professorMapping
+        console.log(`Professor '${prof}' or iteration '${it}' not found in professorMapping.`);
+      }
     }
+    return flag;
+  } catch (error) {
+    console.error(`Error in checkProfmapping: ${error}`);
+    throw error;
   }
-  return flag;
 }
-
-
 
 async function allocateTimeSlotForDefaultSections(course) {
   try {
@@ -711,7 +753,7 @@ async function allocateTimeSlotForDefaultSections(course) {
     for (const item of sectionsAndTimeSlots) {
       const { section, day, startTime, endTime } = item;
       console.log(`Allocating time slot for ${course._id} in section ${section} on ${day}`);
-      
+
       // Fetch the professors for the course
       const professors = course.professors.map(professor => professor._id);
       const sharingType = course.sharingType;
@@ -773,11 +815,14 @@ async function allocateTimeSlotForSection_II(course, allotments) {
       let alloc=false;
       for (let it of days){
         chosenDay=it;
+        const existingtimtable=await TimeTable.find({ section: section,course: course});
+        if(existingtimtable.length>0){
+          break;
+        }
         console.log(`Checking time slots for ${chosenDay} in section ${section}`);
 
         const timeSlots = sectionTimeMapping[chosenDay];
         const existingEntries = await TimeTable.find({ section: section, day: chosenDay });
-
         // Loop through each time slot
         for (const timeSlot of timeSlots) {
           // Check if the time slot is already allocated for the section on the chosen day
@@ -794,6 +839,10 @@ async function allocateTimeSlotForSection_II(course, allotments) {
             continue;
           }
 
+
+          // If the time slot is occupied, skip allocating it
+          
+
           // Determine lecture hall based on section
           let lectureHall;
           if (section === 'A1_CSE' || section === 'B2_ECE') {
@@ -809,13 +858,15 @@ async function allocateTimeSlotForSection_II(course, allotments) {
 
           // Fetch the professors for the course
           const professors = course.professors.map(professor => professor._id);
+          const equaldivide=professors.length/allotments.length;
+          const professorNames = await getProfessorNames(professors);
           const sharing=course.sharingType;
           let areProfsFree;
           let cleared_profs=[];
           if(sharing==='Horizontal'){
-            areProfsFree=checkProfmapping(professors,it,timeSlot);
-            if(areProfsFree){
-              for(let prof of professors){
+            areProfsFree=await checkProfmapping(professorNames,it,timeSlot);
+            if(!areProfsFree){
+              for(let prof of professorNames){
                 cleared_profs.push(prof);
               }
             }
@@ -824,28 +875,36 @@ async function allocateTimeSlotForSection_II(course, allotments) {
             }
           }
           else{
-            for(let prof of professors){
-              areProfsFree=checkProfmapping(prof,it,timeSlot);
-              if(areProfsFree){
+            for(let prof of professorNames){
+              const arr=[prof];
+              areProfsFree=await checkProfmapping(arr,it,timeSlot);
+              if(!areProfsFree){
                 cleared_profs.push(prof);
               }
+              if(cleared_profs.length>equaldivide){
+                break;
+              }
+            }
+            if(cleared_profs.length===0){
+              continue;
             }
           }
           const sharingType = course.sharingType;
 
           console.log(`Allocating time slot for ${course._id} in section ${section} on ${chosenDay} from ${timeSlot.startTime.hours}:${timeSlot.startTime.minutes} to ${timeSlot.endTime.hours}:${timeSlot.endTime.minutes}`);
 
-          
-          
+                  
+
+          const proflog = await convertProfessorNamesToIds(cleared_profs);
           const newTimeTableEntry = new TimeTable({
             day: chosenDay,
             section,
             course: course._id,
-            professors:cleared_profs,
+            professors:proflog,
             lectureHall,
             startTime: timeSlot.startTime,
             endTime: timeSlot.endTime,
-            sharingType
+            
           });
           await newTimeTableEntry.save();
           alloc=true;
@@ -878,11 +937,38 @@ async function allocateTimeSlotForSection_II(course, allotments) {
   }
 }
 
-function shuffleArray(array) {
-  for (let i = array.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [array[i], array[j]] = [array[j], array[i]];
+async function convertProfessorNamesToIds(professorNames) {
+  const professorIds = [];
+
+  for (let professorName of professorNames) {
+    try {
+      const professor = await Professor.findOne({ name: professorName });
+      if (professor) {
+        professorIds.push(professor._id);
+      }
+    } catch (error) {
+      console.error(`Error fetching professor ID for ${professorName}: ${error}`);
+      // Handle error
+    }
   }
+
+  return professorIds;
+}
+
+async function getProfessorNames(professors) {
+  // Assuming you have a function to query the database and retrieve professor names based on _id
+  const professorNames = await Promise.all(professors.map(async (professorId) => {
+    const professor = await Professor.findById(professorId);
+    return professor.name;
+  }));
+  return professorNames;
+}
+
+// Function to fetch professor name from database given professor _id
+async function getProfessorName(professorId) {
+  // Assuming you have a function to query the database and retrieve professor name based on _id
+  const professor = await Professor.findById(professorId);
+  return professor.name;
 }
 
 router.post('/generate-timetable', async (req, res) => {
@@ -890,7 +976,7 @@ router.post('/generate-timetable', async (req, res) => {
     const courses = await Course.find();
     await allocateCoursesToSections_I(courses, firstYearSection);
     await allocateCoursesToSections_II(courses);
-    
+
     res.status(200).json({ message: 'Timetable generation completed' });
   } catch (error) {
     console.error('Error generating timetable:', error);
