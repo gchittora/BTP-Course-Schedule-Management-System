@@ -46,7 +46,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     course.sharingType = course.sharingType || ''; // Ensure sharingType is not undefined
                     // Handle credits
                     course.credits = course.credits; // Adjust the property name as per your actual data structure
-
+                    course.groupInput=course.group || "NA";
                     // Handle professors' names
                     course.professors = course.professors.map(professor => professor.name); // Assuming 'name' is the property that holds the professor's name
                 });
@@ -62,9 +62,10 @@ document.addEventListener("DOMContentLoaded", function () {
             });
     }
 
+    
     function renderCourses() {
         courseTableBody.innerHTML = "";
-
+    
         courses.forEach((course, index) => {
             const row = document.createElement("tr");
             row.innerHTML = `
@@ -80,6 +81,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 <td>${course.credits}</td>
                 <td>${course.semester}</td>
                 <td>${course.courseType}</td>
+                <td>${course.groupInput}</td> <!-- Add this line -->
                 <td>${course.sharingType}</td>
                 <td>${course.year}</td>
                 <td>${course.professors.join(", ")}</td>
@@ -89,7 +91,16 @@ document.addEventListener("DOMContentLoaded", function () {
             `;
             courseTableBody.appendChild(row);
         });
-
+    
+        // Add event listeners for edit, save, and delete buttons
+        addEventListeners();
+    }
+    
+    
+    
+    
+    
+    function addEventListeners() {
         // Add event listener for edit buttons
         document.querySelectorAll(".edit-button").forEach(button => {
             button.addEventListener("click", () => {
@@ -97,7 +108,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 editCourse(index);
             });
         });
-
+    
         // Add event listener for save buttons
         document.querySelectorAll(".save-button").forEach(button => {
             button.addEventListener("click", () => {
@@ -105,7 +116,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 saveCourse(index);
             });
         });
-
+    
         // Add event listener for delete buttons
         document.querySelectorAll(".delete-button").forEach(button => {
             button.addEventListener("click", () => {
@@ -114,6 +125,13 @@ document.addEventListener("DOMContentLoaded", function () {
             });
         });
     }
+    
+    // Call addEventListeners() after rendering courses initially
+    addEventListeners();
+       
+        
+        
+     
 
     function saveCourse(index) {
         const course = courses[index];
@@ -191,7 +209,7 @@ document.addEventListener("DOMContentLoaded", function () {
     function editCourse(index) {
         const course = courses[index];
         const row = document.querySelectorAll("#courseTable tbody tr")[index];
-
+        const puranacourse=course.name;
         // Replace the course data in the row with input fields for editing
         row.innerHTML = `
             <td><input type="text" id="editNameInput" value="${course.name}"></td>
@@ -206,29 +224,32 @@ document.addEventListener("DOMContentLoaded", function () {
             <td><input type="text" id="editCreditsInput" value="${course.credits}"></td>
             <td><input type="text" id="editSemesterInput" value="${course.semester}"></td>
             <td><input type="text" id="editCourseTypeInput" value="${course.courseType}"></td>
+            <td><input type="text" id="editgroupInput" value="${course.groupInput}"></td>
+    
             <td><input type="text" id="editSharingTypeInput" value="${course.sharingType}"></td>
             <td><input type="text" id="editYearInput" value="${course.year}"></td>
             <td><input type="text" id="editProfessorsInput" value="${course.professors.join(", ")}"></td>
             <td><button class="update-button" data-index="${index}">Update</button></td>
             <td><button class="cancel-button" data-index="${index}">Cancel</button></td>
         `;
-
+    
         // Add event listener for update button
         row.querySelector(".update-button").addEventListener("click", () => {
-            updateCourse(index);
+            updateCourse(index,puranacourse);
         });
-
+    
         // Add event listener for cancel button
         row.querySelector(".cancel-button").addEventListener("click", () => {
             renderCourses();
         });
     }
-
-    function updateCourse(index) {
+    
+    function updateCourse(index,puranacourse) {
         const row = document.querySelectorAll("#courseTable tbody tr")[index];
-
+    
         // Get updated course data from input fields
         const updatedCourse = {
+            puranacourse,
             name: row.querySelector("#editNameInput").value,
             id: row.querySelector("#editCodeInput").value,
             department: row.querySelector("#editDepartmentInput").value,
@@ -241,23 +262,64 @@ document.addEventListener("DOMContentLoaded", function () {
             credits: row.querySelector("#editCreditsInput").value,
             semester: row.querySelector("#editSemesterInput").value,
             courseType: row.querySelector("#editCourseTypeInput").value,
+            groupInput: row.querySelector("#editgroupInput").value,
             sharingType: row.querySelector("#editSharingTypeInput").value,
             year: row.querySelector("#editYearInput").value,
             professors: row.querySelector("#editProfessorsInput").value.split(", "),
         };
-
-        // Update the course in the array
-        courses[index] = updatedCourse;
-
-        // Re-render the courses table
-        renderCourses();
+    
+        console.log("Updated Course:", updatedCourse); // Add this line
+    
+        // Send a POST request to update the course data
+        fetch('/update-course', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(updatedCourse),
+        })
+        .then(response => {
+            if (response.ok) {
+                // If the update is successful, re-render the courses table
+                renderCourses();
+            } else {
+                throw new Error('Failed to update course');
+            }
+        })
+        .catch(error => {
+            console.error('Error updating course:', error);
+            // Handle the error, e.g., show an alert to the user
+        });
     }
+    
+    
+    
+    
 
     const addEntryButton = document.querySelector('#addEntryButton');
 
     addEntryButton.addEventListener("click", function () {
         courseForm.style.display = "block";
     });
+
+    function toggleGroupInputVisibility() {
+        const courseTypeSelect = document.getElementById("courseTypeSelect");
+        const groupInputContainer = document.getElementById("groupInputContainer");
+        const groupInput = document.getElementById("groupInput"); // Get the group input field
+    
+        if (courseTypeSelect.value === "Program Elective") {
+            groupInputContainer.style.display = "block";
+        } else {
+            groupInputContainer.style.display = "none";
+            groupInput.value = "NA"; // Set the value of the group input field to "NA"
+        }
+    }
+    
+    
+    // Event listener for course type select change
+    document.getElementById("courseTypeSelect").addEventListener("change", toggleGroupInputVisibility);
+
+    // Event listener for course type select change
 
     const addProfessorButton = document.querySelector('#addProfessorButton');
 
@@ -297,6 +359,7 @@ document.addEventListener("DOMContentLoaded", function () {
             credits: document.getElementById("creditsInput").value,
             semester: document.getElementById("semesterSelect").value,
             courseType: document.getElementById("courseTypeSelect").value,
+            groupInput:document.getElementById("groupInput").value,
             sharingType: document.getElementById("sharingTypeSelect").value,
             year: document.getElementById("yearSelect").value,
             professors: Array.from(document.querySelectorAll(".professors-container input")).map(input => input.value),
@@ -339,10 +402,7 @@ document.addEventListener("DOMContentLoaded", function () {
         window.location.href = '/timetable';
     });
 
-    // Optional: Add event listener for logout button
-    // document.querySelector("form[action='/logout']").addEventListener("submit", function() {
-    //     // Logout logic goes here
-    // });
+    
 
     // Call fetchAndRenderSavedCourses to render saved courses
     fetchAndRenderSavedCourses();
