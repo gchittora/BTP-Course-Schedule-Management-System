@@ -34,8 +34,7 @@
               <option value="ECE">ECE</option>
               <option value="HSS">HSS</option>
               <option value="MTH">MTH</option>
-              <option value="PHY">PHY</option>
-              
+              <option value="PHY">PHY</option>  
             </select>
             <input type="number" id="cseStudentsInput" name="numberOfStudents.CSE" placeholder="No. of CSE students">
             <input type="number" id="cceStudentsInput" name="numberOfStudents.CCE" placeholder="No. of CCE students">
@@ -45,8 +44,6 @@
             <input type="number" id="eceDDStudentsInput" name="numberOfStudents.ECE_DD"
               placeholder="No. of ECE DD students">
             <input type="number" id="mmeStudentsInput" name="numberOfStudents.MME" placeholder="No. of MME students">
-
-
             <input type="number" id="creditsInput" name="credits"placeholder="Credits">
             <select id="semesterSelect">
               <option value="">Select Semester</option>
@@ -60,6 +57,9 @@
               <option value="Program Elective">Program Elective</option>
               <option value="Other Elective">Other Elective</option>
             </select>
+            <div id="groupInputContainer" style="display: none;">
+              <input type="text" id="groupInput" name="groupInput"placeholder="Group">
+            </div>
             <select id="sharingTypeSelect">
               <option value="">Select Sharing Type</option>
               <option value="Vertical">Vertical</option>
@@ -90,6 +90,7 @@
                 <th>Credits</th>
                 <th>Semester</th>
                 <th>Course Type</th>
+                <th>Group</th>
                 <th>Sharing Type</th>
                 <th>Year</th>
                 <th>Professors</th>
