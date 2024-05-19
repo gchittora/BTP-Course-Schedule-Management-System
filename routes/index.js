@@ -13,6 +13,185 @@ passport.deserializeUser(userModel.deserializeUser());
 
 const firstYearSection = ["A1", "A2", "B1", "B2"];
 const secondyearSection = ["A1_MME", "A1_CSE", "A2_CSE", "B1_CCE", "B2_ECE"];
+const thirdYearSection = ["A_CSE", "B_CSE", "C_CCE", "D_ECE", "E_MME"];
+
+const thirdyearSectionTimeMapping = {
+  C_CCE: {
+    MON: [
+      {
+        startTime: { hours: 9, minutes: 0 },
+        endTime: { hours: 10, minutes: 0 },
+      },
+      {
+        startTime: { hours: 10, minutes: 0 },
+        endTime: { hours: 11, minutes: 0 },
+      },
+      {
+        startTime: { hours: 11, minutes: 0 },
+        endTime: { hours: 12, minutes: 0 },
+      },
+      {
+        startTime: { hours: 12, minutes: 0 },
+        endTime: { hours: 13, minutes: 0 },
+      },
+    ],
+    TUE: [
+      {
+        startTime: { hours: 8, minutes: 0 },
+        endTime: { hours: 9, minutes: 30 },
+      },
+      {
+        startTime: { hours: 9, minutes: 30 },
+        endTime: { hours: 11, minutes: 0 },
+      },
+      {
+        startTime: { hours: 11, minutes: 0 },
+        endTime: { hours: 12, minutes: 30 },
+      },
+    ],
+  },
+  D_ECE: {
+    MON: [
+      {
+        startTime: { hours: 8, minutes: 0 },
+        endTime: { hours: 9, minutes: 0 },
+      },
+      {
+        startTime: { hours: 9, minutes: 0 },
+        endTime: { hours: 10, minutes: 0 },
+      },
+      {
+        startTime: { hours: 10, minutes: 0 },
+        endTime: { hours: 11, minutes: 0 },
+      },
+      {
+        startTime: { hours: 11, minutes: 0 },
+        endTime: { hours: 12, minutes: 0 },
+      },
+      {
+        startTime: { hours: 12, minutes: 0 },
+        endTime: { hours: 13, minutes: 0 },
+      },
+    ],
+    TUE: [
+      {
+        startTime: { hours: 8, minutes: 0 },
+        endTime: { hours: 9, minutes: 30 },
+      },
+      {
+        startTime: { hours: 9, minutes: 30 },
+        endTime: { hours: 11, minutes: 0 },
+      },
+      {
+        startTime: { hours: 11, minutes: 0 },
+        endTime: { hours: 12, minutes: 30 },
+      },
+    ],
+  },
+  A_CSE: {
+    MON: [
+      {
+        startTime: { hours: 13, minutes: 0 },
+        endTime: { hours: 14, minutes: 0 },
+      },
+      {
+        startTime: { hours: 14, minutes: 0 },
+        endTime: { hours: 15, minutes: 0 },
+      },
+      {
+        startTime: { hours: 15, minutes: 0 },
+        endTime: { hours: 16, minutes: 0 },
+      },
+      {
+        startTime: { hours: 16, minutes: 0 },
+        endTime: { hours: 17, minutes: 0 },
+      },
+      {
+        startTime: { hours: 17, minutes: 0 },
+        endTime: { hours: 18, minutes: 0 },
+      },
+    ],
+    TUE: [
+      {
+        startTime: { hours: 13, minutes: 0 },
+        endTime: { hours: 14, minutes: 30 },
+      },
+      {
+        startTime: { hours: 14, minutes: 30 },
+        endTime: { hours: 16, minutes: 0 },
+      },
+    ],
+  },
+  B_CSE: {
+    MON: [
+      {
+        startTime: { hours: 13, minutes: 0 },
+        endTime: { hours: 14, minutes: 0 },
+      },
+      {
+        startTime: { hours: 14, minutes: 0 },
+        endTime: { hours: 15, minutes: 0 },
+      },
+      {
+        startTime: { hours: 15, minutes: 0 },
+        endTime: { hours: 16, minutes: 0 },
+      },
+      {
+        startTime: { hours: 16, minutes: 0 },
+        endTime: { hours: 17, minutes: 0 },
+      },
+      {
+        startTime: { hours: 17, minutes: 0 },
+        endTime: { hours: 18, minutes: 0 },
+      },
+    ],
+    TUE: [
+      {
+        startTime: { hours: 13, minutes: 0 },
+        endTime: { hours: 14, minutes: 30 },
+      },
+      {
+        startTime: { hours: 14, minutes: 30 },
+        endTime: { hours: 16, minutes: 0 },
+      },
+    ],
+  },
+  E_MME: {
+    MON: [
+      {
+        startTime: { hours: 13, minutes: 0 },
+        endTime: { hours: 14, minutes: 0 },
+      },
+      {
+        startTime: { hours: 14, minutes: 0 },
+        endTime: { hours: 15, minutes: 0 },
+      },
+      {
+        startTime: { hours: 15, minutes: 0 },
+        endTime: { hours: 16, minutes: 0 },
+      },
+      {
+        startTime: { hours: 16, minutes: 0 },
+        endTime: { hours: 17, minutes: 0 },
+      },
+      {
+        startTime: { hours: 17, minutes: 0 },
+        endTime: { hours: 18, minutes: 0 },
+      },
+    ],
+    TUE: [
+      {
+        startTime: { hours: 13, minutes: 0 },
+        endTime: { hours: 14, minutes: 30 },
+      },
+      {
+        startTime: { hours: 14, minutes: 30 },
+        endTime: { hours: 16, minutes: 0 },
+      },
+    ],
+  },
+};
+
 const secondyearSectionTimeMapping = {
   A1_MME: {
     MON: [
@@ -317,7 +496,8 @@ const firstYearSectionTimeMapping = {
   },
 };
 
- 
+const sectionBusyMapping = {};
+
 
 const lectureHallProximityMapping = {
   AcademicHallLarge: ["LT1", "LT2", "LT9", "LT10"],
@@ -865,8 +1045,8 @@ async function allocateCoursesToSections_I(courses, sections) {
 async function allocateTimeSlotForSection_I(courseId, section) {
   try {
     console.log(
-      `Allocating time slots for course ${courseId} in section ${section}`
-    );
+      `Allocating time slots for course ${courseId} in section ${section}
+   `);
 
     const sectionTimeMapping = firstYearSectionTimeMapping[section];
     const days = Object.keys(sectionTimeMapping);
@@ -918,8 +1098,8 @@ async function allocateTimeSlotForSection_I(courseId, section) {
         // If time slot is not allocated to a different course, allocate it
         if (!isTimeSlotAllocated) {
           console.log(
-            `Allocating time slot for ${courseId} in section ${section} on ${day} from ${timeSlot.startTime.hours}:${timeSlot.startTime.minutes} to ${timeSlot.endTime.hours}:${timeSlot.endTime.minutes}`
-          );
+            `Allocating time slot for ${courseId} in section ${section} on ${day} from ${timeSlot.startTime.hours}:${timeSlot.startTime.minutes} to ${timeSlot.endTime.hours}:${timeSlot.endTime.minutes}
+          `);
 
           const newTimeTableEntry = new TimeTable({
             day,
@@ -995,8 +1175,8 @@ async function checkProfmapping(professorNames, it, timeSlot) {
       } else {
         // Handle the case where professor or iteration is not found in professorMapping
         console.log(
-          `Professor '${prof}' or iteration '${it}' not found in professorMapping.`
-        );
+          `Professor '${prof}' or iteration '${it}' not found in professorMapping.
+        `);
       }
     }
     return flag;
@@ -1039,8 +1219,8 @@ async function allocateTimeSlotForDefaultSections(course) {
     for (const item of sectionsAndTimeSlots) {
       const { section, day, startTime, endTime } = item;
       console.log(
-        `Allocating time slot for ${course._id} in section ${section} on ${day}`
-      );
+        `Allocating time slot for ${course._id} in section ${section} on ${day}
+      `);
 
       // Fetch the professors for the course
       const professors = course.professors.map((professor) => professor._id);
@@ -1069,6 +1249,19 @@ async function allocateTimeSlotForDefaultSections(course) {
       });
       await newTimeTableEntry.save();
 
+      if (!sectionBusyMapping[section]) {
+        sectionBusyMapping[section] = {};
+      }
+      if (!sectionBusyMapping[section][day]) {
+        sectionBusyMapping[section][day] = [];
+      }
+      sectionBusyMapping[section][day].push(
+        {
+          startTime: startTime,
+          endTime:endTime,
+          group: course.group
+        }
+      )
       // Update professorMapping with the allocated time slot
       for (const professorName of professors) {
         if (!professorMapping[professorName]) {
@@ -1086,40 +1279,72 @@ async function allocateTimeSlotForDefaultSections(course) {
     }
   } catch (error) {
     console.error(
-      `Error while allocating time slots for default sections: ${error}`
-    );
+      `Error while allocating time slots for default sections: ${error}
+    `);
     throw error;
   }
 }
 
 async function allocateTimSlots_II(iterator, i, marker) {
-  const section = iterator[i].section;
+  // section ka matlab yaha hai ki konsi branches ke bacche padh rhe hain
+  let section = iterator[i].section;
   const course = iterator[i].course;
-  const allotments = await getAllotments(course);
-  const sectionTimeMapping = secondyearSectionTimeMapping[section];
-  const days = Object.keys(sectionTimeMapping);
+  const year = course.year;
+  let allotments;
+
+  if (course.courseType === "Program Elective") {
+    allotments = [`PE_${course.name}_${year} year`];
+  } else {
+    allotments = await getAllotments(course);
+  }
+
+  let sectionTimeMapping;
+  if (year === "2nd") {
+    sectionTimeMapping = secondyearSectionTimeMapping[section[0]];
+  } else if (year === "3rd") {
+    sectionTimeMapping = thirdyearSectionTimeMapping[section[0]];
+  } else {
+    throw new Error("Invalid year specified");
+  }
+
+  const days = ["MON", "TUE"];
+
   for (const it of days) {
-    const existingTimetable = await TimeTable.find({
-      section: section,
-      course: course,
-    });
+    let existingTimetable;
+    if (course.courseType === "Program Elective") {
+      existingTimetable = await TimeTable.find({
+        section: allotments[0],
+        course: course
+      })
+    }
+    else {
+      existingTimetable = await TimeTable.find({
+        section: section[0],
+        course: course
+      });
+    }
+    
+
     if (existingTimetable.length > 0) {
-      if (i + 1 < iterator.length && marker.value ===false) {
+      if (i + 1 < iterator.length && marker.value === false) {
         await allocateTimSlots_II(iterator, i + 1, marker);
-      }
-      else{
+      } else {
         return;
       } // If timetable exists for this section and course, move to the next section
     }
+    
     const timeSlots = sectionTimeMapping[it];
+
     for (const slot of timeSlots) {
-      const isTimeslotOccupied = await isTimeSlotOccupied(section, it, slot);
+      const isTimeslotOccupied =isTimeSlotOccupied(section, it, slot, course);
 
       // If the time slot is occupied, skip to the next time slot
       if (isTimeslotOccupied) {
         continue;
       }
+
       let a = await allocateTimeSlot(course, section, it, slot, allotments);
+
       if (a) {
         if (i + 1 === iterator.length) {
           marker.value = true;
@@ -1130,7 +1355,7 @@ async function allocateTimSlots_II(iterator, i, marker) {
         if (marker.value) {
           return;
         } else {
-          await removeTimeSlot(course, section, it, slot);
+          await removeTimeSlot(course, section, it, slot, allotments);
           continue;
         }
       } else {
@@ -1141,36 +1366,66 @@ async function allocateTimSlots_II(iterator, i, marker) {
   return;
 }
 
-async function isTimeSlotOccupied(section, day, timeSlot) {
+
+function isTimeSlotOccupied(section, day, timeSlot, course) {
   try {
-    // Check if the time slot is already occupied for the given section and day
-    const existingEntries = await TimeTable.find({
-      section: section,
-      day: day,
-    });
-    return existingEntries.some((entry) => {
-      return (
-        // Check if the start time of the existing entry falls within the new time slot
-        entry.startTime.hours === timeSlot.startTime.hours &&
-        entry.startTime.minutes === timeSlot.startTime.minutes &&
-        entry.endTime.hours === timeSlot.endTime.hours &&
-        entry.endTime.minutes === timeSlot.endTime.minutes
-      );
-    });
+    let isOccupied = false;
+
+    for (const it of section) {
+      if (!sectionBusyMapping[it] || !sectionBusyMapping[it][day]) {
+        continue; // Skip if section or day is not defined
+      }
+      const existingEntries = sectionBusyMapping[it][day];
+      existingEntries.some((entry) => {
+        if (
+          isOverlap(entry, timeSlot) && 
+          (
+            (course.courseType === "Program Elective" && entry.group !== course.group) || 
+            (course.courseType !== "Program Elective")
+          )
+        ) {
+          isOccupied = true;
+          return true; // Exit the some loop early if an overlap is found
+        }
+        return false;
+      });
+      if (isOccupied) {
+        break; // Exit the section loop early if an overlap is found
+      }
+    }
+    return isOccupied;
   } catch (error) {
     console.error(`Error while checking if time slot is occupied: ${error}`);
     throw error;
   }
 }
+
+function isOverlap(slot1, slot2) {
+  return (
+    (slot1.startTime.hours < slot2.endTime.hours || 
+    (slot1.startTime.hours === slot2.endTime.hours && slot1.startTime.minutes < slot2.endTime.minutes)) &&
+    (slot1.endTime.hours > slot2.startTime.hours || 
+    (slot1.endTime.hours === slot2.startTime.hours && slot1.endTime.minutes > slot2.startTime.minutes))
+  );
+}
+
+
 async function allocateTimeSlot(course, section, day, timeSlot, allotments) {
   try {
     // Determine lecture hall based on section
+    let allote;
+    if (course.courseType === "Program Elective" || course.courseType === "Other Elective") {
+      allote = allotments[0];
+    }
+    else {
+      allote = section[0];
+    }
     let lectureHall;
-    if (section === "A1_CSE" || section === "B2_ECE") {
+    if (allote === "A1_CSE" || allote === "B2_ECE") {
       lectureHall = "LT16";
-    } else if (section === "A2_CSE" || section === "B1_CCE") {
+    } else if (allote === "A2_CSE" || allote === "B1_CCE") {
       lectureHall = "LT17";
-    } else if (section === "A1_MME") {
+    } else if (allote === "A1_MME") {
       lectureHall = "LT13";
     } else {
       // Default lecture hall if section is not recognized
@@ -1178,6 +1433,7 @@ async function allocateTimeSlot(course, section, day, timeSlot, allotments) {
     }
 
     // Fetch the professors for the course
+    console.log(course._id);
     const professors = course.professors.map((professor) => professor._id);
     const equalDivide = professors.length / allotments.length;
     const professorNames = await getProfessorNames(professors);
@@ -1210,16 +1466,23 @@ async function allocateTimeSlot(course, section, day, timeSlot, allotments) {
         return false;
       }
     }
-
     console.log(
-      `Allocating time slot for ${course._id} in section ${section} on ${day} from ${timeSlot.startTime.hours}:${timeSlot.startTime.minutes} to ${timeSlot.endTime.hours}:${timeSlot.endTime.minutes}`
-    );
+      `Allocating time slot for ${course._id} in section ${section} on ${day} from ${timeSlot.startTime.hours}:${timeSlot.startTime.minutes} to ${timeSlot.endTime.hours}:${timeSlot.endTime.minutes}
+    `);
 
     // Save the new timetable entry
     const profIds = await convertProfessorNamesToIds(clearedProfs);
+    let allot;
+
+    if (course.courseType != "Program Elective") {
+      allot = section[0];
+    }
+    else {
+      allot = allotments[0];
+    }
     const newTimeTableEntry = new TimeTable({
       day: day,
-      section: section,
+      section: allot,
       course: course._id,
       professors: profIds,
       lectureHall: lectureHall,
@@ -1228,6 +1491,23 @@ async function allocateTimeSlot(course, section, day, timeSlot, allotments) {
     });
     await newTimeTableEntry.save();
 
+
+    for (const it of section) {
+      if (!sectionBusyMapping[it]) {
+        sectionBusyMapping[it] = {};
+      }
+      if (!sectionBusyMapping[it][day]) {
+        sectionBusyMapping[it][day] = [];
+      }
+      sectionBusyMapping[it][day].push(
+        {
+          startTime: timeSlot.startTime,
+          endTime: timeSlot.endTime,
+          group: course.group
+        }
+      )
+    }
+    console.dir(sectionBusyMapping);
     // Update professor mapping
     for (let professorName of clearedProfs) {
       if (!professorMapping[professorName]) {
@@ -1249,16 +1529,44 @@ async function allocateTimeSlot(course, section, day, timeSlot, allotments) {
   }
 }
 
-async function removeTimeSlot(course, section, day, timeSlot) {
+async function removeTimeSlot(course, section, day, timeSlot, allotments) {
   try {
     // Remove the allocated time slot entry from the timetable
-    await TimeTable.deleteOne({
-      section: section,
-      course: course._id,
-      day: day,
-      startTime: timeSlot.startTime,
-      endTime: timeSlot.endTime,
-    });
+    if (course.courseType != "Program Elective") {
+      await TimeTable.deleteOne({
+        section: section[0],
+        course: course._id,
+        day: day,
+        startTime: timeSlot.startTime,
+        endTime: timeSlot.endTime,
+      });
+    }
+    else {
+      await TimeTable.deleteOne({
+        section: allotments[0],
+        course: course._id,
+        day: day,
+        startTime: timeSlot.startTime,
+        endTime: timeSlot.endTime,
+      });
+    }
+
+
+    for (const it of section) {
+      if (
+        sectionBusyMapping[it] &&
+        sectionBusyMapping[it][day]
+      ) {
+        const index = sectionBusyMapping[it][day].findIndex(
+          (entry) =>
+            entry.startTime === timeSlot.startTime &&
+            entry.endTime === timeSlot.endTime
+        );
+        if (index !== -1) {
+          sectionBusyMapping[it][day].splice(index, 1);
+        }
+      }
+    };
 
     // Restore professor mapping to its previous state after backtracking
     const professors = course.professors.map((professor) => professor._id);
@@ -1296,8 +1604,8 @@ async function convertProfessorNamesToIds(professorNames) {
       }
     } catch (error) {
       console.error(
-        `Error fetching professor ID for ${professorName}: ${error}`
-      );
+        `Error fetching professor ID for ${professorName}: ${error}
+      `);
       // Handle error
     }
   }
@@ -1326,11 +1634,10 @@ async function getProfessorName(professorId) {
 async function getAllotments(course) {
   const { CSE, CSE_DD, CCE, ECE, ECE_DD, MME } = course.numberOfStudents;
   let allotments = [];
+  if(course.year==="2nd"){
   if (CSE !== 0 && CSE_DD !== 0 && CCE !== 0) {
     return (allotments = ["A1_CSE", "A2_CSE", "B1_CCE"]);
-  }
-  
-   else if (CSE !== 0 && CSE_DD !== 0 && CCE === 0) {
+  } else if (CSE !== 0 && CSE_DD !== 0 && CCE === 0) {
     return (allotments = ["A1_CSE", "A2_CSE"]);
   } else if (ECE !== 0 && ECE_DD !== 0 && CCE !== 0) {
     return (allotments = ["B1_CCE", "B2_ECE"]);
@@ -1341,6 +1648,88 @@ async function getAllotments(course) {
   } else {
     return (allotments = ["A1_CSE", "A2_CSE", "B1_CCE", "B2_ECE"]); // Default allotments
   }
+}
+if(course.year==="3rd"){
+  if (CSE !== 0 && CSE_DD !== 0 && CCE !== 0) {
+    return (allotments = ["A_CSE", "B_CSE", "C_CCE"]);
+  }
+  else if (CSE !== 0 && CSE_DD !== 0 && CCE === 0) {
+    return (allotments = ["A_CSE", "B_CSE"]);
+  }
+  else if (ECE !== 0 && ECE_DD !== 0 && CCE !== 0) {
+    return (allotments = ["C_CCE", "D_ECE"]);
+  }
+  else if (ECE !== 0 && ECE_DD !== 0 && CCE === 0) {
+    return (allotments = ["D_ECE"]);
+  } 
+  else if (MME !== 0) {
+    return (allotments = ["E_MME"]);
+  }
+  
+}
+}
+
+function yearWiseSection(year, branch) {
+  if (year === '2nd' && branch === "CSE") {
+    return ["A1_CSE", "A2_CSE"];
+  }
+  if (year === "2nd" && branch === "CCE") {
+    return ["B1_CCE"];
+  }
+  if (year === "2nd" && branch === "ECE") {
+    return ["B2_ECE"];
+  }
+  if (year === "2nd" && branch === "MME") {
+    return ["A1_MME"];
+  }
+  if (year === "3rd" && branch === "CSE") {
+    return ["A_CSE", "B_CSE"];
+  }
+  if (year === "3rd" && branch === "CCE") {
+    return ["C_CCE"];
+  }
+  if (year === "3rd" && branch === "ECE") {
+    return ["D_ECE"];
+  }
+  if (year === "3rd" && branch === "MME") {
+    return ["E_MME"];
+  }
+}
+
+async function getSectionsForElectives(course) {
+  let sections = [];
+  const CSE = course.numberOfStudents.CSE;
+  const CSE_DD = course.numberOfStudents.CSE_DD;
+  const CCE = course.numberOfStudents.CCE;
+  const ECE = course.numberOfStudents.ECE;
+  const MME = course.numberOfStudents.MME;
+  const ECE_DD = course.numberOfStudents.ECE_DD;
+  const year = course.year;
+  if (CSE != 0) {
+    const CSE_SEC = yearWiseSection(year, "CSE");
+    for (const it of CSE_SEC) {
+      sections.push(it);
+    }
+  }
+  if (ECE != 0) {
+    const ECE_SEC = yearWiseSection(year, "ECE");
+    for (const it of ECE_SEC) {
+      sections.push(it);
+    }
+  }
+  if (CCE != 0) {
+    const CCE_SEC = yearWiseSection(year, "CCE");
+    for (const it of CCE_SEC) {
+      sections.push(it);
+    }
+  }
+  if (MME != 0) {
+    const MME_SEC = yearWiseSection(year, "MME");
+    for (const it of MME) {
+      sections.push(it);
+    }
+  }
+  return sections;
 }
 
 router.post("/generate-timetable", async (req, res) => {
@@ -1358,29 +1747,39 @@ router.post("/generate-timetable", async (req, res) => {
     }
 
     // Fetch 2nd year courses excluding M-III
-    const courses_2ndYear = await Course.find({
-      year: "2nd",
+    const courses_2ndYear_andAhead = await Course.find({
+      year: { $ne: "1st" },
       name: { $ne: "M-III" },
     });
-    console.log(courses_2ndYear);
-
     const iterator = [];
-
     // Loop through each course
-    for (const course of courses_2ndYear) {
-      const allotments = await getAllotments(course); // Awaiting right in the top-level code
-      for (const section of allotments) {
+    // dp approach
+    for (const course of courses_2ndYear_andAhead) {
+      if (course.courseType !== "Program Elective") {
+        const allotments = await getAllotments(course);
+        for (const section of allotments) {
+          iterator.push({
+            course: course,
+            section: [section]
+          });
+        }
+      }
+      else {
+        let sections = [];
+        sections = await getSectionsForElectives(course);
         iterator.push({
           course: course,
-          section: section,
+          section: sections
         });
       }
     }
     const marker = { value: false };
+
     await allocateTimSlots_II(iterator, 0, marker);
 
     res.status(200).json({ message: "Timetable generation completed" });
-  } catch (error) {
+  }
+  catch (error) {
     console.error("Error generating timetable:", error);
     res.status(500).json({ error: "Internal server error" });
   }
