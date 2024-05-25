@@ -4,119 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>HOD Page - <%= department %></title>
-  <style>
-    /* Place the contents of hodstyles.css here */
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #f8f9fa;
-      /* Light gray background color */
-    }
-
-    /* Container styles */
-    .App {
-      margin-left: 20px;
-    }
-
-    /* Heading styles */
-    h1 {
-      margin-top: 20px;
-      margin-bottom: 30px;
-      color: #343a40;
-      /* Dark gray heading color */
-      text-align: center;
-    }
-
-    /* Table styles */
-    #courseTable {
-      width: 100%;
-      margin-top: 20px;
-      border-collapse: collapse;
-      border-radius: 8px;
-      overflow: hidden;
-      box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
-      /* Box shadow for table */
-    }
-
-    th,
-    td {
-      padding: 12px;
-      border-bottom: 1px solid #dee2e6;
-      /* Light gray border color */
-    }
-
-    /* Table header styles */
-    thead {
-      background-color: #007bff;
-      /* Blue header background color */
-      color: #fff;
-      /* White text color */
-    }
-
-    /* Button styles */
-    button {
-      padding: 10px 20px;
-      background-color: #007bff;
-      /* Blue button background color */
-      color: #fff;
-      /* White text color */
-      border: none;
-      border-radius: 4px;
-      cursor: pointer;
-      transition: background-color 0.3s ease;
-      /* Smooth transition */
-    }
-
-    button:hover {
-      background-color: #0056b3;
-      /* Darker blue hover color */
-    }
-
-    /* Form styles */
-    form {
-      margin-top: 20px;
-      display: flex;
-      flex-direction: column;
-    }
-
-    input[type="number"].credits-input {
-      padding: 10px;
-      border: 1px solid #ced4da;
-      /* Light gray border color */
-      border-radius: 4px;
-      font-size: 16px;
-    }
-
-    /* Logout button styles */
-    .logout-button {
-      margin-top: 20px;
-      padding: 10px 20px;
-      background-color: #dc3545;
-      /* Red logout button background color */
-      color: #fff;
-      /* White text color */
-      border: none;
-      border-radius: 4px;
-      cursor: pointer;
-      transition: background-color 0.3s ease;
-      /* Smooth transition */
-    }
-
-    .logout-button:hover {
-      background-color: #c82333;
-      /* Darker red hover color */
-    }
-
-    input[type="number"]::-webkit-inner-spin-button,
-    input[type="number"]::-webkit-outer-spin-button {
-      -webkit-appearance: none;
-      margin: 0;
-    }
-
-    input[type="number"] {
-      -moz-appearance: textfield;
-      /* Firefox */
-    }
-  </style>
+  <link rel="stylesheet" href="/stylesheets/hodstyle.css">
 </head>
 
 <body>
@@ -138,19 +26,18 @@
           </tr>
         </thead>
         <tbody>
-          <% courses.forEach((course, index)=> { %>
+          <% courses.forEach((course, index) => { %>
           <tr>
             <td><%= course.name %></td>
             <td><%= course.courseCode %></td>
-            <td><%= course.numberOfStudents %></td>
             <td>
-              <input
-                type="number"
-                step="any"
-                class="credits-input"
-                placeholder="Credits"
-              />
+              <ul class="students-list">
+                <% Object.entries(course.numberOfStudents).forEach(([dept, count]) => { %>
+                <li><%= dept %>: <%= count %></li>
+                <% }) %>
+              </ul>
             </td>
+            <td><%= course.credits %></td>
             <td><%= course.semester %></td>
             <td><%= course.courseType %></td>
             <td>
@@ -183,78 +70,6 @@
       </form>
     </div>
   </div>
-  <script>
-    document.addEventListener("DOMContentLoaded", function () {
-      const formContainer = document.getElementById("formContainer");
-      
-      formContainer.addEventListener("click", function (event) {
-        const target = event.target;
-        
-        if (target.classList.contains("addProfessorButton")) {
-          const professorsContainer = document.createElement("div");
-          professorsContainer.classList.add("professors-container");
-
-          const professorInput = document.createElement("input");
-          professorInput.type = "text";
-          professorInput.placeholder = "Professor";
-          professorsContainer.appendChild(professorInput);
-
-          const deleteButton = document.createElement("button");
-          deleteButton.textContent = "Delete";
-          deleteButton.classList.add("deleteProfessorButton");
-          professorsContainer.appendChild(deleteButton);
-
-          // Insert before the next sibling element within the same parent
-          target.parentNode.insertBefore(professorsContainer, target.nextSibling);
-        } else if (target.classList.contains("deleteProfessorButton")) {
-          const professorsContainer = target.parentNode;
-          professorsContainer.remove();
-        }
-      });
-
-      const saveButtons = document.querySelectorAll(".save-button");
-
-      saveButtons.forEach(function (button) {
-        button.addEventListener("click", function () {
-          const row = button.closest("tr");
-          const creditsInput = row.querySelector(".credits-input");
-          const sharingTypeSelect = row.querySelector(".sharing-type-select");
-          const professorsInputs = row.querySelectorAll(".professors-container input");
-
-          const courseName = row.querySelector("td:nth-child(1)").textContent; // Assuming Course ID is in the second column
-
-          const credits = creditsInput.value;
-          const sharingType = sharingTypeSelect.value;
-          const professors = Array.from(professorsInputs).map(input => input.value);
-
-          if (confirm("Are you sure you want to save")) {
-            fetch('/save-course', {
-              method: 'POST',
-              headers: {
-                'Content-Type': 'application/json'
-              },
-              body: JSON.stringify({
-                courseName: courseName,
-                credits: credits,
-                sharingType: sharingType,
-                professors: professors
-              })
-            }).then(response => {
-              if (response.ok) {
-                // Course saved successfully, perform any additional actions here
-                alert("Course entries have been updated successfully");
-                console.log('Course saved successfully');
-              } else {
-                // Handle error response
-                console.error('Failed to save course');
-              }
-            }).catch(error => {
-              console.error('Error saving course:', error);
-            });
-          }
-        });
-      });
-    });
-  </script>
+  <script src="/javascripts/hodscript.js"></script>
 </body>
 </html>
