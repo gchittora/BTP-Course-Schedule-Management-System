@@ -402,7 +402,10 @@ document.addEventListener("DOMContentLoaded", function () {
         window.location.href = '/timetable';
     });
 
-    
+    // Optional: Add event listener for logout button
+    // document.querySelector("form[action='/logout']").addEventListener("submit", function() {
+    //     // Logout logic goes here
+    // });
 
     // Call fetchAndRenderSavedCourses to render saved courses
     fetchAndRenderSavedCourses();
