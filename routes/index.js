@@ -840,7 +840,7 @@ router.get(
       const courses = await Course.find({ department: departmentDoc._id });
 
       // Filter courses to show only those that have not been filled by the HOD
-      const unfilledCourses = courses.filter((course) => !course.credits);
+      const unfilledCourses = courses.filter((course) => !course.sharingType);
 
       res.render("hod", { department: department, courses: unfilledCourses });
     } catch (error) {
@@ -852,7 +852,7 @@ router.get(
 
 // POST route to update the course data
 router.post("/save-course", async (req, res) => {
-  const { courseName, credits, sharingType, professors } = req.body;
+  const { courseName,sharingType, professors } = req.body;
 
   try {
     // Check if the course exists
@@ -887,7 +887,7 @@ router.post("/save-course", async (req, res) => {
     }
 
     // Update the course with credits, sharingType, and professors
-    course.credits = credits;
+    
     course.sharingType = sharingType;
     course.professors = professorIds;
 
