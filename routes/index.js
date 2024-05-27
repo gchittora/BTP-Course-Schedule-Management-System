@@ -15,6 +15,43 @@ const firstYearSection = ["A1", "A2", "B1", "B2"];
 const secondyearSection = ["A1_MME", "A1_CSE", "A2_CSE", "B1_CCE", "B2_ECE"];
 const thirdYearSection = ["A_CSE", "B_CSE", "C_CCE", "D_ECE", "E_MME"];
 
+const MSCsectionTimeMapping={
+  B4_CCE: {
+    MON: [
+      {
+        startTime: { hours: 9, minutes: 0 },
+        endTime: { hours: 10, minutes: 0 },
+      },
+      {
+        startTime: { hours: 10, minutes: 0 },
+        endTime: { hours: 11, minutes: 0 },
+      },
+      {
+        startTime: { hours: 11, minutes: 0 },
+        endTime: { hours: 12, minutes: 0 },
+      },
+      {
+        startTime: { hours: 12, minutes: 0 },
+        endTime: { hours: 13, minutes: 0 },
+      },
+    ],
+    TUE: [
+      {
+        startTime: { hours: 8, minutes: 0 },
+        endTime: { hours: 9, minutes: 30 },
+      },
+      {
+        startTime: { hours: 9, minutes: 30 },
+        endTime: { hours: 11, minutes: 0 },
+      },
+      {
+        startTime: { hours: 11, minutes: 0 },
+        endTime: { hours: 12, minutes: 30 },
+      },
+    ],
+  },
+}
+
 const thirdyearSectionTimeMapping = {
   C_CCE: {
     MON: [
@@ -187,6 +224,145 @@ const thirdyearSectionTimeMapping = {
       {
         startTime: { hours: 14, minutes: 30 },
         endTime: { hours: 16, minutes: 0 },
+      },
+    ],
+  },
+};
+
+const fourthyearSectionTimeMapping = {
+  B4_CCE: {
+    MON: [
+      {
+        startTime: { hours: 9, minutes: 0 },
+        endTime: { hours: 10, minutes: 0 },
+      },
+      {
+        startTime: { hours: 10, minutes: 0 },
+        endTime: { hours: 11, minutes: 0 },
+      },
+      {
+        startTime: { hours: 11, minutes: 0 },
+        endTime: { hours: 12, minutes: 0 },
+      },
+      {
+        startTime: { hours: 12, minutes: 0 },
+        endTime: { hours: 13, minutes: 0 },
+      },
+    ],
+    TUE: [
+      {
+        startTime: { hours: 8, minutes: 0 },
+        endTime: { hours: 9, minutes: 30 },
+      },
+      {
+        startTime: { hours: 9, minutes: 30 },
+        endTime: { hours: 11, minutes: 0 },
+      },
+      {
+        startTime: { hours: 11, minutes: 0 },
+        endTime: { hours: 12, minutes: 30 },
+      },
+    ],
+  },
+  A4_CSE: {
+    MON: [
+      {
+        startTime: { hours: 9, minutes: 0 },
+        endTime: { hours: 10, minutes: 0 },
+      },
+      {
+        startTime: { hours: 10, minutes: 0 },
+        endTime: { hours: 11, minutes: 0 },
+      },
+      {
+        startTime: { hours: 11, minutes: 0 },
+        endTime: { hours: 12, minutes: 0 },
+      },
+      {
+        startTime: { hours: 12, minutes: 0 },
+        endTime: { hours: 13, minutes: 0 },
+      },
+    ],
+    TUE: [
+      {
+        startTime: { hours: 8, minutes: 0 },
+        endTime: { hours: 9, minutes: 30 },
+      },
+      {
+        startTime: { hours: 9, minutes: 30 },
+        endTime: { hours: 11, minutes: 0 },
+      },
+      {
+        startTime: { hours: 11, minutes: 0 },
+        endTime: { hours: 12, minutes: 30 },
+      },
+    ],
+  },
+  C4_ECE: {
+    MON: [
+      {
+        startTime: { hours: 9, minutes: 0 },
+        endTime: { hours: 10, minutes: 0 },
+      },
+      {
+        startTime: { hours: 10, minutes: 0 },
+        endTime: { hours: 11, minutes: 0 },
+      },
+      {
+        startTime: { hours: 11, minutes: 0 },
+        endTime: { hours: 12, minutes: 0 },
+      },
+      {
+        startTime: { hours: 12, minutes: 0 },
+        endTime: { hours: 13, minutes: 0 },
+      },
+    ],
+    TUE: [
+      {
+        startTime: { hours: 8, minutes: 0 },
+        endTime: { hours: 9, minutes: 30 },
+      },
+      {
+        startTime: { hours: 9, minutes: 30 },
+        endTime: { hours: 11, minutes: 0 },
+      },
+      {
+        startTime: { hours: 11, minutes: 0 },
+        endTime: { hours: 12, minutes: 30 },
+      },
+    ],
+  },
+  D4_MME: {
+    MON: [
+      {
+        startTime: { hours: 9, minutes: 0 },
+        endTime: { hours: 10, minutes: 0 },
+      },
+      {
+        startTime: { hours: 10, minutes: 0 },
+        endTime: { hours: 11, minutes: 0 },
+      },
+      {
+        startTime: { hours: 11, minutes: 0 },
+        endTime: { hours: 12, minutes: 0 },
+      },
+      {
+        startTime: { hours: 12, minutes: 0 },
+        endTime: { hours: 13, minutes: 0 },
+      },
+    ],
+    TUE: [
+      {
+        startTime: { hours: 8, minutes: 0 },
+        endTime: { hours: 9, minutes: 30 },
+      },
+      {
+        startTime: { hours: 9, minutes: 30 },
+        endTime: { hours: 11, minutes: 0 },
+      },
+      {
+        startTime: { hours: 11, minutes: 0 },
+        endTime: { hours: 12, minutes: 30 },
       },
     ],
   },
@@ -496,16 +672,15 @@ const firstYearSectionTimeMapping = {
   },
 };
 
-const sectionBusyMapping = {};
+let sectionBusyMapping = {};
 
 
-const lectureHallProximityMapping = {
-  AcademicHallLarge: ["LT1", "LT2", "LT9", "LT10"],
-  AcademicHallSmall: ["LT3", "LT4", "LT5", "LT6", "LT7", "LT8"],
-  Incubation: ["LT16", "LT17", "LT18", "LT19"],
-  MmeBuilding: ["LT11", "LT12", "LT13"],
-  MysteryHalls: ["LT14", "LT15"],
-};
+const AcademicHallLarge=["LT1", "LT2", "LT9", "LT10"];
+  const AcademicHallSmall=["LT3", "LT4", "LT5", "LT6", "LT7", "LT8"];
+  const Incubation= ["LT16", "LT17", "LT18", "LT19"];
+  const MmeBuilding=["LT11", "LT12", "LT13"];
+  const MysteryHalls=["LT14", "LT15"];
+
 
 // Render the index page
 router.get("/", function (req, res) {
@@ -1294,6 +1469,9 @@ async function allocateTimSlots_II(iterator, i, marker) {
 
   if (course.courseType === "Program Elective") {
     allotments = [`PE_${course.name}_${year} year`];
+  }
+  else if (course.courseType === "Other Elective") {
+    allotments = [`OE_${course.name}_${year} year`];
   } else {
     allotments = await getAllotments(course);
   }
@@ -1414,23 +1592,45 @@ async function allocateTimeSlot(course, section, day, timeSlot, allotments) {
   try {
     // Determine lecture hall based on section
     let allote;
+    let lectureHall;
     if (course.courseType === "Program Elective" || course.courseType === "Other Elective") {
-      allote = allotments[0];
+      for(const lt of AcademicHallSmall){
+        const existinglts= await TimeTable.find({day:day,startTime:timeSlot.startTime,endTime:timeSlot.endTime,lectureHall:lt});
+        if(existinglts.length>0){
+          continue;
+        }
+        lectureHall=lt;
+        break;
+
+      }
     }
     else {
       allote = section[0];
+    
+    
+    if (allote === "A_CSE") {
+      lectureHall = "LT18";
+    } 
+    else if(allote === "B2_ECE"){
+      lectureHall = "LT10";
     }
-    let lectureHall;
-    if (allote === "A1_CSE" || allote === "B2_ECE") {
+    else if (allote === "B_CSE" || allote === "C_CCE") {
+      lectureHall = "LT19";
+    } else if (allote === "E_MME") {
+      lectureHall = "LT12";
+    } 
+    else if (allote === "A1_CSE" || allote === "B2_ECE") {
       lectureHall = "LT16";
     } else if (allote === "A2_CSE" || allote === "B1_CCE") {
       lectureHall = "LT17";
     } else if (allote === "A1_MME") {
       lectureHall = "LT13";
-    } else {
+    } 
+    else {
       // Default lecture hall if section is not recognized
       lectureHall = "AcademicHallLarge";
     }
+  }
 
     // Fetch the professors for the course
     console.log(course._id);
@@ -1694,6 +1894,19 @@ function yearWiseSection(year, branch) {
   if (year === "3rd" && branch === "MME") {
     return ["E_MME"];
   }
+  if (year === '4th' && branch === "CSE") {
+    return ["A4_CSE"];
+  }
+  if (year === '4th' && branch === "CCE") {
+    return ["B4_CCE"];
+  }
+  if (year === '4th' && branch === "ECE") {
+    return ["C4_CSE"];
+  }
+  if (year === '4th' && branch === "MME") {
+    return ["D4_MME"];
+  }
+
 }
 
 async function getSectionsForElectives(course) {
@@ -1735,6 +1948,7 @@ async function getSectionsForElectives(course) {
 router.post("/generate-timetable", async (req, res) => {
   try {
     professorMapping = {};
+    sectionBusyMapping={};
     const courses_1stYear = await Course.find({ year: "1st" });
     await allocateCoursesToSections_I(courses_1stYear, firstYearSection);
 
