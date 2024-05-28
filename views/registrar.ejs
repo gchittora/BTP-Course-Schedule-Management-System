@@ -22,7 +22,6 @@
           <h1>Course Information</h1>
           <div>
             <button id="addEntryButton">Add Entry</button>
-            <button id="saveButton" style="background-color: green;">Save</button> <!-- Save button -->
           </div>
           <form id="courseForm" style="display: none;">
             <input type="text" id="courseNameInput"  placeholder="Course Name">
@@ -33,8 +32,20 @@
               <option value="CCE">CCE</option>
               <option value="MME">MME</option>
               <option value="ECE">ECE</option>
-              <option value="DCS">DCS</option>
-              <option value="DCE">DCE</option>
+              <option value="HSS">HSS</option>
+              <option value="MTH">MTH</option>
+              <option value="PHY">PHY</option>  
+            </select>
+            <select id="ProgramSelect">
+              <option value="">Select Program</option>
+              <option value="B.Tech.">B.Tech.</option>
+              <option value="B.Tech.(Hons.)">B.Tech.(Hons.)</option>
+              <option value="Minors">Minors</option>
+              <option value="B.Tech.-M.Tech.(5-year Integrated DD)">B.Tech.-M.Tech.(5-year Integrated DD)</option>
+              <option value="M.Tech.">M.Tech.</option>
+              <option value="M.S.">M.S.</option>
+              <option value="M.Sc.">M.Sc.</option>
+              <option value="Ph.D.">Ph.D.</option>    
             </select>
             <input type="number" id="cseStudentsInput" name="numberOfStudents.CSE" placeholder="No. of CSE students">
             <input type="number" id="cceStudentsInput" name="numberOfStudents.CCE" placeholder="No. of CCE students">
@@ -44,9 +55,11 @@
             <input type="number" id="eceDDStudentsInput" name="numberOfStudents.ECE_DD"
               placeholder="No. of ECE DD students">
             <input type="number" id="mmeStudentsInput" name="numberOfStudents.MME" placeholder="No. of MME students">
+            <input type="number" id="mscPHYStudentsInput" name="numberOfStudents.MScPHY" placeholder="No. of MScPHY students">
+            <input type="number" id="mscMTHStudentsInput" name="numberOfStudents.MScMTH" placeholder="No. of MScMTH students">
 
 
-            <input type="number" id="creditsInput" placeholder="Credits">
+            <input type="number" id="creditsInput" name="credits"placeholder="Credits">
             <select id="semesterSelect">
               <option value="">Select Semester</option>
               <option value="Odd">Odd</option>
@@ -54,10 +67,14 @@
             </select>
             <select id="courseTypeSelect">
               <option value="">Select Course Type</option>
-              <option value="Core">Core</option>
-              <option value="Elective">Elective</option>
-              <option value="Other">Other</option>
+              <option value="Institute Core">Institute Core</option>
+              <option value="Program Core">Program Core</option>
+              <option value="Program Elective">Program Elective</option>
+              <option value="Other Elective">Other Elective</option>
             </select>
+            <div id="groupInputContainer" style="display: none;">
+              <input type="text" id="groupInput" name="groupInput"placeholder="Group">
+            </div>
             <select id="sharingTypeSelect">
               <option value="">Select Sharing Type</option>
               <option value="Vertical">Vertical</option>
@@ -79,15 +96,19 @@
                 <th>Course Name</th>
                 <th>Course ID</th>
                 <th>Department</th>
+                <th>Program</th>
                 <th>No. of CSE Students</th>
                 <th>No. of CCE Students</th>
                 <th>No. of ECE Students</th>
                 <th>No. of CSE DD Students</th>
                 <th>No. of ECE DD Students</th>
                 <th>No. of MME Students</th>
+                <th>No. of MSc PHY Students</th>
+                <th>No. of MSc MTH Students</th>
                 <th>Credits</th>
                 <th>Semester</th>
                 <th>Course Type</th>
+                <th>Group</th>
                 <th>Sharing Type</th>
                 <th>Year</th>
                 <th>Professors</th>
@@ -98,10 +119,11 @@
               <!-- Course entries will be inserted here dynamically -->
             </tbody>
           </table>
-          <button id="generateButton">Generate</button>
-
           <button id="sendButton">Send</button>
+          <button id="generateButton" >Generate</button>
 
+          
+          <button id="viewTimetableButton">View Timetable</button>
 
           <!-- Logout button -->
           <form action="/logout" method="POST">
