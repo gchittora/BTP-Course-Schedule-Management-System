@@ -1791,7 +1791,7 @@ async function allocateTimeSlot(course, section, day, timeSlot, allotments) {
     // Determine lecture hall based on section
     let allote;
     let lectureHall;
-    if (course.program === "M.Sc") {
+    if (course.program === "M.Sc.") {
       for (const lt of MmeBuilding) {
         const existinglts = await TimeTable.find({ day: day, startTime: timeSlot.startTime, endTime: timeSlot.endTime, lectureHall: lt });
         if (existinglts.length > 0) {
