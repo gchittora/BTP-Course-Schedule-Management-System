@@ -11,9 +11,1614 @@ passport.use(new localStrategy(userModel.authenticate()));
 passport.serializeUser(userModel.serializeUser());
 passport.deserializeUser(userModel.deserializeUser());
 
+// even sem
+const firstYearSection_Even = ["A1_CSE", "A2_CSE", "B1_CCE", "B2_CCE", "B3_CCE", "C1_ECE", "C2_ECE", "C3_ECE", "D1_MME", "D2_MME", "D3_MME", "Comb_section1", "Comb_section2"];
+const secondYearSection_Even = ["A1CSE", "A2CSE", "B1CCE", "B2CCE", "B3CCE", "C1ECE", "C2ECE", "C3ECE", "D1MME"];
+const thirdYearSection_Even = ["A1_CSE_III", "A2_CSE_III", "B1_CCE_III", "B2_CCE_III", "B3_CCE_III", "C1_ECE_III", "C2_ECE_III", "C3_ECE_III", "D1_MME_III"];
+const fourthYearSection_Even = ["A_CSE", "B_CCE", "C_ECE", "D_MME"];
+
+// odd sem
 const firstYearSection = ["A1", "A2", "B1", "B2"];
 const secondyearSection = ["A1_MME", "A1_CSE", "A2_CSE", "B1_CCE", "B2_ECE"];
 const thirdYearSection = ["A_CSE", "B_CSE", "C_CCE", "D_ECE", "E_MME"];
+
+const firstYearSectionTimeMapping_II = {
+  A1_CSE: {
+    MON: [
+      {
+        startTime: { hours: 8, minutes: 0 },
+        endTime: { hours: 9, minutes: 0 },
+      },
+      {
+        startTime: { hours: 9, minutes: 0 },
+        endTime: { hours: 10, minutes: 0 },
+      },
+      {
+        startTime: { hours: 10, minutes: 0 },
+        endTime: { hours: 11, minutes: 0 },
+      },
+      {
+        startTime: { hours: 11, minutes: 0 },
+        endTime: { hours: 12, minutes: 0 },
+      },
+      {
+        startTime: { hours: 12, minutes: 0 },
+        endTime: { hours: 13, minutes: 0 },
+      },
+    ],
+    TUE: [
+      {
+        startTime: { hours: 8, minutes: 0 },
+        endTime: { hours: 9, minutes: 30 },
+      },
+      {
+        startTime: { hours: 9, minutes: 30 },
+        endTime: { hours: 11, minutes: 0 },
+      },
+      {
+        startTime: { hours: 11, minutes: 0 },
+        endTime: { hours: 12, minutes: 30 },
+      }
+    ],
+  },
+  A2_CSE: {
+    MON: [
+      {
+        startTime: { hours: 8, minutes: 0 },
+        endTime: { hours: 9, minutes: 0 },
+      },
+      {
+        startTime: { hours: 9, minutes: 0 },
+        endTime: { hours: 10, minutes: 0 },
+      },
+      {
+        startTime: { hours: 10, minutes: 0 },
+        endTime: { hours: 11, minutes: 0 },
+      },
+      {
+        startTime: { hours: 11, minutes: 0 },
+        endTime: { hours: 12, minutes: 0 },
+      },
+      {
+        startTime: { hours: 12, minutes: 0 },
+        endTime: { hours: 13, minutes: 0 },
+      }
+    ],
+    TUE: [
+      {
+        startTime: { hours: 8, minutes: 0 },
+        endTime: { hours: 9, minutes: 30 },
+      },
+      {
+        startTime: { hours: 9, minutes: 30 },
+        endTime: { hours: 11, minutes: 0 },
+      },
+      {
+        startTime: { hours: 11, minutes: 0 },
+        endTime: { hours: 12, minutes: 30 },
+      }
+    ],
+  },
+  Comb_section1: {
+    MON: [
+      {
+        startTime: { hours: 8, minutes: 0 },
+        endTime: { hours: 9, minutes: 0 },
+      },
+      {
+        startTime: { hours: 9, minutes: 0 },
+        endTime: { hours: 10, minutes: 0 },
+      },
+      {
+        startTime: { hours: 10, minutes: 0 },
+        endTime: { hours: 11, minutes: 0 },
+      },
+      {
+        startTime: { hours: 11, minutes: 0 },
+        endTime: { hours: 12, minutes: 0 },
+      },
+      {
+        startTime: { hours: 12, minutes: 0 },
+        endTime: { hours: 13, minutes: 0 },
+      },
+    ],
+    TUE: [
+      {
+        startTime: { hours: 8, minutes: 0 },
+        endTime: { hours: 9, minutes: 30 },
+      },
+      {
+        startTime: { hours: 9, minutes: 30 },
+        endTime: { hours: 11, minutes: 0 },
+      },
+      {
+        startTime: { hours: 11, minutes: 0 },
+        endTime: { hours: 12, minutes: 30 },
+      }
+    ],
+  },
+  Comb_section2: {
+    MON: [
+      {
+        startTime: { hours: 8, minutes: 0 },
+        endTime: { hours: 9, minutes: 0 },
+      },
+      {
+        startTime: { hours: 9, minutes: 0 },
+        endTime: { hours: 10, minutes: 0 },
+      },
+      {
+        startTime: { hours: 10, minutes: 0 },
+        endTime: { hours: 11, minutes: 0 },
+      },
+      {
+        startTime: { hours: 11, minutes: 0 },
+        endTime: { hours: 12, minutes: 0 },
+      },
+      {
+        startTime: { hours: 12, minutes: 0 },
+        endTime: { hours: 13, minutes: 0 },
+      },
+    ],
+    TUE: [
+      {
+        startTime: { hours: 8, minutes: 0 },
+        endTime: { hours: 9, minutes: 30 },
+      },
+      {
+        startTime: { hours: 9, minutes: 30 },
+        endTime: { hours: 11, minutes: 0 },
+      },
+      {
+        startTime: { hours: 11, minutes: 0 },
+        endTime: { hours: 12, minutes: 30 },
+      }
+    ],
+  },
+  B1_CCE: {
+    MON: [
+      {
+        startTime: { hours: 13, minutes: 0 },
+        endTime: { hours: 14, minutes: 0 },
+      },
+      {
+        startTime: { hours: 14, minutes: 0 },
+        endTime: { hours: 15, minutes: 0 },
+      },
+      {
+        startTime: { hours: 15, minutes: 0 },
+        endTime: { hours: 16, minutes: 0 },
+      },
+      {
+        startTime: { hours: 16, minutes: 0 },
+        endTime: { hours: 17, minutes: 0 },
+      },
+      {
+        startTime: { hours: 17, minutes: 0 },
+        endTime: { hours: 18, minutes: 0 },
+      },
+    ],
+    TUE: [
+      {
+        startTime: { hours: 13, minutes: 0 },
+        endTime: { hours: 14, minutes: 30 },
+      },
+      {
+        startTime: { hours: 14, minutes: 30 },
+        endTime: { hours: 16, minutes: 0 },
+      },
+    ],
+  },
+  B2_CCE: {
+    MON: [
+      {
+        startTime: { hours: 13, minutes: 0 },
+        endTime: { hours: 14, minutes: 0 },
+      },
+      {
+        startTime: { hours: 14, minutes: 0 },
+        endTime: { hours: 15, minutes: 0 },
+      },
+      {
+        startTime: { hours: 15, minutes: 0 },
+        endTime: { hours: 16, minutes: 0 },
+      },
+      {
+        startTime: { hours: 16, minutes: 0 },
+        endTime: { hours: 17, minutes: 0 },
+      },
+      {
+        startTime: { hours: 17, minutes: 0 },
+        endTime: { hours: 18, minutes: 0 },
+      },
+    ],
+    TUE: [
+      {
+        startTime: { hours: 13, minutes: 0 },
+        endTime: { hours: 14, minutes: 30 },
+      },
+      {
+        startTime: { hours: 14, minutes: 30 },
+        endTime: { hours: 16, minutes: 0 },
+      },
+    ],
+  },
+  B3_CCE: {
+    MON: [
+      {
+        startTime: { hours: 13, minutes: 0 },
+        endTime: { hours: 14, minutes: 0 },
+      },
+      {
+        startTime: { hours: 14, minutes: 0 },
+        endTime: { hours: 15, minutes: 0 },
+      },
+      {
+        startTime: { hours: 15, minutes: 0 },
+        endTime: { hours: 16, minutes: 0 },
+      },
+      {
+        startTime: { hours: 16, minutes: 0 },
+        endTime: { hours: 17, minutes: 0 },
+      },
+      {
+        startTime: { hours: 17, minutes: 0 },
+        endTime: { hours: 18, minutes: 0 },
+      },
+    ],
+    TUE: [
+      {
+        startTime: { hours: 13, minutes: 0 },
+        endTime: { hours: 14, minutes: 30 },
+      },
+      {
+        startTime: { hours: 14, minutes: 30 },
+        endTime: { hours: 16, minutes: 0 },
+      },
+    ],
+  },
+  C1_ECE: {
+    MON: [
+      {
+        startTime: { hours: 13, minutes: 0 },
+        endTime: { hours: 14, minutes: 0 },
+      },
+      {
+        startTime: { hours: 14, minutes: 0 },
+        endTime: { hours: 15, minutes: 0 },
+      },
+      {
+        startTime: { hours: 15, minutes: 0 },
+        endTime: { hours: 16, minutes: 0 },
+      },
+      {
+        startTime: { hours: 16, minutes: 0 },
+        endTime: { hours: 17, minutes: 0 },
+      },
+      {
+        startTime: { hours: 17, minutes: 0 },
+        endTime: { hours: 18, minutes: 0 },
+      },
+    ],
+    TUE: [
+      {
+        startTime: { hours: 13, minutes: 0 },
+        endTime: { hours: 14, minutes: 30 },
+      },
+      {
+        startTime: { hours: 14, minutes: 30 },
+        endTime: { hours: 16, minutes: 0 },
+      },
+    ],
+  },
+  C2_ECE: {
+    MON: [
+      {
+        startTime: { hours: 13, minutes: 0 },
+        endTime: { hours: 14, minutes: 0 },
+      },
+      {
+        startTime: { hours: 14, minutes: 0 },
+        endTime: { hours: 15, minutes: 0 },
+      },
+      {
+        startTime: { hours: 15, minutes: 0 },
+        endTime: { hours: 16, minutes: 0 },
+      },
+      {
+        startTime: { hours: 16, minutes: 0 },
+        endTime: { hours: 17, minutes: 0 },
+      },
+      {
+        startTime: { hours: 17, minutes: 0 },
+        endTime: { hours: 18, minutes: 0 },
+      },
+    ],
+    TUE: [
+      {
+        startTime: { hours: 13, minutes: 0 },
+        endTime: { hours: 14, minutes: 30 },
+      },
+      {
+        startTime: { hours: 14, minutes: 30 },
+        endTime: { hours: 16, minutes: 0 },
+      },
+    ],
+  },
+  C3_ECE: {
+    MON: [
+      {
+        startTime: { hours: 13, minutes: 0 },
+        endTime: { hours: 14, minutes: 0 },
+      },
+      {
+        startTime: { hours: 14, minutes: 0 },
+        endTime: { hours: 15, minutes: 0 },
+      },
+      {
+        startTime: { hours: 15, minutes: 0 },
+        endTime: { hours: 16, minutes: 0 },
+      },
+      {
+        startTime: { hours: 16, minutes: 0 },
+        endTime: { hours: 17, minutes: 0 },
+      },
+      {
+        startTime: { hours: 17, minutes: 0 },
+        endTime: { hours: 18, minutes: 0 },
+      },
+    ],
+    TUE: [
+      {
+        startTime: { hours: 13, minutes: 0 },
+        endTime: { hours: 14, minutes: 30 },
+      },
+      {
+        startTime: { hours: 14, minutes: 30 },
+        endTime: { hours: 16, minutes: 0 },
+      },
+    ],
+  },
+  D1_MME: {
+    MON: [
+      {
+        startTime: { hours: 8, minutes: 0 },
+        endTime: { hours: 9, minutes: 0 },
+      },
+      {
+        startTime: { hours: 9, minutes: 0 },
+        endTime: { hours: 10, minutes: 0 },
+      },
+      {
+        startTime: { hours: 10, minutes: 0 },
+        endTime: { hours: 11, minutes: 0 },
+      },
+      {
+        startTime: { hours: 11, minutes: 0 },
+        endTime: { hours: 12, minutes: 0 },
+      },
+      {
+        startTime: { hours: 12, minutes: 0 },
+        endTime: { hours: 13, minutes: 0 },
+      },
+    ],
+    TUE: [
+      {
+        startTime: { hours: 8, minutes: 0 },
+        endTime: { hours: 9, minutes: 30 },
+      },
+      {
+        startTime: { hours: 9, minutes: 30 },
+        endTime: { hours: 11, minutes: 0 },
+      },
+      {
+        startTime: { hours: 11, minutes: 0 },
+        endTime: { hours: 12, minutes: 30 },
+      }
+    ],
+  },
+  D2_MME: {
+    MON: [
+      {
+        startTime: { hours: 8, minutes: 0 },
+        endTime: { hours: 9, minutes: 0 },
+      },
+      {
+        startTime: { hours: 9, minutes: 0 },
+        endTime: { hours: 10, minutes: 0 },
+      },
+      {
+        startTime: { hours: 10, minutes: 0 },
+        endTime: { hours: 11, minutes: 0 },
+      },
+      {
+        startTime: { hours: 11, minutes: 0 },
+        endTime: { hours: 12, minutes: 0 },
+      },
+      {
+        startTime: { hours: 12, minutes: 0 },
+        endTime: { hours: 13, minutes: 0 },
+      },
+    ],
+    TUE: [
+      {
+        startTime: { hours: 8, minutes: 0 },
+        endTime: { hours: 9, minutes: 30 },
+      },
+      {
+        startTime: { hours: 9, minutes: 30 },
+        endTime: { hours: 11, minutes: 0 },
+      },
+      {
+        startTime: { hours: 11, minutes: 0 },
+        endTime: { hours: 12, minutes: 30 },
+      }
+    ],
+  },
+  D3_MME: {
+    MON: [
+      {
+        startTime: { hours: 8, minutes: 0 },
+        endTime: { hours: 9, minutes: 0 },
+      },
+      {
+        startTime: { hours: 9, minutes: 0 },
+        endTime: { hours: 10, minutes: 0 },
+      },
+      {
+        startTime: { hours: 10, minutes: 0 },
+        endTime: { hours: 11, minutes: 0 },
+      },
+      {
+        startTime: { hours: 11, minutes: 0 },
+        endTime: { hours: 12, minutes: 0 },
+      },
+      {
+        startTime: { hours: 12, minutes: 0 },
+        endTime: { hours: 13, minutes: 0 },
+      },
+    ],
+    TUE: [
+      {
+        startTime: { hours: 8, minutes: 0 },
+        endTime: { hours: 9, minutes: 30 },
+      },
+      {
+        startTime: { hours: 9, minutes: 30 },
+        endTime: { hours: 11, minutes: 0 },
+      },
+      {
+        startTime: { hours: 11, minutes: 0 },
+        endTime: { hours: 12, minutes: 30 },
+      }
+    ],
+  }
+};
+
+const secondYearSectionTimeMapping_II = {
+  A1_CSE: {
+    MON: [
+      {
+        startTime: { hours: 13, minutes: 0 },
+        endTime: { hours: 14, minutes: 0 },
+      },
+      {
+        startTime: { hours: 14, minutes: 0 },
+        endTime: { hours: 15, minutes: 0 },
+      },
+      {
+        startTime: { hours: 15, minutes: 0 },
+        endTime: { hours: 16, minutes: 0 },
+      },
+      {
+        startTime: { hours: 16, minutes: 0 },
+        endTime: { hours: 17, minutes: 0 },
+      },
+      {
+        startTime: { hours: 17, minutes: 0 },
+        endTime: { hours: 18, minutes: 0 },
+      },
+    ],
+    TUE: [
+      {
+        startTime: { hours: 13, minutes: 0 },
+        endTime: { hours: 14, minutes: 30 },
+      },
+      {
+        startTime: { hours: 14, minutes: 30 },
+        endTime: { hours: 16, minutes: 0 },
+      },
+    ],
+  },
+  A2_CSE: {
+    MON: [
+      {
+        startTime: { hours: 13, minutes: 0 },
+        endTime: { hours: 14, minutes: 0 },
+      },
+      {
+        startTime: { hours: 14, minutes: 0 },
+        endTime: { hours: 15, minutes: 0 },
+      },
+      {
+        startTime: { hours: 15, minutes: 0 },
+        endTime: { hours: 16, minutes: 0 },
+      },
+      {
+        startTime: { hours: 16, minutes: 0 },
+        endTime: { hours: 17, minutes: 0 },
+      },
+      {
+        startTime: { hours: 17, minutes: 0 },
+        endTime: { hours: 18, minutes: 0 },
+      },
+    ],
+    TUE: [
+      {
+        startTime: { hours: 13, minutes: 0 },
+        endTime: { hours: 14, minutes: 30 },
+      },
+      {
+        startTime: { hours: 14, minutes: 30 },
+        endTime: { hours: 16, minutes: 0 },
+      },
+    ],
+  },
+  B1_CCE: {
+    MON: [
+      {
+        startTime: { hours: 8, minutes: 0 },
+        endTime: { hours: 9, minutes: 0 },
+      },
+      {
+        startTime: { hours: 9, minutes: 0 },
+        endTime: { hours: 10, minutes: 0 },
+      },
+      {
+        startTime: { hours: 10, minutes: 0 },
+        endTime: { hours: 11, minutes: 0 },
+      },
+      {
+        startTime: { hours: 11, minutes: 0 },
+        endTime: { hours: 12, minutes: 0 },
+      },
+      {
+        startTime: { hours: 12, minutes: 0 },
+        endTime: { hours: 13, minutes: 0 },
+      },
+    ],
+    TUE: [
+      {
+        startTime: { hours: 8, minutes: 0 },
+        endTime: { hours: 9, minutes: 30 },
+      },
+      {
+        startTime: { hours: 9, minutes: 30 },
+        endTime: { hours: 11, minutes: 0 },
+      },
+      {
+        startTime: { hours: 11, minutes: 0 },
+        endTime: { hours: 12, minutes: 30 },
+      }
+    ],
+  },
+  B2_CCE: {
+    MON: [
+      {
+        startTime: { hours: 8, minutes: 0 },
+        endTime: { hours: 9, minutes: 0 },
+      },
+      {
+        startTime: { hours: 9, minutes: 0 },
+        endTime: { hours: 10, minutes: 0 },
+      },
+      {
+        startTime: { hours: 10, minutes: 0 },
+        endTime: { hours: 11, minutes: 0 },
+      },
+      {
+        startTime: { hours: 11, minutes: 0 },
+        endTime: { hours: 12, minutes: 0 },
+      },
+      {
+        startTime: { hours: 12, minutes: 0 },
+        endTime: { hours: 13, minutes: 0 },
+      },
+    ],
+    TUE: [
+      {
+        startTime: { hours: 8, minutes: 0 },
+        endTime: { hours: 9, minutes: 30 },
+      },
+      {
+        startTime: { hours: 9, minutes: 30 },
+        endTime: { hours: 11, minutes: 0 },
+      },
+      {
+        startTime: { hours: 11, minutes: 0 },
+        endTime: { hours: 12, minutes: 30 },
+      }
+    ],
+  },
+  B3_CCE: {
+    MON: [
+      {
+        startTime: { hours: 8, minutes: 0 },
+        endTime: { hours: 9, minutes: 0 },
+      },
+      {
+        startTime: { hours: 9, minutes: 0 },
+        endTime: { hours: 10, minutes: 0 },
+      },
+      {
+        startTime: { hours: 10, minutes: 0 },
+        endTime: { hours: 11, minutes: 0 },
+      },
+      {
+        startTime: { hours: 11, minutes: 0 },
+        endTime: { hours: 12, minutes: 0 },
+      },
+      {
+        startTime: { hours: 12, minutes: 0 },
+        endTime: { hours: 13, minutes: 0 },
+      },
+    ],
+    TUE: [
+      {
+        startTime: { hours: 8, minutes: 0 },
+        endTime: { hours: 9, minutes: 30 },
+      },
+      {
+        startTime: { hours: 9, minutes: 30 },
+        endTime: { hours: 11, minutes: 0 },
+      },
+      {
+        startTime: { hours: 11, minutes: 0 },
+        endTime: { hours: 12, minutes: 30 },
+      }
+    ],
+  },
+  C1_ECE: {
+    MON: [
+      {
+        startTime: { hours: 8, minutes: 0 },
+        endTime: { hours: 9, minutes: 0 },
+      },
+      {
+        startTime: { hours: 9, minutes: 0 },
+        endTime: { hours: 10, minutes: 0 },
+      },
+      {
+        startTime: { hours: 10, minutes: 0 },
+        endTime: { hours: 11, minutes: 0 },
+      },
+      {
+        startTime: { hours: 11, minutes: 0 },
+        endTime: { hours: 12, minutes: 0 },
+      },
+      {
+        startTime: { hours: 12, minutes: 0 },
+        endTime: { hours: 13, minutes: 0 },
+      },
+    ],
+    TUE: [
+      {
+        startTime: { hours: 8, minutes: 0 },
+        endTime: { hours: 9, minutes: 30 },
+      },
+      {
+        startTime: { hours: 9, minutes: 30 },
+        endTime: { hours: 11, minutes: 0 },
+      },
+      {
+        startTime: { hours: 11, minutes: 0 },
+        endTime: { hours: 12, minutes: 30 },
+      }
+    ],
+  },
+  C2_ECE: {
+    MON: [
+      {
+        startTime: { hours: 8, minutes: 0 },
+        endTime: { hours: 9, minutes: 0 },
+      },
+      {
+        startTime: { hours: 9, minutes: 0 },
+        endTime: { hours: 10, minutes: 0 },
+      },
+      {
+        startTime: { hours: 10, minutes: 0 },
+        endTime: { hours: 11, minutes: 0 },
+      },
+      {
+        startTime: { hours: 11, minutes: 0 },
+        endTime: { hours: 12, minutes: 0 },
+      },
+      {
+        startTime: { hours: 12, minutes: 0 },
+        endTime: { hours: 13, minutes: 0 },
+      },
+    ],
+    TUE: [
+      {
+        startTime: { hours: 8, minutes: 0 },
+        endTime: { hours: 9, minutes: 30 },
+      },
+      {
+        startTime: { hours: 9, minutes: 30 },
+        endTime: { hours: 11, minutes: 0 },
+      },
+      {
+        startTime: { hours: 11, minutes: 0 },
+        endTime: { hours: 12, minutes: 30 },
+      }
+    ],
+  },
+  C3_ECE: {
+    MON: [
+      {
+        startTime: { hours: 8, minutes: 0 },
+        endTime: { hours: 9, minutes: 0 },
+      },
+      {
+        startTime: { hours: 9, minutes: 0 },
+        endTime: { hours: 10, minutes: 0 },
+      },
+      {
+        startTime: { hours: 10, minutes: 0 },
+        endTime: { hours: 11, minutes: 0 },
+      },
+      {
+        startTime: { hours: 11, minutes: 0 },
+        endTime: { hours: 12, minutes: 0 },
+      },
+      {
+        startTime: { hours: 12, minutes: 0 },
+        endTime: { hours: 13, minutes: 0 },
+      },
+    ],
+    TUE: [
+      {
+        startTime: { hours: 8, minutes: 0 },
+        endTime: { hours: 9, minutes: 30 },
+      },
+      {
+        startTime: { hours: 9, minutes: 30 },
+        endTime: { hours: 11, minutes: 0 },
+      },
+      {
+        startTime: { hours: 11, minutes: 0 },
+        endTime: { hours: 12, minutes: 30 },
+      }
+    ],
+  },
+  D1MME: {
+    MON: [
+      {
+        startTime: { hours: 13, minutes: 0 },
+        endTime: { hours: 14, minutes: 0 },
+      },
+      {
+        startTime: { hours: 14, minutes: 0 },
+        endTime: { hours: 15, minutes: 0 },
+      },
+      {
+        startTime: { hours: 15, minutes: 0 },
+        endTime: { hours: 16, minutes: 0 },
+      },
+      {
+        startTime: { hours: 16, minutes: 0 },
+        endTime: { hours: 17, minutes: 0 },
+      },
+      {
+        startTime: { hours: 17, minutes: 0 },
+        endTime: { hours: 18, minutes: 0 },
+      },
+    ],
+    TUE: [
+      {
+        startTime: { hours: 13, minutes: 0 },
+        endTime: { hours: 14, minutes: 30 },
+      },
+      {
+        startTime: { hours: 14, minutes: 30 },
+        endTime: { hours: 16, minutes: 0 },
+      },
+    ],
+  }
+};
+
+const thirdYearSectionTimeMapping_II = {
+  A1_CSE_III: {
+    MON: [
+      {
+        startTime: { hours: 13, minutes: 0 },
+        endTime: { hours: 14, minutes: 0 },
+      },
+      {
+        startTime: { hours: 14, minutes: 0 },
+        endTime: { hours: 15, minutes: 0 },
+      },
+      {
+        startTime: { hours: 15, minutes: 0 },
+        endTime: { hours: 16, minutes: 0 },
+      },
+      {
+        startTime: { hours: 16, minutes: 0 },
+        endTime: { hours: 17, minutes: 0 },
+      },
+      {
+        startTime: { hours: 17, minutes: 0 },
+        endTime: { hours: 18, minutes: 0 },
+      },
+    ],
+    TUE: [
+      {
+        startTime: { hours: 13, minutes: 0 },
+        endTime: { hours: 14, minutes: 30 },
+      },
+      {
+        startTime: { hours: 14, minutes: 30 },
+        endTime: { hours: 16, minutes: 0 },
+      },
+    ],
+  },
+  A2_CSE_III: {
+    MON: [
+      {
+        startTime: { hours: 13, minutes: 0 },
+        endTime: { hours: 14, minutes: 0 },
+      },
+      {
+        startTime: { hours: 14, minutes: 0 },
+        endTime: { hours: 15, minutes: 0 },
+      },
+      {
+        startTime: { hours: 15, minutes: 0 },
+        endTime: { hours: 16, minutes: 0 },
+      },
+      {
+        startTime: { hours: 16, minutes: 0 },
+        endTime: { hours: 17, minutes: 0 },
+      },
+      {
+        startTime: { hours: 17, minutes: 0 },
+        endTime: { hours: 18, minutes: 0 },
+      },
+    ],
+    TUE: [
+      {
+        startTime: { hours: 13, minutes: 0 },
+        endTime: { hours: 14, minutes: 30 },
+      },
+      {
+        startTime: { hours: 14, minutes: 30 },
+        endTime: { hours: 16, minutes: 0 },
+      },
+    ],
+  },
+  B1_CCE_III: {
+    MON: [
+      {
+        startTime: { hours: 13, minutes: 0 },
+        endTime: { hours: 14, minutes: 0 },
+      },
+      {
+        startTime: { hours: 14, minutes: 0 },
+        endTime: { hours: 15, minutes: 0 },
+      },
+      {
+        startTime: { hours: 15, minutes: 0 },
+        endTime: { hours: 16, minutes: 0 },
+      },
+      {
+        startTime: { hours: 16, minutes: 0 },
+        endTime: { hours: 17, minutes: 0 },
+      },
+      {
+        startTime: { hours: 17, minutes: 0 },
+        endTime: { hours: 18, minutes: 0 },
+      },
+    ],
+    TUE: [
+      {
+        startTime: { hours: 13, minutes: 0 },
+        endTime: { hours: 14, minutes: 30 },
+      },
+      {
+        startTime: { hours: 14, minutes: 30 },
+        endTime: { hours: 16, minutes: 0 },
+      },
+    ],
+  },
+  B2_CCE_III: {
+    MON: [
+      {
+        startTime: { hours: 13, minutes: 0 },
+        endTime: { hours: 14, minutes: 0 },
+      },
+      {
+        startTime: { hours: 14, minutes: 0 },
+        endTime: { hours: 15, minutes: 0 },
+      },
+      {
+        startTime: { hours: 15, minutes: 0 },
+        endTime: { hours: 16, minutes: 0 },
+      },
+      {
+        startTime: { hours: 16, minutes: 0 },
+        endTime: { hours: 17, minutes: 0 },
+      },
+      {
+        startTime: { hours: 17, minutes: 0 },
+        endTime: { hours: 18, minutes: 0 },
+      },
+    ],
+    TUE: [
+      {
+        startTime: { hours: 13, minutes: 0 },
+        endTime: { hours: 14, minutes: 30 },
+      },
+      {
+        startTime: { hours: 14, minutes: 30 },
+        endTime: { hours: 16, minutes: 0 },
+      },
+    ],
+  },
+  B3_CCE_III: {
+    MON: [
+      {
+        startTime: { hours: 13, minutes: 0 },
+        endTime: { hours: 14, minutes: 0 },
+      },
+      {
+        startTime: { hours: 14, minutes: 0 },
+        endTime: { hours: 15, minutes: 0 },
+      },
+      {
+        startTime: { hours: 15, minutes: 0 },
+        endTime: { hours: 16, minutes: 0 },
+      },
+      {
+        startTime: { hours: 16, minutes: 0 },
+        endTime: { hours: 17, minutes: 0 },
+      },
+      {
+        startTime: { hours: 17, minutes: 0 },
+        endTime: { hours: 18, minutes: 0 },
+      },
+    ],
+    TUE: [
+      {
+        startTime: { hours: 13, minutes: 0 },
+        endTime: { hours: 14, minutes: 30 },
+      },
+      {
+        startTime: { hours: 14, minutes: 30 },
+        endTime: { hours: 16, minutes: 0 },
+      },
+    ],
+  },
+  C1_ECE_III: {
+    MON: [
+      {
+        startTime: { hours: 13, minutes: 0 },
+        endTime: { hours: 14, minutes: 0 },
+      },
+      {
+        startTime: { hours: 14, minutes: 0 },
+        endTime: { hours: 15, minutes: 0 },
+      },
+      {
+        startTime: { hours: 15, minutes: 0 },
+        endTime: { hours: 16, minutes: 0 },
+      },
+      {
+        startTime: { hours: 16, minutes: 0 },
+        endTime: { hours: 17, minutes: 0 },
+      },
+      {
+        startTime: { hours: 17, minutes: 0 },
+        endTime: { hours: 18, minutes: 0 },
+      },
+    ],
+    TUE: [
+      {
+        startTime: { hours: 13, minutes: 0 },
+        endTime: { hours: 14, minutes: 30 },
+      },
+      {
+        startTime: { hours: 14, minutes: 30 },
+        endTime: { hours: 16, minutes: 0 },
+      },
+    ],
+  },
+  C2_ECE_III: {
+    MON: [
+      {
+        startTime: { hours: 13, minutes: 0 },
+        endTime: { hours: 14, minutes: 0 },
+      },
+      {
+        startTime: { hours: 14, minutes: 0 },
+        endTime: { hours: 15, minutes: 0 },
+      },
+      {
+        startTime: { hours: 15, minutes: 0 },
+        endTime: { hours: 16, minutes: 0 },
+      },
+      {
+        startTime: { hours: 16, minutes: 0 },
+        endTime: { hours: 17, minutes: 0 },
+      },
+      {
+        startTime: { hours: 17, minutes: 0 },
+        endTime: { hours: 18, minutes: 0 },
+      },
+    ],
+    TUE: [
+      {
+        startTime: { hours: 13, minutes: 0 },
+        endTime: { hours: 14, minutes: 30 },
+      },
+      {
+        startTime: { hours: 14, minutes: 30 },
+        endTime: { hours: 16, minutes: 0 },
+      },
+    ],
+  },
+  C3_ECE_III: {
+    MON: [
+      {
+        startTime: { hours: 13, minutes: 0 },
+        endTime: { hours: 14, minutes: 0 },
+      },
+      {
+        startTime: { hours: 14, minutes: 0 },
+        endTime: { hours: 15, minutes: 0 },
+      },
+      {
+        startTime: { hours: 15, minutes: 0 },
+        endTime: { hours: 16, minutes: 0 },
+      },
+      {
+        startTime: { hours: 16, minutes: 0 },
+        endTime: { hours: 17, minutes: 0 },
+      },
+      {
+        startTime: { hours: 17, minutes: 0 },
+        endTime: { hours: 18, minutes: 0 },
+      },
+    ],
+    TUE: [
+      {
+        startTime: { hours: 13, minutes: 0 },
+        endTime: { hours: 14, minutes: 30 },
+      },
+      {
+        startTime: { hours: 14, minutes: 30 },
+        endTime: { hours: 16, minutes: 0 },
+      },
+    ],
+  },
+  D1_MME_III: {
+    MON: [
+      {
+        startTime: { hours: 13, minutes: 0 },
+        endTime: { hours: 14, minutes: 0 },
+      },
+      {
+        startTime: { hours: 14, minutes: 0 },
+        endTime: { hours: 15, minutes: 0 },
+      },
+      {
+        startTime: { hours: 15, minutes: 0 },
+        endTime: { hours: 16, minutes: 0 },
+      },
+      {
+        startTime: { hours: 16, minutes: 0 },
+        endTime: { hours: 17, minutes: 0 },
+      },
+      {
+        startTime: { hours: 17, minutes: 0 },
+        endTime: { hours: 18, minutes: 0 },
+      },
+    ],
+    TUE: [
+      {
+        startTime: { hours: 13, minutes: 0 },
+        endTime: { hours: 14, minutes: 30 },
+      },
+      {
+        startTime: { hours: 14, minutes: 30 },
+        endTime: { hours: 16, minutes: 0 },
+      },
+    ],
+  }
+};
+
+const fourthYearSectionTimeMapping_II = {
+  A_CSE: {
+    MON: [
+      {
+        startTime: { hours: 13, minutes: 0 },
+        endTime: { hours: 14, minutes: 0 },
+      },
+      {
+        startTime: { hours: 14, minutes: 0 },
+        endTime: { hours: 15, minutes: 0 },
+      },
+      {
+        startTime: { hours: 15, minutes: 0 },
+        endTime: { hours: 16, minutes: 0 },
+      },
+      {
+        startTime: { hours: 16, minutes: 0 },
+        endTime: { hours: 17, minutes: 0 },
+      },
+      {
+        startTime: { hours: 17, minutes: 0 },
+        endTime: { hours: 18, minutes: 0 },
+      },
+    ],
+    TUE: [
+      {
+        startTime: { hours: 13, minutes: 0 },
+        endTime: { hours: 14, minutes: 30 },
+      },
+      {
+        startTime: { hours: 14, minutes: 30 },
+        endTime: { hours: 16, minutes: 0 },
+      },
+    ],
+  },
+  B_CCE: {
+    MON: [
+      {
+        startTime: { hours: 13, minutes: 0 },
+        endTime: { hours: 14, minutes: 0 },
+      },
+      {
+        startTime: { hours: 14, minutes: 0 },
+        endTime: { hours: 15, minutes: 0 },
+      },
+      {
+        startTime: { hours: 15, minutes: 0 },
+        endTime: { hours: 16, minutes: 0 },
+      },
+      {
+        startTime: { hours: 16, minutes: 0 },
+        endTime: { hours: 17, minutes: 0 },
+      },
+      {
+        startTime: { hours: 17, minutes: 0 },
+        endTime: { hours: 18, minutes: 0 },
+      },
+    ],
+    TUE: [
+      {
+        startTime: { hours: 13, minutes: 0 },
+        endTime: { hours: 14, minutes: 30 },
+      },
+      {
+        startTime: { hours: 14, minutes: 30 },
+        endTime: { hours: 16, minutes: 0 },
+      },
+    ],
+  },
+  B1_CCE: {
+    MON: [
+      {
+        startTime: { hours: 8, minutes: 0 },
+        endTime: { hours: 9, minutes: 0 },
+      },
+      {
+        startTime: { hours: 9, minutes: 0 },
+        endTime: { hours: 10, minutes: 0 },
+      },
+      {
+        startTime: { hours: 10, minutes: 0 },
+        endTime: { hours: 11, minutes: 0 },
+      },
+      {
+        startTime: { hours: 11, minutes: 0 },
+        endTime: { hours: 12, minutes: 0 },
+      },
+      {
+        startTime: { hours: 12, minutes: 0 },
+        endTime: { hours: 13, minutes: 0 },
+      },
+    ],
+    TUE: [
+      {
+        startTime: { hours: 8, minutes: 0 },
+        endTime: { hours: 9, minutes: 30 },
+      },
+      {
+        startTime: { hours: 9, minutes: 30 },
+        endTime: { hours: 11, minutes: 0 },
+      },
+      {
+        startTime: { hours: 11, minutes: 0 },
+        endTime: { hours: 12, minutes: 30 },
+      }
+    ],
+  },
+  B2_CCE: {
+    MON: [
+      {
+        startTime: { hours: 8, minutes: 0 },
+        endTime: { hours: 9, minutes: 0 },
+      },
+      {
+        startTime: { hours: 9, minutes: 0 },
+        endTime: { hours: 10, minutes: 0 },
+      },
+      {
+        startTime: { hours: 10, minutes: 0 },
+        endTime: { hours: 11, minutes: 0 },
+      },
+      {
+        startTime: { hours: 11, minutes: 0 },
+        endTime: { hours: 12, minutes: 0 },
+      },
+      {
+        startTime: { hours: 12, minutes: 0 },
+        endTime: { hours: 13, minutes: 0 },
+      },
+    ],
+    TUE: [
+      {
+        startTime: { hours: 8, minutes: 0 },
+        endTime: { hours: 9, minutes: 30 },
+      },
+      {
+        startTime: { hours: 9, minutes: 30 },
+        endTime: { hours: 11, minutes: 0 },
+      },
+      {
+        startTime: { hours: 11, minutes: 0 },
+        endTime: { hours: 12, minutes: 30 },
+      }
+    ],
+  },
+  B3_CCE: {
+    MON: [
+      {
+        startTime: { hours: 8, minutes: 0 },
+        endTime: { hours: 9, minutes: 0 },
+      },
+      {
+        startTime: { hours: 9, minutes: 0 },
+        endTime: { hours: 10, minutes: 0 },
+      },
+      {
+        startTime: { hours: 10, minutes: 0 },
+        endTime: { hours: 11, minutes: 0 },
+      },
+      {
+        startTime: { hours: 11, minutes: 0 },
+        endTime: { hours: 12, minutes: 0 },
+      },
+      {
+        startTime: { hours: 12, minutes: 0 },
+        endTime: { hours: 13, minutes: 0 },
+      },
+    ],
+    TUE: [
+      {
+        startTime: { hours: 8, minutes: 0 },
+        endTime: { hours: 9, minutes: 30 },
+      },
+      {
+        startTime: { hours: 9, minutes: 30 },
+        endTime: { hours: 11, minutes: 0 },
+      },
+      {
+        startTime: { hours: 11, minutes: 0 },
+        endTime: { hours: 12, minutes: 30 },
+      }
+    ],
+  },
+  C1_ECE: {
+    MON: [
+      {
+        startTime: { hours: 8, minutes: 0 },
+        endTime: { hours: 9, minutes: 0 },
+      },
+      {
+        startTime: { hours: 9, minutes: 0 },
+        endTime: { hours: 10, minutes: 0 },
+      },
+      {
+        startTime: { hours: 10, minutes: 0 },
+        endTime: { hours: 11, minutes: 0 },
+      },
+      {
+        startTime: { hours: 11, minutes: 0 },
+        endTime: { hours: 12, minutes: 0 },
+      },
+      {
+        startTime: { hours: 12, minutes: 0 },
+        endTime: { hours: 13, minutes: 0 },
+      },
+    ],
+    TUE: [
+      {
+        startTime: { hours: 8, minutes: 0 },
+        endTime: { hours: 9, minutes: 30 },
+      },
+      {
+        startTime: { hours: 9, minutes: 30 },
+        endTime: { hours: 11, minutes: 0 },
+      },
+      {
+        startTime: { hours: 11, minutes: 0 },
+        endTime: { hours: 12, minutes: 30 },
+      }
+    ],
+  },
+  C2_ECE: {
+    MON: [
+      {
+        startTime: { hours: 8, minutes: 0 },
+        endTime: { hours: 9, minutes: 0 },
+      },
+      {
+        startTime: { hours: 9, minutes: 0 },
+        endTime: { hours: 10, minutes: 0 },
+      },
+      {
+        startTime: { hours: 10, minutes: 0 },
+        endTime: { hours: 11, minutes: 0 },
+      },
+      {
+        startTime: { hours: 11, minutes: 0 },
+        endTime: { hours: 12, minutes: 0 },
+      },
+      {
+        startTime: { hours: 12, minutes: 0 },
+        endTime: { hours: 13, minutes: 0 },
+      },
+    ],
+    TUE: [
+      {
+        startTime: { hours: 8, minutes: 0 },
+        endTime: { hours: 9, minutes: 30 },
+      },
+      {
+        startTime: { hours: 9, minutes: 30 },
+        endTime: { hours: 11, minutes: 0 },
+      },
+      {
+        startTime: { hours: 11, minutes: 0 },
+        endTime: { hours: 12, minutes: 30 },
+      }
+    ],
+  },
+  C3_ECE: {
+    MON: [
+      {
+        startTime: { hours: 8, minutes: 0 },
+        endTime: { hours: 9, minutes: 0 },
+      },
+      {
+        startTime: { hours: 9, minutes: 0 },
+        endTime: { hours: 10, minutes: 0 },
+      },
+      {
+        startTime: { hours: 10, minutes: 0 },
+        endTime: { hours: 11, minutes: 0 },
+      },
+      {
+        startTime: { hours: 11, minutes: 0 },
+        endTime: { hours: 12, minutes: 0 },
+      },
+      {
+        startTime: { hours: 12, minutes: 0 },
+        endTime: { hours: 13, minutes: 0 },
+      },
+    ],
+    TUE: [
+      {
+        startTime: { hours: 8, minutes: 0 },
+        endTime: { hours: 9, minutes: 30 },
+      },
+      {
+        startTime: { hours: 9, minutes: 30 },
+        endTime: { hours: 11, minutes: 0 },
+      },
+      {
+        startTime: { hours: 11, minutes: 0 },
+        endTime: { hours: 12, minutes: 30 },
+      }
+    ],
+  },
+  D1MME: {
+    MON: [
+      {
+        startTime: { hours: 13, minutes: 0 },
+        endTime: { hours: 14, minutes: 0 },
+      },
+      {
+        startTime: { hours: 14, minutes: 0 },
+        endTime: { hours: 15, minutes: 0 },
+      },
+      {
+        startTime: { hours: 15, minutes: 0 },
+        endTime: { hours: 16, minutes: 0 },
+      },
+      {
+        startTime: { hours: 16, minutes: 0 },
+        endTime: { hours: 17, minutes: 0 },
+      },
+      {
+        startTime: { hours: 17, minutes: 0 },
+        endTime: { hours: 18, minutes: 0 },
+      },
+    ],
+    TUE: [
+      {
+        startTime: { hours: 13, minutes: 0 },
+        endTime: { hours: 14, minutes: 30 },
+      },
+      {
+        startTime: { hours: 14, minutes: 30 },
+        endTime: { hours: 16, minutes: 0 },
+      },
+    ],
+  }
+};
+
+const MSCPHY_II = {
+  A1_PHY_II: {
+    MON: [
+      {
+        startTime: { hours: 8, minutes: 0 },
+        endTime: { hours: 9, minutes: 0 },
+      },
+      {
+        startTime: { hours: 9, minutes: 0 },
+        endTime: { hours: 10, minutes: 0 },
+      },
+      {
+        startTime: { hours: 10, minutes: 0 },
+        endTime: { hours: 11, minutes: 0 },
+      },
+      {
+        startTime: { hours: 11, minutes: 0 },
+        endTime: { hours: 12, minutes: 0 },
+      },
+      {
+        startTime: { hours: 12, minutes: 0 },
+        endTime: { hours: 13, minutes: 0 },
+      },
+    ],
+    TUE: [
+      {
+        startTime: { hours: 8, minutes: 0 },
+        endTime: { hours: 9, minutes: 30 },
+      },
+      {
+        startTime: { hours: 9, minutes: 30 },
+        endTime: { hours: 11, minutes: 0 },
+      },
+      {
+        startTime: { hours: 11, minutes: 0 },
+        endTime: { hours: 12, minutes: 30 },
+      },
+    ],
+  },
+  B1_PHY_II: {
+    MON: [
+      {
+        startTime: { hours: 13, minutes: 0 },
+        endTime: { hours: 14, minutes: 0 },
+      },
+      {
+        startTime: { hours: 14, minutes: 0 },
+        endTime: { hours: 15, minutes: 0 },
+      },
+      {
+        startTime: { hours: 15, minutes: 0 },
+        endTime: { hours: 16, minutes: 0 },
+      },
+      {
+        startTime: { hours: 16, minutes: 0 },
+        endTime: { hours: 17, minutes: 0 },
+      },
+      {
+        startTime: { hours: 17, minutes: 0 },
+        endTime: { hours: 18, minutes: 0 },
+      },
+    ],
+    TUE: [
+      {
+        startTime: { hours: 13, minutes: 0 },
+        endTime: { hours: 14, minutes: 30 },
+      },
+      {
+        startTime: { hours: 14, minutes: 30 },
+        endTime: { hours: 16, minutes: 0 },
+      },
+    ]
+  }
+};
+
+const MSCMTH_II = {
+  A1_MTH_II: {
+    MON: [
+      {
+        startTime: { hours: 8, minutes: 0 },
+        endTime: { hours: 9, minutes: 0 },
+      },
+      {
+        startTime: { hours: 9, minutes: 0 },
+        endTime: { hours: 10, minutes: 0 },
+      },
+      {
+        startTime: { hours: 10, minutes: 0 },
+        endTime: { hours: 11, minutes: 0 },
+      },
+      {
+        startTime: { hours: 11, minutes: 0 },
+        endTime: { hours: 12, minutes: 0 },
+      },
+      {
+        startTime: { hours: 12, minutes: 0 },
+        endTime: { hours: 13, minutes: 0 },
+      },
+    ],
+    TUE: [
+      {
+        startTime: { hours: 8, minutes: 0 },
+        endTime: { hours: 9, minutes: 30 },
+      },
+      {
+        startTime: { hours: 9, minutes: 30 },
+        endTime: { hours: 11, minutes: 0 },
+      },
+      {
+        startTime: { hours: 11, minutes: 0 },
+        endTime: { hours: 12, minutes: 30 },
+      },
+    ],
+  },
+  B1_MTH_II: {
+    MON: [
+      {
+        startTime: { hours: 13, minutes: 0 },
+        endTime: { hours: 14, minutes: 0 },
+      },
+      {
+        startTime: { hours: 14, minutes: 0 },
+        endTime: { hours: 15, minutes: 0 },
+      },
+      {
+        startTime: { hours: 15, minutes: 0 },
+        endTime: { hours: 16, minutes: 0 },
+      },
+      {
+        startTime: { hours: 16, minutes: 0 },
+        endTime: { hours: 17, minutes: 0 },
+      },
+      {
+        startTime: { hours: 17, minutes: 0 },
+        endTime: { hours: 18, minutes: 0 },
+      },
+    ],
+    TUE: [
+      {
+        startTime: { hours: 13, minutes: 0 },
+        endTime: { hours: 14, minutes: 30 },
+      },
+      {
+        startTime: { hours: 14, minutes: 30 },
+        endTime: { hours: 16, minutes: 0 },
+      },
+    ]
+  }
+};
 
 const MSCPHY = {
   A1_PHY: {
@@ -690,6 +2295,10 @@ const firstYearSectionTimeMapping = {
   A1: {
     MON: [
       {
+        startTime: { hours: 8, minutes: 0 },
+        endTime: { hours: 9, minutes: 0 },
+      },
+      {
         startTime: { hours: 9, minutes: 0 },
         endTime: { hours: 10, minutes: 0 },
       },
@@ -723,6 +2332,10 @@ const firstYearSectionTimeMapping = {
   },
   A2: {
     MON: [
+      {
+        startTime: { hours: 8, minutes: 0 },
+        endTime: { hours: 9, minutes: 0 },
+      },
       {
         startTime: { hours: 9, minutes: 0 },
         endTime: { hours: 10, minutes: 0 },
@@ -758,6 +2371,10 @@ const firstYearSectionTimeMapping = {
   B1: {
     MON: [
       {
+        startTime: { hours: 13, minutes: 0 },
+        endTime: { hours: 14, minutes: 0 },
+      },
+      {
         startTime: { hours: 14, minutes: 0 },
         endTime: { hours: 15, minutes: 0 },
       },
@@ -788,6 +2405,10 @@ const firstYearSectionTimeMapping = {
   B2: {
     MON: [
       {
+        startTime: { hours: 13, minutes: 0 },
+        endTime: { hours: 14, minutes: 0 },
+      },
+      {
         startTime: { hours: 14, minutes: 0 },
         endTime: { hours: 15, minutes: 0 },
       },
@@ -816,6 +2437,7 @@ const firstYearSectionTimeMapping = {
     ],
   },
 };
+
 
 let sectionBusyMapping = {};
 
@@ -1275,7 +2897,7 @@ async function getDepartmentName(courseId) {
   try {
     // Find the course by its ID and populate the department field
     const course = await Course.findById(courseId).populate("department");
-    
+
     // Check if the course and department exist
     if (!course || !course.department) {
       return "Department not found";
@@ -1633,6 +3255,362 @@ async function allocateTimeSlotForDefaultSections(course) {
   }
 }
 
+
+async function allocateTimSlots_II_Even(iterator, i, marker) {
+  // section ka matlab yaha hai ki konsi branches ke bacche padh rhe hain
+  let section = iterator[i].section;
+  const course = iterator[i].course;
+  const year = course.year;
+  let allotments;
+
+  if (course.courseType === "Program Elective") {
+    allotments = [`PE_${course.name}_${year}year_${course.program}`];
+  }
+  else if (course.courseType === "Other Elective") {
+    allotments = [`OE_${course.name}_${year} year`];
+  } else {
+    allotments = await getAllotments(course);
+  }
+  let sectionTimeMapping;
+  if (course.courseType === "Other Elective") {
+    sectionTimeMapping = {
+      MON: [
+        {
+          startTime: { hours: 8, minutes: 0 },
+          endTime: { hours: 9, minutes: 0 },
+        },
+        {
+          startTime: { hours: 9, minutes: 0 },
+          endTime: { hours: 10, minutes: 0 },
+        },
+        {
+          startTime: { hours: 10, minutes: 0 },
+          endTime: { hours: 11, minutes: 0 },
+        },
+        {
+          startTime: { hours: 11, minutes: 0 },
+          endTime: { hours: 12, minutes: 0 },
+        },
+        {
+          startTime: { hours: 12, minutes: 0 },
+          endTime: { hours: 13, minutes: 0 },
+        },
+        {
+          startTime: { hours: 13, minutes: 0 },
+          endTime: { hours: 14, minutes: 0 },
+        },
+        {
+          startTime: { hours: 14, minutes: 0 },
+          endTime: { hours: 15, minutes: 0 },
+        },
+        {
+          startTime: { hours: 15, minutes: 0 },
+          endTime: { hours: 16, minutes: 0 },
+        },
+        {
+          startTime: { hours: 16, minutes: 0 },
+          endTime: { hours: 17, minutes: 0 },
+        },
+        {
+          startTime: { hours: 17, minutes: 0 },
+          endTime: { hours: 18, minutes: 0 },
+        },
+      ],
+      TUE: [
+        {
+          startTime: { hours: 8, minutes: 0 },
+          endTime: { hours: 9, minutes: 30 },
+        },
+        {
+          startTime: { hours: 9, minutes: 30 },
+          endTime: { hours: 11, minutes: 0 },
+        },
+        {
+          startTime: { hours: 11, minutes: 0 },
+          endTime: { hours: 12, minutes: 30 },
+        },
+        {
+          startTime: { hours: 13, minutes: 0 },
+          endTime: { hours: 14, minutes: 30 },
+        },
+        {
+          startTime: { hours: 14, minutes: 30 },
+          endTime: { hours: 16, minutes: 0 },
+        },
+      ],
+    }
+  }
+  else {
+    if (course.program === "M.Sc.") {
+      const dept_name = await getDepartmentName(course._id);
+      if (year === "1st" && dept_name === "PHY") {
+        sectionTimeMapping = MSCPHY_II["A1_PHY_II"];
+      }
+      else if (year === "1st" && dept_name === "MTH") {
+        sectionTimeMapping = MSCMTH_II["A1_MTH_II"];
+      }
+      else if (year === "2nd" && dept_name === "PHY") {
+        sectionTimeMapping = MSCPHY_II["B1_PHY_II"];
+      }
+      else if (year === "2nd" && dept_name === "MTH") {
+        sectionTimeMapping = MSCMTH_II["B1_MTH_II"];
+      }
+      else {
+        throw new Error("Invalid year specified, ok bhai");
+      }
+    }
+    else {
+      if (year === "1st") {
+        sectionTimeMapping = firstYearSectionTimeMapping_II[section[0]];
+      }
+      if (year === "2nd") {
+        sectionTimeMapping = secondYearSectionTimeMapping_II[section[0]];
+      } else if (year === "3rd") {
+        sectionTimeMapping = thirdYearSectionTimeMapping_II[section[0]];
+      }
+      else if (year === "4th") {
+        sectionTimeMapping = fourthYearSectionTimeMapping_II[section[0]];
+      } else {
+        throw new Error("Invalid year specified");
+      }
+    }
+  }
+
+  const days = ["MON", "TUE"];
+
+  for (const it of days) {
+    let existingTimetable;
+    if (course.courseType === "Program Elective") {
+      existingTimetable = await TimeTable.find({
+        section: allotments[0],
+        course: course
+      })
+    }
+    else {
+      existingTimetable = await TimeTable.find({
+        section: section[0],
+        course: course
+      });
+    }
+
+
+    if (existingTimetable.length > 0) {
+      if (i + 1 < iterator.length && marker.value === false) {
+        await allocateTimSlots_II_Even(iterator, i + 1, marker);
+      } else {
+        return;
+      } // If timetable exists for this section and course, move to the next section
+    }
+
+    const timeSlots = sectionTimeMapping[it];
+
+    for (const slot of timeSlots) {
+      const isTimeslotOccupied = isTimeSlotOccupied(section, it, slot, course);
+
+      // If the time slot is occupied, skip to the next time slot
+      if (isTimeslotOccupied) {
+        continue;
+      }
+
+      let a = await allocateTimeSlot_Even(course, section, it, slot, allotments);
+
+      if (a) {
+        if (i + 1 === iterator.length) {
+          marker.value = true;
+        }
+        if (i + 1 < iterator.length) {
+          await allocateTimSlots_II_Even(iterator, i + 1, marker);
+        }
+        if (marker.value) {
+          return;
+        } else {
+          await removeTimeSlot(course, section, it, slot, allotments);
+          continue;
+        }
+      } else {
+        continue;
+      }
+    }
+  }
+  return;
+}
+
+async function allocateTimeSlot_Even(course, section, day, timeSlot, allotments) {
+  try {
+    // Determine lecture hall based on section
+    let allote;
+    let oldSec=section;
+    let lectureHall="None";
+    if (course.program === "M.Sc.") {
+      for (const lt of MmeBuilding) {
+        const existinglts = await TimeTable.find({ day: day, startTime: timeSlot.startTime, endTime: timeSlot.endTime, lectureHall: lt });
+        if (existinglts.length > 0) {
+          continue;
+        }
+        lectureHall = lt;
+        break;
+      }
+    }
+    else {
+      if (course.courseType === "Program Elective" || course.courseType === "Other Elective") {
+        for (const lt of AcademicHallSmall) {
+          const existinglts = await TimeTable.find({ day: day, startTime: timeSlot.startTime, endTime: timeSlot.endTime, lectureHall: lt });
+          if (existinglts.length > 0) {
+            continue;
+          }
+          lectureHall = lt;
+          break;
+        }
+      }
+      else {
+        allote = section[0];
+        if (allote === "A1_CSE" || allote === "Comb_section1" || allote === "C3_ECE") {
+          lectureHall = "LT1";
+        }
+        else if (allote === "A2_CSE" || allote === "Comb_section2" || allote === "B3_CCE") {
+          lectureHall = "LT2";
+        }
+        else if (allote === "C1_ECE" || allote === "C1ECE") {
+          lectureHall = "LT3";
+        }
+        else if (allote === "C2_ECE" || allote === "C2ECE") {
+          lectureHall = "LT4";
+        }
+        else if (allote === "B1CCE") {
+          lectureHall = "LT6";
+        }
+        else if (allote === "B2CCE") {
+          lectureHall = "LT7";
+        }
+        else if (allote === "C3_ECE_III") {
+          lectureHall = "LT18";
+        }
+        else if (allote === "B3_CCE_III") {
+          lectureHall = "LT16";
+        }
+        else if (allote === "D3_MME" || allote === "D1MME") {
+          lectureHall = "LT11";
+        }
+        else if (allote === "A1CSE" || allote === "B3CCE") {
+          lectureHall = "LT17";
+        } else if (allote === "A2CSE" || allote === "C3ECE") {
+          lectureHall = "LT19";
+        }
+        else if (allote === "A1_CSE_III") {
+          lectureHall = "LT10";
+        }
+        else if (allote === "A2_CSE_III") {
+          lectureHall = "LT9";
+        }
+        else if (allote === "D1_MME_III") {
+          lectureHall = "LT12";
+        }
+        else {
+          // Default lecture hall if section is not recognized
+          lectureHall = "TBD";
+        }
+      }
+    }
+    const professors = course.professors.map((professor) => professor._id);
+    const equalDivide = professors.length / allotments.length;
+    const professorNames = await getProfessorNames(professors);
+    const sharing = course.sharingType;
+    let clearedProfs = [];
+
+    if (sharing === "Horizontal") {
+      const areProfsFree = await checkProfmapping(
+        professorNames,
+        day,
+        timeSlot
+      );
+      if (!areProfsFree) {
+        clearedProfs = professorNames.slice();
+      } else {
+        return false;
+      }
+    } else {
+      for (let prof of professorNames) {
+        const arr = [prof];
+        const areProfsFree = await checkProfmapping(arr, day, timeSlot);
+        if (!areProfsFree) {
+          clearedProfs.push(prof);
+        }
+        if (clearedProfs.length > equalDivide) {
+          break;
+        }
+      }
+      if (clearedProfs.length === 0) {
+        return false;
+      }
+    }
+    console.log(
+      `Allocating time slot for ${course._id} in section ${section} on ${day} from ${timeSlot.startTime.hours}:${timeSlot.startTime.minutes} to ${timeSlot.endTime.hours}:${timeSlot.endTime.minutes}
+    `);
+
+    // Save the new timetable entry
+    const profIds = await convertProfessorNamesToIds(clearedProfs);
+    let allot;
+
+    if (course.courseType != "Program Elective") {
+      allot = section[0];
+    }
+    else {
+      allot = allotments[0];
+    }
+    const newTimeTableEntry = new TimeTable({
+      day: day,
+      section: allot,
+      course: course._id,
+      professors: profIds,
+      lectureHall: lectureHall,
+      startTime: timeSlot.startTime,
+      endTime: timeSlot.endTime,
+    });
+    await newTimeTableEntry.save();
+
+    if (allot === "Comb_section1") {
+      section = ["A1_CSE", "D3_MME"];
+    }
+    else if (allot === "Comb_section2") {
+      section = ["A2_CSE", "D3_MME"];
+    }
+    for (const it of section) {
+      if (!sectionBusyMapping[it]) {
+        sectionBusyMapping[it] = {};
+      }
+      if (!sectionBusyMapping[it][day]) {
+        sectionBusyMapping[it][day] = [];
+      }
+      sectionBusyMapping[it][day].push(
+        {
+          startTime: timeSlot.startTime,
+          endTime: timeSlot.endTime,
+          group: course.group
+        }
+      )
+    }
+    // Update professor mapping
+    for (let professorName of clearedProfs) {
+      if (!professorMapping[professorName]) {
+        professorMapping[professorName] = {};
+      }
+      if (!professorMapping[professorName][day]) {
+        professorMapping[professorName][day] = [];
+      }
+      professorMapping[professorName][day].push({
+        startTime: timeSlot.startTime,
+        endTime: timeSlot.endTime,
+        sharingType: course.sharingType,
+      });
+    }
+    section=oldSec;
+    return true;
+  } catch (error) {
+    console.error(`Error while allocating time slot: ${error}`);
+    throw error;
+  }
+}
+
 async function allocateTimSlots_II(iterator, i, marker) {
   // section ka matlab yaha hai ki konsi branches ke bacche padh rhe hain
   let section = iterator[i].section;
@@ -1651,7 +3629,7 @@ async function allocateTimSlots_II(iterator, i, marker) {
 
   let sectionTimeMapping;
   if (course.program === "M.Sc.") {
-    const dept_name=await getDepartmentName(course._id);
+    const dept_name = await getDepartmentName(course._id);
     if (year === "1st" && dept_name === "PHY") {
       sectionTimeMapping = MSCPHY["A1_PHY"];
     }
@@ -1681,7 +3659,7 @@ async function allocateTimSlots_II(iterator, i, marker) {
     }
   }
 
-  
+
   const days = ["MON", "TUE"];
 
   for (const it of days) {
@@ -1708,7 +3686,7 @@ async function allocateTimSlots_II(iterator, i, marker) {
       } // If timetable exists for this section and course, move to the next section
     }
 
-    console.log(sectionTimeMapping,course.name,course.program);
+    console.log(sectionTimeMapping, course.name, course.program);
     const timeSlots = sectionTimeMapping[it];
 
     for (const slot of timeSlots) {
@@ -1840,11 +3818,6 @@ async function allocateTimeSlot(course, section, day, timeSlot, allotments) {
         }
       }
     }
-
-
-
-    // Fetch the professors for the course
-    console.log(course._id);
     const professors = course.professors.map((professor) => professor._id);
     const equalDivide = professors.length / allotments.length;
     const professorNames = await getProfessorNames(professors);
@@ -1918,7 +3891,6 @@ async function allocateTimeSlot(course, section, day, timeSlot, allotments) {
         }
       )
     }
-    console.dir(sectionBusyMapping);
     // Update professor mapping
     for (let professorName of clearedProfs) {
       if (!professorMapping[professorName]) {
@@ -1942,6 +3914,7 @@ async function allocateTimeSlot(course, section, day, timeSlot, allotments) {
 
 async function removeTimeSlot(course, section, day, timeSlot, allotments) {
   try {
+    let oldSec=section;
     // Remove the allocated time slot entry from the timetable
     if (course.courseType != "Program Elective") {
       await TimeTable.deleteOne({
@@ -1962,6 +3935,12 @@ async function removeTimeSlot(course, section, day, timeSlot, allotments) {
       });
     }
 
+    if (allot === "Comb_section1") {
+      section = ["A1_CSE", "D3_MME"];
+    }
+    else if (allot === "Comb_section2") {
+      section = ["A2_CSE", "D3_MME"];
+    }
 
     for (const it of section) {
       if (
@@ -1998,6 +3977,7 @@ async function removeTimeSlot(course, section, day, timeSlot, allotments) {
         }
       }
     }
+    section=oldSec;
   } catch (error) {
     console.error(`Error while removing time slot: ${error}`);
     throw error;
@@ -2042,6 +4022,99 @@ async function getProfessorName(professorId) {
   return professor.name;
 }
 
+async function getAllotments_II(course) {
+  const { CSE, CSE_DD, CCE, ECE, ECE_DD, MME, MScMTH, MScPHY } = course.numberOfStudents;
+  let allotments = [];
+  if (course.program === "M.Sc.") {
+    if (course.year === "1st") {
+      if (MScMTH != 0) {
+        return allotments = ["A1_MTH_II"];
+      }
+      else if (MScPHY != 0) {
+        return allotments = ["A1_PHY_II"];
+      }
+    }
+    else {
+      if (MScMTH != 0) {
+        return allotments = ["B1_MTH_II"];
+      }
+      else if (MScPHY != 0) {
+        return allotments = ["B1_PHY_II"];
+      }
+    }
+  }
+  else {
+    if (course.year === "1st") {
+      if (CSE !== 0 && CCE !== 0 && ECE != 0 && MME != 0) {
+        return (allotments = ["Comb_section1", "Comb_section2", "B3_CCE", "C3_ECE"]);
+      } else if (CSE !== 0 && CCE !== 0) {
+        return (allotments = ["A1_CSE", "A2_CSE", "B3_CCE"]);
+      } else if (CSE !== 0 && CCE === 0) {
+        return (allotments = ["A1_CSE", "A2_CSE"]);
+      } else if (ECE !== 0 && CCE !== 0) {
+        return (allotments = ["B1_CCE", "B2_CCE", "C2_ECE", "C1_ECE"]);
+      } else if (ECE !== 0 && CCE === 0) {
+        return (allotments = ["C2_ECE", "C1_ECE"]);
+      } else if (MME !== 0) {
+        return (allotments = ["D3_MME"]);
+      } else {
+        console.log("Gadbad hogyi!!!,getallotments_II ke else me hun,1st year");
+        return (allotments = ["A1_CSE", "A2_CSE", "B1_CCE", "B2_ECE"]);
+      }
+    }
+    if (course.year === "2nd") {
+      if (CSE !== 0 && CCE !== 0) {
+        return (allotments = ["A1CSE", "A2CSE", "B3CCE"]);
+      } else if (CSE !== 0 && CCE === 0) {
+        return (allotments = ["A1CSE", "A2CSE"]);
+      } else if (ECE !== 0 && CCE !== 0) {
+        return (allotments = ["B1CCE", "B2CCE", "C1ECE", "C2ECE"]);
+      } else if (ECE !== 0 && CCE === 0) {
+        return (allotments = ["C2ECE", "C1ECE"]);
+      } else if (MME !== 0) {
+        return (allotments = ["D1MME"]);
+      } else {
+        console.log("Gadbad hogyi!!!,getallotments_II ke else me hun,2nd year");
+        return (allotments = ["A1_CSE", "A2_CSE", "B1_CCE", "B2_ECE"]);
+      }
+    }
+    if (course.year === "3rd") {
+      if (CSE !== 0 && CCE !== 0) {
+        return (allotments = ["A1_CSE_III", "A2_CSE_III", "B3_CCE_III"]);
+      }
+      else if (CSE !== 0 && CCE === 0) {
+        return (allotments = ["A1_CSE_III", "A2_CSE_III"]);
+      }
+      else if (ECE !== 0 && CCE !== 0) {
+        return (allotments = ["B1_CCE_III", "C1_ECE_III", "C2_ECE_III", "B2_CCE_III"]);
+      }
+      else if (ECE !== 0 && CCE === 0) {
+        return (allotments = ["C1_ECE_III", "C2_ECE_III"]);
+      }
+      else if (MME !== 0) {
+        return (allotments = ["D1_MME_III"]);
+      }
+    }
+    if (course.year === "4th") {
+      if (CSE !== 0 && CCE !== 0) {
+        return (allotments = ["A_CSE", "B_CCE"]);
+      }
+      else if (CSE !== 0 && CCE === 0) {
+        return (allotments = ["A_CSE"]);
+      }
+      else if (ECE !== 0 && CCE !== 0) {
+        return (allotments = ["B_CCE", "C_ECE"]);
+      }
+      else if (ECE !== 0 && CCE === 0) {
+        return (allotments = ["C_ECE"]);
+      }
+      else if (MME !== 0) {
+        return (allotments = ["D_MME"]);
+      }
+    }
+  }
+}
+
 async function getAllotments(course) {
   const { CSE, CSE_DD, CCE, ECE, ECE_DD, MME, MScMTH, MScPHY } = course.numberOfStudents;
   console.log(MScMTH, MScPHY);
@@ -2066,6 +4139,9 @@ async function getAllotments(course) {
   }
   else {
     if (course.year === "2nd") {
+      if (CSE !== 0 && CSE_DD !== 0 && CCE !== 0) {
+        return (allotments = ["A1_CSE", "A2_CSE", "B1_CCE"]);
+      }
       if (CSE !== 0 && CSE_DD !== 0 && CCE !== 0) {
         return (allotments = ["A1_CSE", "A2_CSE", "B1_CCE"]);
       } else if (CSE !== 0 && CSE_DD !== 0 && CCE === 0) {
@@ -2149,27 +4225,76 @@ function yearWiseSection(year, branch) {
     return ["B4_CCE"];
   }
   if (year === '4th' && branch === "ECE") {
-    return ["C4_CSE"];
+    return ["C4_ECE"];
   }
   if (year === '4th' && branch === "MME") {
     return ["D4_MME"];
   }
-  // if (year === '1st' && branch === "MSCPHY") {
-  //   return ["A1_PHY"];
-  // }
-  // if (year === '1st' && branch === "MSCMTH") {
-  //   return ["B1_MTH"];
-  // }
-  // if (year === '2nd' && branch === "MSCPHY") {
-  //   return ["B1_PHY"];
-  // }
-  // if (year === '2nd' && branch === "MSCMTH") {
-  //   return ["A1_MTH"];
-  // }
-  // else{
-  //   return [""];
-  // }
+  if (year === "1st" && branch === "MTH") {
+    return ["B1_MTH"];
+  }
+  if (year === "2nd" && branch === "MTH") {
+    return ["A1_MTH"];
+  }
+  if (year === "1st" && branch === "PHY") {
+    return ["A1_PHY"];
+  }
+  if (year === "2nd" && branch === "PHY") {
+    return ["B1_PHY"];
+  }
 }
+
+function yearWiseSection_II(year, branch) {
+  if (year === '2nd' && branch === "CSE") {
+    return ["A1CSE", "A2CSE"];
+  }
+  if (year === "2nd" && branch === "CCE") {
+    return ["B1CCE", "B2CCE"];
+  }
+  if (year === "2nd" && branch === "ECE") {
+    return ["C1ECE", "C2ECE"];
+  }
+  if (year === "2nd" && branch === "MME") {
+    return ["D1MME"];
+  }
+  if (year === "3rd" && branch === "CSE") {
+    return ["A1_CSE_III", "A2_CSE_III"];
+  }
+  if (year === "3rd" && branch === "CCE") {
+    return ["B1_CCE_III", "B2_CCE_III"];
+  }
+  if (year === "3rd" && branch === "ECE") {
+    return ["C1_ECE_III", "C2_ECE_III"];
+  }
+  if (year === "3rd" && branch === "MME") {
+    return ["D1_MME_III"];
+  }
+  if (year === '4th' && branch === "CSE") {
+    return ["A_CSE"];
+  }
+  if (year === '4th' && branch === "CCE") {
+    return ["B_CCE"];
+  }
+  if (year === '4th' && branch === "ECE") {
+    return ["C_ECE"];
+  }
+  if (year === '4th' && branch === "MME") {
+    return ["D_MME"];
+  }
+  if (year === "1st" && branch === "MTH") {
+    return ["A1_MTH_II"];
+  }
+  if (year === "2nd" && branch === "MTH") {
+    return ["B1_MTH_II"];
+  }
+  if (year === "1st" && branch === "PHY") {
+    return ["A1_PHY_II"];
+  }
+  if (year === "2nd" && branch === "PHY") {
+    return ["B1_PHY_II"];
+  }
+}
+
 
 async function getSectionsForElectives(course) {
   let sections = [];
@@ -2179,103 +4304,181 @@ async function getSectionsForElectives(course) {
   const ECE = course.numberOfStudents.ECE;
   const MME = course.numberOfStudents.MME;
   const ECE_DD = course.numberOfStudents.ECE_DD;
-  // const MSCPHY = course.numberOfStudents.MSCPHY;
-  // const MSCMTH = course.numberOfStudents.MSCMTH;
+  const MSCPHY = course.numberOfStudents.MScPHY;
+  const MSCMTH = course.numberOfStudents.MScMTH;
   const year = course.year;
-  if (CSE != 0) {
-    const CSE_SEC = yearWiseSection(year, "CSE");
-    for (const it of CSE_SEC) {
-      sections.push(it);
+
+  if (course.semester === "Odd") {
+    if (CSE != 0) {
+      const CSE_SEC = yearWiseSection(year, "CSE");
+      for (const it of CSE_SEC) {
+        sections.push(it);
+      }
+    }
+    if (ECE != 0) {
+      const ECE_SEC = yearWiseSection(year, "ECE");
+      for (const it of ECE_SEC) {
+        sections.push(it);
+      }
+    }
+    if (CCE != 0) {
+      const CCE_SEC = yearWiseSection(year, "CCE");
+      for (const it of CCE_SEC) {
+        sections.push(it);
+      }
+    }
+    if (MME != 0) {
+      const MME_SEC = yearWiseSection(year, "MME");
+      for (const it of MME_SEC) {
+        sections.push(it);
+      }
+    }
+    if (MSCMTH != 0) {
+      const MSCMTH_SEC = yearWiseSection(year, "MSCMTH");
+      for (const it of MSCMTH_SEC) {
+        sections.push(it);
+      }
+    }
+    if (MSCPHY != 0) {
+      const MSCPHY_SEC = yearWiseSection(year, "MSCPHY");
+      for (const it of MSCPHY_SEC) {
+        sections.push(it);
+      }
     }
   }
-  if (ECE != 0) {
-    const ECE_SEC = yearWiseSection(year, "ECE");
-    for (const it of ECE_SEC) {
-      sections.push(it);
+  else {
+    if (CSE != 0) {
+      const CSE_SEC = yearWiseSection_II(year, "CSE");
+      for (const it of CSE_SEC) {
+        sections.push(it);
+      }
+    }
+    if (ECE != 0) {
+      const ECE_SEC = yearWiseSection_II(year, "ECE");
+      for (const it of ECE_SEC) {
+        sections.push(it);
+      }
+    }
+    if (CCE != 0) {
+      const CCE_SEC = yearWiseSection_II(year, "CCE");
+      for (const it of CCE_SEC) {
+        sections.push(it);
+      }
+    }
+    if (MME != 0) {
+      const MME_SEC = yearWiseSection_II(year, "MME");
+      for (const it of MME_SEC) {
+        sections.push(it);
+      }
+    }
+    if (MSCMTH != 0) {
+      const MSCMTH_SEC = yearWiseSection_II(year, "MSCMTH");
+      for (const it of MSCMTH_SEC) {
+        sections.push(it);
+      }
+    }
+    if (MSCPHY != 0) {
+      const MSCPHY_SEC = yearWiseSection_II(year, "MSCPHY");
+      for (const it of MSCPHY_SEC) {
+        sections.push(it);
+      }
     }
   }
-  if (CCE != 0) {
-    const CCE_SEC = yearWiseSection(year, "CCE");
-    for (const it of CCE_SEC) {
-      sections.push(it);
-    }
-  }
-  if (MME != 0) {
-    const MME_SEC = yearWiseSection(year, "MME");
-    for (const it of MME_SEC) {
-      sections.push(it);
-    }
-  }
-  // if (MSCMTH != 0) {
-  //   const MSCMTH_SEC = yearWiseSection(year, "MSCMTH");
-  //   for (const it of MSCMTH_SEC) {
-  //     sections.push(it);
-  //   }
-  // }
-  // if (MSCPHY != 0) {
-  //   const MSCPHY_SEC = yearWiseSection(year, "MSCPHY");
-  //   for (const it of MSCPHY_SEC) {
-  //     sections.push(it);
-  //   }
-  // }
   return sections;
 }
-
+// other elective baaki hai
+// MTECh baaki hai
+// teachers ka vo 8-5 baaki hai
+// pTS EFE baaki hai
 router.post("/generate-timetable", async (req, res) => {
   try {
     professorMapping = {};
     sectionBusyMapping = {};
     const courses_1stYear = await Course.find({ year: "1st", program: "B.Tech." });
-    await allocateCoursesToSections_I(courses_1stYear, firstYearSection);
+    if (courses_1stYear[0].semester === "Odd") {//XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+      await allocateCoursesToSections_I(courses_1stYear, firstYearSection);
 
-    const M_III = await Course.findOne({ name: "M-III" });
-    if (M_III) {
-      await allocateTimeSlotForDefaultSections(M_III);
-    } else {
-      console.log("M-III course not found.");
-    }
+      const M_III = await Course.findOne({ name: "M-III" });
+      if (M_III) {
+        await allocateTimeSlotForDefaultSections(M_III);
+      } else {
+        console.log("M-III course not found.");
+      }
 
-    // Fetch 2nd year courses excluding M-III
-    const courses_2ndYear_andAhead = await Course.find({
-      year: { $ne: "1st" },
-      name: { $ne: "M-III" },
-      program: "B.Tech.",
-    });
+      // Fetch 2nd year courses excluding M-III
+      const courses_2ndYear_andAhead = await Course.find({
+        year: { $ne: "1st" },
+        name: { $ne: "M-III" },
+        program: "B.Tech.",
+      });
 
-    const courses_msc = await Course.find({
-      program: "M.Sc."
-    });
+      const courses_msc = await Course.find({
+        program: "M.Sc."
+      });
 
-    // Push the MSC courses into the courses_2ndYear_andAhead array
-    courses_2ndYear_andAhead.push(...courses_msc);
+      // Push the MSC courses into the courses_2ndYear_andAhead array
+      courses_2ndYear_andAhead.push(...courses_msc);
 
-    const iterator = [];
-    // Loop through each course
-    // dp approach
-    for (const course of courses_2ndYear_andAhead) {
-      if (course.courseType !== "Program Elective") {
-        const allotments = await getAllotments(course);
-        for (const section of allotments) {
+      const iterator = [];
+      // Loop through each course
+      // dp approach
+      for (const course of courses_2ndYear_andAhead) {
+        if (course.courseType !== "Program Elective" && course.courseType !== "Other Elective") {
+          const allotments = await getAllotments(course);
+          for (const section of allotments) {
+            iterator.push({
+              course: course,
+              section: [section]
+            });
+          }
+        }
+        else {
+          let sections = [];
+          sections = await getSectionsForElectives(course);
           iterator.push({
             course: course,
-            section: [section]
+            section: sections
           });
         }
       }
-      else {
-        let sections = [];
-        sections = await getSectionsForElectives(course);
-        iterator.push({
-          course: course,
-          section: sections
-        });
-      }
+      const marker = { value: false };
+
+      await allocateTimSlots_II(iterator, 0, marker);
+
+      res.status(200).json({ message: "Timetable generation completed" });
     }
-    const marker = { value: false };
+    else {//XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+      const courses_Even = await Course.find();
 
-    await allocateTimSlots_II(iterator, 0, marker);
+      const iterator = [];
+      // Loop through each course
+      // dp approach
+      for (const course of courses_Even) {
+        if (course.courseType !== "Program Elective" && course.courseType !== "Other Elective") {
+          const allotments = await getAllotments_II(course);
+          for (const section of allotments) {
+            iterator.push({
+              course: course,
+              section: [section]
+            });
+          }
+        }
+        else {
+          let sections = [];
+          sections = await getSectionsForElectives_II(course);
+          iterator.push({
+            course: course,
+            section: sections
+          });
+        }
+      }
+      const marker = { value: false };
 
-    res.status(200).json({ message: "Timetable generation completed" });
+      await allocateTimSlots_II_Even(iterator, 0, marker);
+
+      res.status(200).json({ message: "Timetable generation completed" });
+    }
+
   }
   catch (error) {
     console.error("Error generating timetable:", error);
