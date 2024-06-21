@@ -10,7 +10,9 @@ const TimeTable = require("./timetable");
 passport.use(new localStrategy(userModel.authenticate()));
 passport.serializeUser(userModel.serializeUser());
 passport.deserializeUser(userModel.deserializeUser());
-
+const bodyParser = require('body-parser');
+router.use(bodyParser.json());
+const answer = [];
 // even sem
 const firstYearSection_Even = ["A1_CSE", "A2_CSE", "B1_CCE", "B2_CCE", "B3_CCE", "C1_ECE", "C2_ECE", "C3_ECE", "D1_MME", "D2_MME", "D3_MME", "Comb_section1", "Comb_section2"];
 const secondYearSection_Even = ["A1CSE", "A2CSE", "B1CCE", "B2CCE", "B3CCE", "C1ECE", "C2ECE", "C3ECE", "D1MME"];
@@ -22,476 +24,149 @@ const firstYearSection = ["A1", "A2", "B1", "B2"];
 const secondyearSection = ["A1_MME", "A1_CSE", "A2_CSE", "B1_CCE", "B2_ECE"];
 const thirdYearSection = ["A_CSE", "B_CSE", "C_CCE", "D_ECE", "E_MME"];
 
+
+const MorningSlotMon = [
+  {
+    startTime: { hours: 8, minutes: 0 },
+    endTime: { hours: 9, minutes: 0 },
+  },
+  {
+    startTime: { hours: 9, minutes: 0 },
+    endTime: { hours: 10, minutes: 0 },
+  },
+  {
+    startTime: { hours: 10, minutes: 0 },
+    endTime: { hours: 11, minutes: 0 },
+  },
+  {
+    startTime: { hours: 11, minutes: 0 },
+    endTime: { hours: 12, minutes: 0 },
+  },
+  {
+    startTime: { hours: 12, minutes: 0 },
+    endTime: { hours: 13, minutes: 0 },
+  }];
+
+const MorningSlotTue = [
+  {
+    startTime: { hours: 8, minutes: 0 },
+    endTime: { hours: 9, minutes: 30 },
+  },
+  {
+    startTime: { hours: 9, minutes: 30 },
+    endTime: { hours: 11, minutes: 0 },
+  },
+  {
+    startTime: { hours: 11, minutes: 0 },
+    endTime: { hours: 12, minutes: 30 },
+  }
+];
+
+const EveningSlotMon = [
+  {
+    startTime: { hours: 13, minutes: 0 },
+    endTime: { hours: 14, minutes: 0 },
+  },
+  {
+    startTime: { hours: 14, minutes: 0 },
+    endTime: { hours: 15, minutes: 0 },
+  },
+  {
+    startTime: { hours: 15, minutes: 0 },
+    endTime: { hours: 16, minutes: 0 },
+  },
+  {
+    startTime: { hours: 16, minutes: 0 },
+    endTime: { hours: 17, minutes: 0 },
+  },
+  {
+    startTime: { hours: 17, minutes: 0 },
+    endTime: { hours: 18, minutes: 0 },
+  },
+];
+
+const EveningSlotTue = [
+  {
+    startTime: { hours: 13, minutes: 0 },
+    endTime: { hours: 14, minutes: 30 },
+  },
+  {
+    startTime: { hours: 14, minutes: 30 },
+    endTime: { hours: 16, minutes: 0 },
+  },
+];
+// FOR UG's HALF OF THE DAY
+function morOReve(startTime,endTime){
+  if(startTime.hours >=8 && endTime.hours<=13){
+    return "Morning";
+  }
+  else{
+    return "Evening";
+  }
+}
+// FOR PG's HALF OF THE DAY
+function dayANDnight(section){
+  if(section==="A1_PHY_II" || section==="A1_MTH_II" || section==="A1_PHY" || section==="A1_MTH"){
+    return "Morning";
+  }
+  else{
+    return "Evening";
+  }
+  
+}
+
 const firstYearSectionTimeMapping_II = {
   A1_CSE: {
-    MON: [
-      {
-        startTime: { hours: 8, minutes: 0 },
-        endTime: { hours: 9, minutes: 0 },
-      },
-      {
-        startTime: { hours: 9, minutes: 0 },
-        endTime: { hours: 10, minutes: 0 },
-      },
-      {
-        startTime: { hours: 10, minutes: 0 },
-        endTime: { hours: 11, minutes: 0 },
-      },
-      {
-        startTime: { hours: 11, minutes: 0 },
-        endTime: { hours: 12, minutes: 0 },
-      },
-      {
-        startTime: { hours: 12, minutes: 0 },
-        endTime: { hours: 13, minutes: 0 },
-      },
-    ],
-    TUE: [
-      {
-        startTime: { hours: 8, minutes: 0 },
-        endTime: { hours: 9, minutes: 30 },
-      },
-      {
-        startTime: { hours: 9, minutes: 30 },
-        endTime: { hours: 11, minutes: 0 },
-      },
-      {
-        startTime: { hours: 11, minutes: 0 },
-        endTime: { hours: 12, minutes: 30 },
-      }
-    ],
+    MON: MorningSlotMon,
+    TUE: MorningSlotTue
   },
   A2_CSE: {
-    MON: [
-      {
-        startTime: { hours: 8, minutes: 0 },
-        endTime: { hours: 9, minutes: 0 },
-      },
-      {
-        startTime: { hours: 9, minutes: 0 },
-        endTime: { hours: 10, minutes: 0 },
-      },
-      {
-        startTime: { hours: 10, minutes: 0 },
-        endTime: { hours: 11, minutes: 0 },
-      },
-      {
-        startTime: { hours: 11, minutes: 0 },
-        endTime: { hours: 12, minutes: 0 },
-      },
-      {
-        startTime: { hours: 12, minutes: 0 },
-        endTime: { hours: 13, minutes: 0 },
-      }
-    ],
-    TUE: [
-      {
-        startTime: { hours: 8, minutes: 0 },
-        endTime: { hours: 9, minutes: 30 },
-      },
-      {
-        startTime: { hours: 9, minutes: 30 },
-        endTime: { hours: 11, minutes: 0 },
-      },
-      {
-        startTime: { hours: 11, minutes: 0 },
-        endTime: { hours: 12, minutes: 30 },
-      }
-    ],
+    MON: MorningSlotMon,
+    TUE: MorningSlotTue
   },
   Comb_section1: {
-    MON: [
-      {
-        startTime: { hours: 8, minutes: 0 },
-        endTime: { hours: 9, minutes: 0 },
-      },
-      {
-        startTime: { hours: 9, minutes: 0 },
-        endTime: { hours: 10, minutes: 0 },
-      },
-      {
-        startTime: { hours: 10, minutes: 0 },
-        endTime: { hours: 11, minutes: 0 },
-      },
-      {
-        startTime: { hours: 11, minutes: 0 },
-        endTime: { hours: 12, minutes: 0 },
-      },
-      {
-        startTime: { hours: 12, minutes: 0 },
-        endTime: { hours: 13, minutes: 0 },
-      },
-    ],
-    TUE: [
-      {
-        startTime: { hours: 8, minutes: 0 },
-        endTime: { hours: 9, minutes: 30 },
-      },
-      {
-        startTime: { hours: 9, minutes: 30 },
-        endTime: { hours: 11, minutes: 0 },
-      },
-      {
-        startTime: { hours: 11, minutes: 0 },
-        endTime: { hours: 12, minutes: 30 },
-      }
-    ],
+    MON: MorningSlotMon,
+    TUE:MorningSlotTue
   },
   Comb_section2: {
-    MON: [
-      {
-        startTime: { hours: 8, minutes: 0 },
-        endTime: { hours: 9, minutes: 0 },
-      },
-      {
-        startTime: { hours: 9, minutes: 0 },
-        endTime: { hours: 10, minutes: 0 },
-      },
-      {
-        startTime: { hours: 10, minutes: 0 },
-        endTime: { hours: 11, minutes: 0 },
-      },
-      {
-        startTime: { hours: 11, minutes: 0 },
-        endTime: { hours: 12, minutes: 0 },
-      },
-      {
-        startTime: { hours: 12, minutes: 0 },
-        endTime: { hours: 13, minutes: 0 },
-      },
-    ],
-    TUE: [
-      {
-        startTime: { hours: 8, minutes: 0 },
-        endTime: { hours: 9, minutes: 30 },
-      },
-      {
-        startTime: { hours: 9, minutes: 30 },
-        endTime: { hours: 11, minutes: 0 },
-      },
-      {
-        startTime: { hours: 11, minutes: 0 },
-        endTime: { hours: 12, minutes: 30 },
-      }
-    ],
+    MON: MorningSlotMon,
+    TUE:MorningSlotTue
   },
   B1_CCE: {
-    MON: [
-      {
-        startTime: { hours: 13, minutes: 0 },
-        endTime: { hours: 14, minutes: 0 },
-      },
-      {
-        startTime: { hours: 14, minutes: 0 },
-        endTime: { hours: 15, minutes: 0 },
-      },
-      {
-        startTime: { hours: 15, minutes: 0 },
-        endTime: { hours: 16, minutes: 0 },
-      },
-      {
-        startTime: { hours: 16, minutes: 0 },
-        endTime: { hours: 17, minutes: 0 },
-      },
-      {
-        startTime: { hours: 17, minutes: 0 },
-        endTime: { hours: 18, minutes: 0 },
-      },
-    ],
-    TUE: [
-      {
-        startTime: { hours: 13, minutes: 0 },
-        endTime: { hours: 14, minutes: 30 },
-      },
-      {
-        startTime: { hours: 14, minutes: 30 },
-        endTime: { hours: 16, minutes: 0 },
-      },
-    ],
+    MON: EveningSlotMon,
+    TUE: EveningSlotTue
   },
   B2_CCE: {
-    MON: [
-      {
-        startTime: { hours: 13, minutes: 0 },
-        endTime: { hours: 14, minutes: 0 },
-      },
-      {
-        startTime: { hours: 14, minutes: 0 },
-        endTime: { hours: 15, minutes: 0 },
-      },
-      {
-        startTime: { hours: 15, minutes: 0 },
-        endTime: { hours: 16, minutes: 0 },
-      },
-      {
-        startTime: { hours: 16, minutes: 0 },
-        endTime: { hours: 17, minutes: 0 },
-      },
-      {
-        startTime: { hours: 17, minutes: 0 },
-        endTime: { hours: 18, minutes: 0 },
-      },
-    ],
-    TUE: [
-      {
-        startTime: { hours: 13, minutes: 0 },
-        endTime: { hours: 14, minutes: 30 },
-      },
-      {
-        startTime: { hours: 14, minutes: 30 },
-        endTime: { hours: 16, minutes: 0 },
-      },
-    ],
+    MON: EveningSlotMon,
+    TUE: EveningSlotTue
   },
   B3_CCE: {
-    MON: [
-      {
-        startTime: { hours: 13, minutes: 0 },
-        endTime: { hours: 14, minutes: 0 },
-      },
-      {
-        startTime: { hours: 14, minutes: 0 },
-        endTime: { hours: 15, minutes: 0 },
-      },
-      {
-        startTime: { hours: 15, minutes: 0 },
-        endTime: { hours: 16, minutes: 0 },
-      },
-      {
-        startTime: { hours: 16, minutes: 0 },
-        endTime: { hours: 17, minutes: 0 },
-      },
-      {
-        startTime: { hours: 17, minutes: 0 },
-        endTime: { hours: 18, minutes: 0 },
-      },
-    ],
-    TUE: [
-      {
-        startTime: { hours: 13, minutes: 0 },
-        endTime: { hours: 14, minutes: 30 },
-      },
-      {
-        startTime: { hours: 14, minutes: 30 },
-        endTime: { hours: 16, minutes: 0 },
-      },
-    ],
+    MON: EveningSlotMon,
+    TUE: EveningSlotTue
   },
   C1_ECE: {
-    MON: [
-      {
-        startTime: { hours: 13, minutes: 0 },
-        endTime: { hours: 14, minutes: 0 },
-      },
-      {
-        startTime: { hours: 14, minutes: 0 },
-        endTime: { hours: 15, minutes: 0 },
-      },
-      {
-        startTime: { hours: 15, minutes: 0 },
-        endTime: { hours: 16, minutes: 0 },
-      },
-      {
-        startTime: { hours: 16, minutes: 0 },
-        endTime: { hours: 17, minutes: 0 },
-      },
-      {
-        startTime: { hours: 17, minutes: 0 },
-        endTime: { hours: 18, minutes: 0 },
-      },
-    ],
-    TUE: [
-      {
-        startTime: { hours: 13, minutes: 0 },
-        endTime: { hours: 14, minutes: 30 },
-      },
-      {
-        startTime: { hours: 14, minutes: 30 },
-        endTime: { hours: 16, minutes: 0 },
-      },
-    ],
+    MON: EveningSlotMon,
+    TUE: EveningSlotTue
   },
   C2_ECE: {
-    MON: [
-      {
-        startTime: { hours: 13, minutes: 0 },
-        endTime: { hours: 14, minutes: 0 },
-      },
-      {
-        startTime: { hours: 14, minutes: 0 },
-        endTime: { hours: 15, minutes: 0 },
-      },
-      {
-        startTime: { hours: 15, minutes: 0 },
-        endTime: { hours: 16, minutes: 0 },
-      },
-      {
-        startTime: { hours: 16, minutes: 0 },
-        endTime: { hours: 17, minutes: 0 },
-      },
-      {
-        startTime: { hours: 17, minutes: 0 },
-        endTime: { hours: 18, minutes: 0 },
-      },
-    ],
-    TUE: [
-      {
-        startTime: { hours: 13, minutes: 0 },
-        endTime: { hours: 14, minutes: 30 },
-      },
-      {
-        startTime: { hours: 14, minutes: 30 },
-        endTime: { hours: 16, minutes: 0 },
-      },
-    ],
+    MON: EveningSlotMon,
+    TUE: EveningSlotTue
   },
   C3_ECE: {
-    MON: [
-      {
-        startTime: { hours: 13, minutes: 0 },
-        endTime: { hours: 14, minutes: 0 },
-      },
-      {
-        startTime: { hours: 14, minutes: 0 },
-        endTime: { hours: 15, minutes: 0 },
-      },
-      {
-        startTime: { hours: 15, minutes: 0 },
-        endTime: { hours: 16, minutes: 0 },
-      },
-      {
-        startTime: { hours: 16, minutes: 0 },
-        endTime: { hours: 17, minutes: 0 },
-      },
-      {
-        startTime: { hours: 17, minutes: 0 },
-        endTime: { hours: 18, minutes: 0 },
-      },
-    ],
-    TUE: [
-      {
-        startTime: { hours: 13, minutes: 0 },
-        endTime: { hours: 14, minutes: 30 },
-      },
-      {
-        startTime: { hours: 14, minutes: 30 },
-        endTime: { hours: 16, minutes: 0 },
-      },
-    ],
+    MON: EveningSlotMon,
+    TUE: EveningSlotTue
   },
   D1_MME: {
-    MON: [
-      {
-        startTime: { hours: 8, minutes: 0 },
-        endTime: { hours: 9, minutes: 0 },
-      },
-      {
-        startTime: { hours: 9, minutes: 0 },
-        endTime: { hours: 10, minutes: 0 },
-      },
-      {
-        startTime: { hours: 10, minutes: 0 },
-        endTime: { hours: 11, minutes: 0 },
-      },
-      {
-        startTime: { hours: 11, minutes: 0 },
-        endTime: { hours: 12, minutes: 0 },
-      },
-      {
-        startTime: { hours: 12, minutes: 0 },
-        endTime: { hours: 13, minutes: 0 },
-      },
-    ],
-    TUE: [
-      {
-        startTime: { hours: 8, minutes: 0 },
-        endTime: { hours: 9, minutes: 30 },
-      },
-      {
-        startTime: { hours: 9, minutes: 30 },
-        endTime: { hours: 11, minutes: 0 },
-      },
-      {
-        startTime: { hours: 11, minutes: 0 },
-        endTime: { hours: 12, minutes: 30 },
-      }
-    ],
+    MON: MorningSlotMon,
+    TUE: MorningSlotTue
   },
   D2_MME: {
-    MON: [
-      {
-        startTime: { hours: 8, minutes: 0 },
-        endTime: { hours: 9, minutes: 0 },
-      },
-      {
-        startTime: { hours: 9, minutes: 0 },
-        endTime: { hours: 10, minutes: 0 },
-      },
-      {
-        startTime: { hours: 10, minutes: 0 },
-        endTime: { hours: 11, minutes: 0 },
-      },
-      {
-        startTime: { hours: 11, minutes: 0 },
-        endTime: { hours: 12, minutes: 0 },
-      },
-      {
-        startTime: { hours: 12, minutes: 0 },
-        endTime: { hours: 13, minutes: 0 },
-      },
-    ],
-    TUE: [
-      {
-        startTime: { hours: 8, minutes: 0 },
-        endTime: { hours: 9, minutes: 30 },
-      },
-      {
-        startTime: { hours: 9, minutes: 30 },
-        endTime: { hours: 11, minutes: 0 },
-      },
-      {
-        startTime: { hours: 11, minutes: 0 },
-        endTime: { hours: 12, minutes: 30 },
-      }
-    ],
+    MON: MorningSlotMon,
+    TUE: MorningSlotTue
   },
   D3_MME: {
-    MON: [
-      {
-        startTime: { hours: 8, minutes: 0 },
-        endTime: { hours: 9, minutes: 0 },
-      },
-      {
-        startTime: { hours: 9, minutes: 0 },
-        endTime: { hours: 10, minutes: 0 },
-      },
-      {
-        startTime: { hours: 10, minutes: 0 },
-        endTime: { hours: 11, minutes: 0 },
-      },
-      {
-        startTime: { hours: 11, minutes: 0 },
-        endTime: { hours: 12, minutes: 0 },
-      },
-      {
-        startTime: { hours: 12, minutes: 0 },
-        endTime: { hours: 13, minutes: 0 },
-      },
-    ],
-    TUE: [
-      {
-        startTime: { hours: 8, minutes: 0 },
-        endTime: { hours: 9, minutes: 30 },
-      },
-      {
-        startTime: { hours: 9, minutes: 30 },
-        endTime: { hours: 11, minutes: 0 },
-      },
-      {
-        startTime: { hours: 11, minutes: 0 },
-        endTime: { hours: 12, minutes: 30 },
-      }
-    ],
+    MON: MorningSlotMon,
+    TUE: MorningSlotTue
   }
 };
 
@@ -2448,7 +2123,6 @@ const Incubation = ["LT16", "LT17", "LT18", "LT19"];
 const MmeBuilding = ["LT11", "LT12", "LT13"];
 const MysteryHalls = ["LT14", "LT15"];
 
-
 // Render the index page
 router.get("/", function (req, res) {
   res.render("index");
@@ -2724,7 +2398,7 @@ router.post("/update-course", async (req, res) => {
         name: name,
         courseCode: id,
         department: departmentDoc,
-        program: program, // Use the ObjectId of the department
+        program: program,
         cseStudents: cseStudents,
         cceStudents: cceStudents,
         eceStudents: eceStudents,
@@ -2736,7 +2410,7 @@ router.post("/update-course", async (req, res) => {
         credits: credits,
         semester: semester,
         courseType: courseType,
-        group: groupInput, // Assuming the field in the schema is named 'group'
+        group: groupInput,
         sharingType: sharingType,
         year: year,
         professors: professorIds,
@@ -2804,11 +2478,11 @@ router.get(
 
 // POST route to update the course data
 router.post("/save-course", async (req, res) => {
-  const { courseName, sharingType, professors } = req.body;
+  const { courseName, sharingType, professors,program } = req.body;
 
   try {
     // Check if the course exists
-    let course = await Course.findOne({ name: courseName });
+    let course = await Course.findOne({ name: courseName,program:program });
 
     if (!course) {
       return res.status(404).json({ error: "Course not found" });
@@ -2873,9 +2547,9 @@ function determineDepartment(email) {
 
 // Route to update course details by HOD
 router.post("/hod/update", isLoggedIn, function (req, res) {
-  const { courseId, credits, sharingType, professors } = req.body;
+  const { courseId, credits, sharingType, professors,program } = req.body;
   Course.findByIdAndUpdate(
-    courseId,
+    courseId,program,
     { credits: credits, methodOfDelivery: sharingType, professors: professors },
     { new: true }
   )
@@ -3014,9 +2688,9 @@ async function allocateCoursesToSections_I(courses, sections) {
 
 async function allocateTimeSlotForSection_I(courseId, section) {
   try {
-    console.log(
-      `Allocating time slots for course ${courseId} in section ${section}
-   `);
+  //   console.log(
+  //     `Allocating time slots for course ${courseId} in section ${section}
+  //  `);
 
     const sectionTimeMapping = firstYearSectionTimeMapping[section];
     const days = Object.keys(sectionTimeMapping);
@@ -3046,7 +2720,7 @@ async function allocateTimeSlotForSection_I(courseId, section) {
 
     // Loop through each day
     for (const day of days) {
-      console.log(`Checking time slots for ${day} in section ${section}`);
+      // console.log(`Checking time slots for ${day} in section ${section}`);
 
       const timeSlots = sectionTimeMapping[day];
 
@@ -3067,9 +2741,9 @@ async function allocateTimeSlotForSection_I(courseId, section) {
 
         // If time slot is not allocated to a different course, allocate it
         if (!isTimeSlotAllocated) {
-          console.log(
-            `Allocating time slot for ${courseId} in section ${section} on ${day} from ${timeSlot.startTime.hours}:${timeSlot.startTime.minutes} to ${timeSlot.endTime.hours}:${timeSlot.endTime.minutes}
-          `);
+          // console.log(
+          //   `Allocating time slot for ${courseId} in section ${section} on ${day} from ${timeSlot.startTime.hours}:${timeSlot.startTime.minutes} to ${timeSlot.endTime.hours}:${timeSlot.endTime.minutes}
+          // `);
 
           const newTimeTableEntry = new TimeTable({
             day,
@@ -3111,8 +2785,6 @@ async function allocateTimeSlotForSection_I(courseId, section) {
     if (!allocated) {
       console.log(`No available time slots for ${section}`);
     }
-
-    console.dir(professorMapping, { depth: null });
   } catch (error) {
     console.error(`Error while allocating time slots: ${error}`);
     throw error;
@@ -3138,15 +2810,17 @@ async function checkProfmapping(professorNames, it, timeSlot) {
             (entry.startTime.hours === timeSlot.endTime.hours &&
               entry.startTime.minutes === timeSlot.endTime.minutes) ||
             (entry.endTime.hours === timeSlot.startTime.hours &&
-              entry.endTime.minutes === timeSlot.startTime.minutes)
+              entry.endTime.minutes === timeSlot.startTime.minutes) ||
+            (entry.startTime.hours === 8 && timeSlot.startTime.hours === 5) ||
+            (entry.startTime.hours === 5 && timeSlot.startTime.hours === 8)
         );
 
         flag = flag || notFreeAndBackToBack;
       } else {
         // Handle the case where professor or iteration is not found in professorMapping
-        console.log(
-          `Professor '${prof}' or iteration '${it}' not found in professorMapping.
-        `);
+        // console.log(
+        //   `Professor '${prof}' or iteration '${it}' not found in professorMapping.
+        // `);
       }
     }
     return flag;
@@ -3188,9 +2862,9 @@ async function allocateTimeSlotForDefaultSections(course) {
 
     for (const item of sectionsAndTimeSlots) {
       const { section, day, startTime, endTime } = item;
-      console.log(
-        `Allocating time slot for ${course._id} in section ${section} on ${day}
-      `);
+      // console.log(
+      //   `Allocating time slot for ${course._id} in section ${section} on ${day}
+      // `);
 
       // Fetch the professors for the course
       const professors = course.professors.map((professor) => professor._id);
@@ -3439,8 +3113,8 @@ async function allocateTimeSlot_Even(course, section, day, timeSlot, allotments)
   try {
     // Determine lecture hall based on section
     let allote;
-    let oldSec=section;
-    let lectureHall="None";
+    let oldSec = section;
+    let lectureHall = "None";
     if (course.program === "M.Sc.") {
       for (const lt of MmeBuilding) {
         const existinglts = await TimeTable.find({ day: day, startTime: timeSlot.startTime, endTime: timeSlot.endTime, lectureHall: lt });
@@ -3543,9 +3217,9 @@ async function allocateTimeSlot_Even(course, section, day, timeSlot, allotments)
         return false;
       }
     }
-    console.log(
-      `Allocating time slot for ${course._id} in section ${section} on ${day} from ${timeSlot.startTime.hours}:${timeSlot.startTime.minutes} to ${timeSlot.endTime.hours}:${timeSlot.endTime.minutes}
-    `);
+    // console.log(
+    //   `Allocating time slot for ${course._id} in section ${section} on ${day} from ${timeSlot.startTime.hours}:${timeSlot.startTime.minutes} to ${timeSlot.endTime.hours}:${timeSlot.endTime.minutes}
+    // `);
 
     // Save the new timetable entry
     const profIds = await convertProfessorNamesToIds(clearedProfs);
@@ -3574,6 +3248,20 @@ async function allocateTimeSlot_Even(course, section, day, timeSlot, allotments)
     else if (allot === "Comb_section2") {
       section = ["A2_CSE", "D3_MME"];
     }
+    let temp = [];
+    for (const it of answer) {
+      if (it.name === course.name) {
+        temp.push([getDepartmentName(it._id), it.year]);
+      }
+    }
+    let guruvar = [];
+    for (const it of temp) {
+      const curr_sec=yearWiseSection_II(it[1], it[0]);
+      if(morOReve(timeSlot.startTime,timeSlot.endTime)===dayANDnight(curr_sec)){
+        guruvar.push(curr_sec);
+      }
+    }
+    section.push(...guruvar);
     for (const it of section) {
       if (!sectionBusyMapping[it]) {
         sectionBusyMapping[it] = {};
@@ -3603,7 +3291,7 @@ async function allocateTimeSlot_Even(course, section, day, timeSlot, allotments)
         sharingType: course.sharingType,
       });
     }
-    section=oldSec;
+    section = oldSec;
     return true;
   } catch (error) {
     console.error(`Error while allocating time slot: ${error}`);
@@ -3617,7 +3305,8 @@ async function allocateTimSlots_II(iterator, i, marker) {
   const course = iterator[i].course;
   const year = course.year;
   let allotments;
-
+  const MScMTH=course.numberOfStudents.MScMTH;
+  const MScPHY=course.numberOfStudents.MScPHY;
   if (course.courseType === "Program Elective") {
     allotments = [`PE_${course.name}_${year}year_${course.program}`];
   }
@@ -3630,19 +3319,23 @@ async function allocateTimSlots_II(iterator, i, marker) {
   let sectionTimeMapping;
   if (course.program === "M.Sc.") {
     const dept_name = await getDepartmentName(course._id);
-    if (year === "1st" && dept_name === "PHY") {
+    console.log(year,dept_name);
+    if (year === "1st" && dept_name === "PHY" || (year === "1st" && MScPHY!=0)) {
       sectionTimeMapping = MSCPHY["A1_PHY"];
     }
-    else if (year === "1st" && dept_name === "MTH") {
+    else if ((year === "1st" && dept_name === "MTH") || (year === "1st" && MScMTH!=0)) {
       sectionTimeMapping = MSCMTH["B1_MTH"];
     }
-    else if (year === "2nd" && dept_name === "PHY") {
+    else if (year === "2nd" && dept_name === "PHY" || (year === "2nd" && MScPHY!=0)) {
       sectionTimeMapping = MSCPHY["B1_PHY"];
     }
-    else if (year === "2nd" && dept_name === "MTH") {
+    else if (year === "2nd" && dept_name === "MTH" || (year === "2nd" && MScMTH!=0)) {
       sectionTimeMapping = MSCMTH["A1_MTH"];
     }
     else {
+      for(const it of answer){
+        console.log(it.name,it.program);
+      }
       throw new Error("Invalid year specified, ok bhai");
     }
   }
@@ -3686,7 +3379,6 @@ async function allocateTimSlots_II(iterator, i, marker) {
       } // If timetable exists for this section and course, move to the next section
     }
 
-    console.log(sectionTimeMapping, course.name, course.program);
     const timeSlots = sectionTimeMapping[it];
 
     for (const slot of timeSlots) {
@@ -3850,9 +3542,9 @@ async function allocateTimeSlot(course, section, day, timeSlot, allotments) {
         return false;
       }
     }
-    console.log(
-      `Allocating time slot for ${course._id} in section ${section} on ${day} from ${timeSlot.startTime.hours}:${timeSlot.startTime.minutes} to ${timeSlot.endTime.hours}:${timeSlot.endTime.minutes}
-    `);
+    // console.log(
+    //   `Allocating time slot for ${course._id} in section ${section} on ${day} from ${timeSlot.startTime.hours}:${timeSlot.startTime.minutes} to ${timeSlot.endTime.hours}:${timeSlot.endTime.minutes}
+    // `);
 
     // Save the new timetable entry
     const profIds = await convertProfessorNamesToIds(clearedProfs);
@@ -3875,6 +3567,20 @@ async function allocateTimeSlot(course, section, day, timeSlot, allotments) {
     });
     await newTimeTableEntry.save();
 
+    let temp = [];
+    for (const it of answer) {
+      if (it.name === course.name) {
+        temp.push([getDepartmentName(it._id), it.year]);
+      }
+    }
+    let guruvar = [];
+    for (const it of temp) {
+      const curr_sec=yearWiseSection_II(it[1], it[0]);
+      if(morOReve(timeSlot.startTime,timeSlot.endTime)===dayANDnight(curr_sec)){
+        guruvar.push(curr_sec);
+      }
+    }
+    section.push(...guruvar);
 
     for (const it of section) {
       if (!sectionBusyMapping[it]) {
@@ -3914,7 +3620,7 @@ async function allocateTimeSlot(course, section, day, timeSlot, allotments) {
 
 async function removeTimeSlot(course, section, day, timeSlot, allotments) {
   try {
-    let oldSec=section;
+    let oldSec = section;
     // Remove the allocated time slot entry from the timetable
     if (course.courseType != "Program Elective") {
       await TimeTable.deleteOne({
@@ -3977,7 +3683,7 @@ async function removeTimeSlot(course, section, day, timeSlot, allotments) {
         }
       }
     }
-    section=oldSec;
+    section = oldSec;
   } catch (error) {
     console.error(`Error while removing time slot: ${error}`);
     throw error;
@@ -4117,7 +3823,6 @@ async function getAllotments_II(course) {
 
 async function getAllotments(course) {
   const { CSE, CSE_DD, CCE, ECE, ECE_DD, MME, MScMTH, MScPHY } = course.numberOfStudents;
-  console.log(MScMTH, MScPHY);
   let allotments = [];
   if (course.program === "M.Sc.") {
     if (course.year === "1st") {
@@ -4334,13 +4039,13 @@ async function getSectionsForElectives(course) {
       }
     }
     if (MSCMTH != 0) {
-      const MSCMTH_SEC = yearWiseSection(year, "MSCMTH");
+      const MSCMTH_SEC = yearWiseSection(year, "MTH");
       for (const it of MSCMTH_SEC) {
         sections.push(it);
       }
     }
     if (MSCPHY != 0) {
-      const MSCPHY_SEC = yearWiseSection(year, "MSCPHY");
+      const MSCPHY_SEC = yearWiseSection(year, "PHY");
       for (const it of MSCPHY_SEC) {
         sections.push(it);
       }
@@ -4386,6 +4091,7 @@ async function getSectionsForElectives(course) {
   }
   return sections;
 }
+
 // other elective baaki hai
 // MTECh baaki hai
 // teachers ka vo 8-5 baaki hai
@@ -4394,8 +4100,10 @@ router.post("/generate-timetable", async (req, res) => {
   try {
     professorMapping = {};
     sectionBusyMapping = {};
+    
     const courses_1stYear = await Course.find({ year: "1st", program: "B.Tech." });
-    if (courses_1stYear[0].semester === "Odd") {//XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+    //XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+    if (courses_1stYear[0].semester === "Odd") {
       await allocateCoursesToSections_I(courses_1stYear, firstYearSection);
 
       const M_III = await Course.findOne({ name: "M-III" });
@@ -4409,15 +4117,71 @@ router.post("/generate-timetable", async (req, res) => {
       const courses_2ndYear_andAhead = await Course.find({
         year: { $ne: "1st" },
         name: { $ne: "M-III" },
-        program: "B.Tech.",
+        program: "B.Tech."
       });
 
-      const courses_msc = await Course.find({
-        program: "M.Sc."
-      });
+      let filteredCourses=[];
+      async function findDuplicateCourses() {
+        try {
+          const aggregateResults = await Course.aggregate([
+            {
+              $group: {
+                _id: "$name",
+                count: { $sum: 1 }
+              }
+            },
+            {
+              $match: {
+                count: { $gt: 1 }
+              }
+            }
+          ]);
+      
+          const answer = [];
+      
+          for (const result of aggregateResults) {
+            const courseName = result._id;
+            const courses = await Course.find({ name: courseName, program: { $ne: "B.Tech." } });
+            answer.push(...courses);
+          }
+      
+          // Fetch M.Sc. and M.Tech. courses after finding duplicate courses
+          const courses_msc = await Course.find({ program: "M.Sc." });
+          const courses_mtech = await Course.find({ program: "M.Tech." });
+      
+          // Display the answer courses
+          // for (const it of answer) {
+          //   console.log("ye answer ka hai " + it.name, it.program);
+          // }
+      
+          // Filter the courses
+          filteredCourses =  filterCourses(answer, courses_msc);
+      
+        } catch (error) {
+          console.error("Error during aggregation or finding courses:", error);
+        }
+      }
+           
+      await findDuplicateCourses();
 
+      function filterCourses(answer, courses_msc) {
+        // Create an array of course names from the answer array
+        const answerCourseNames = answer.map(course => course.name);
+      
+        // Filter the courses_msc array
+        const filteredCourses = courses_msc.filter(course => {
+          // Check if the course name is not present in the answerCourseNames array
+          return !answerCourseNames.includes(course.name);
+        });
+      
+        return filteredCourses;
+      }
+      
+      for(const it of filteredCourses){
+        console.log("Ye filteredCourse hai "+ it.name,it.program);
+      }
       // Push the MSC courses into the courses_2ndYear_andAhead array
-      courses_2ndYear_andAhead.push(...courses_msc);
+      courses_2ndYear_andAhead.push(...filteredCourses);
 
       const iterator = [];
       // Loop through each course
@@ -4442,13 +4206,49 @@ router.post("/generate-timetable", async (req, res) => {
         }
       }
       const marker = { value: false };
-
+      for(const it of filteredCourses){
+        console.log("This is filteredCourse "+it.name,it.program);
+      }
       await allocateTimSlots_II(iterator, 0, marker);
 
       res.status(200).json({ message: "Timetable generation completed" });
     }
-    else {//XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-      const courses_Even = await Course.find();
+    //XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+    else {
+      Course.aggregate([
+        {
+          $group: {
+            _id: "$name",
+            count: { $sum: 1 }
+          }
+        },
+        {
+          $match: {
+            count: { $gt: 1 }
+          }
+        }
+      ])
+        .then(results => {
+          // Loop through each result
+          results.forEach(result => {
+            const courseName = result._id;
+            // Find courses with the same name but not B.Tech
+            Course.find({ name: courseName, program: { $ne: "B.Tech." } })
+              .then(courses => {
+                // Push matching courses into the answer array
+                answer.push(...courses);
+              })
+              .catch(error => {
+                console.error("Error finding courses:", error);
+              });
+          });
+
+          console.log(answer);
+        })
+        .catch(error => {
+          console.error(error);
+        });
+      const courses_Even = await Course.find({ _id: { $nin: answer } });
 
       const iterator = [];
       // Loop through each course
@@ -4465,7 +4265,7 @@ router.post("/generate-timetable", async (req, res) => {
         }
         else {
           let sections = [];
-          sections = await getSectionsForElectives_II(course);
+          sections = await getSectionsForElectives(course);
           iterator.push({
             course: course,
             section: sections
@@ -4475,7 +4275,6 @@ router.post("/generate-timetable", async (req, res) => {
       const marker = { value: false };
 
       await allocateTimSlots_II_Even(iterator, 0, marker);
-
       res.status(200).json({ message: "Timetable generation completed" });
     }
 
