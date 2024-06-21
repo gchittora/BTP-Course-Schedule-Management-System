@@ -134,7 +134,34 @@ document.addEventListener("DOMContentLoaded", function () {
     addEventListeners();
        
         
-        
+    document.getElementById("sendButton").addEventListener("click", function () {
+        if (courses.length === 0) {
+            alert("No courses to send.");
+            return;
+        }
+
+        fetch("/sendAllCourses", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(courses)
+        })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error("Network response was not ok.");
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log("All courses sent successfully:", data);
+                alert("All courses sent and emails sent successfully.");
+            })
+            .catch(error => {
+                console.error("Error sending all courses:", error);
+                alert("Error occurred while sending all courses. Please try again.");
+            });
+    });
      
 
     function saveCourse(index) {
