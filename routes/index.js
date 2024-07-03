@@ -7,6 +7,9 @@ const userModel = require("./users");
 const passport = require("passport");
 const localStrategy = require("passport-local").Strategy;
 const TimeTable = require("./timetable");
+const mailer=require("../mailer");
+const Storing=require("./storing");
+const cron=require("node-cron");
 passport.use(new localStrategy(userModel.authenticate()));
 passport.serializeUser(userModel.serializeUser());
 passport.deserializeUser(userModel.deserializeUser());
@@ -2471,10 +2474,69 @@ router.get(
       res.render("hod", { department: department, courses: unfilledCourses });
     } catch (error) {
       console.error("Error fetching data:", error);
-      res.render("emptydata");
     }
   }
 );
+
+router.post("/hod/:department/saveFlag",async (req,res)=>{
+    const {department}=req.body;
+    let identifier=`hod${department}flag`;
+    identifier=identifier.toLowerCase();
+    switch (identifier) {
+      case 'hodcseflag':
+        await Storing.findOneAndUpdate(
+          {}, // Assuming there is only one document
+          { $set: { hodcseflag: true } },
+          { new: true } // Options: return the updated document
+        );
+        break;
+      case 'hodeceflag':
+        await Storing.findOneAndUpdate(
+          {}, // Assuming there is only one document
+          { $set: { hodeceflag: true } },
+          { new: true } // Options: return the updated document
+        );
+        break;
+      case 'hodcceflag':
+        await Storing.findOneAndUpdate(
+          {}, // Assuming there is only one document
+          { $set: { hodcceflag: true } },
+          { new: true } // Options: return the updated document
+        );
+        break;
+      case 'hodmmeflag':
+        await Storing.findOneAndUpdate(
+          {}, // Assuming there is only one document
+          { $set: { hodmmeflag: true } },
+          { new: true } // Options: return the updated document
+        );
+        break;
+      case 'hodhssflag':
+        await Storing.findOneAndUpdate(
+          {}, // Assuming there is only one document
+          { $set: { hodhssflag: true } },
+          { new: true } // Options: return the updated document
+        );
+        break;
+      case 'hodmthflag':
+        await Storing.findOneAndUpdate(
+          {}, // Assuming there is only one document
+          { $set: { hodmthflag: true } },
+          { new: true } // Options: return the updated document
+        );
+        break;
+      case 'hodphyflag':
+        await Storing.findOneAndUpdate(
+          {}, // Assuming there is only one document
+          { $set: { hodphyflag: true } },
+          { new: true } // Options: return the updated document
+        );
+        break;
+      default:
+        return res.status(400).send('Invalid department.');
+    }
+})
+
 
 // POST route to update the course data
 router.post("/save-course", async (req, res) => {
@@ -2565,6 +2627,50 @@ router.post("/hod/update", isLoggedIn, function (req, res) {
         .status(500)
         .json({ error: "Error occurred while updating course details" });
     });
+});
+
+router.post('/send-info', async (req, res) => {
+  try {
+    const { deadLineDate } = req.body;
+
+    // Update the existing document if it exists, otherwise create a new one
+    const existingStoring = await Storing.findOne(); // Adjust the query if needed to uniquely identify the document
+
+    if (existingStoring) {
+      existingStoring.deadlinedate = new Date(deadLineDate);
+      await existingStoring.save();
+    } else {
+      const storingRecord = new Storing({
+        deadlinedate: new Date(deadLineDate),
+      });
+      await storingRecord.save();
+    }
+    // Send notification emails to HODs
+    await mailer.SendToHOD();
+    res.json({ success: true, message: 'Deadline date saved and notifications sent successfully' });
+  } catch (error) {
+    console.error('Error processing deadline and notifications:', error);
+    res.status(500).json({ success: false, message: 'Failed to process deadline and notifications' });
+  }
+});
+
+cron.schedule('45 15 * * *', async () => {
+  try {
+    console.log('Cron me hai.');
+    const storing = await Storing.findOne({});
+
+    if (storing) {
+     await mailer.sendReminderMail(storing.deadlinedate);
+     await mailer.notifyRegistrar(storing);
+    }
+
+    console.log('Scheduled task executed.');
+  } catch (err) {
+    console.error('Error fetching or processing storing document:', err);
+  }
+}, {
+  scheduled: true,
+  timezone: 'Asia/Kolkata' // Specify Kolkata timezone
 });
 
 async function getDepartmentName(courseId) {
@@ -3621,6 +3727,13 @@ async function allocateTimeSlot(course, section, day, timeSlot, allotments) {
 async function removeTimeSlot(course, section, day, timeSlot, allotments) {
   try {
     let oldSec = section;
+
+    if (course.courseType != "Program Elective") {
+      allot = section[0];
+    }
+    else {
+      allot = allotments[0];
+    }
     // Remove the allocated time slot entry from the timetable
     if (course.courseType != "Program Elective") {
       await TimeTable.deleteOne({
@@ -4097,6 +4210,7 @@ async function getSectionsForElectives(course) {
 // teachers ka vo 8-5 baaki hai
 // pTS EFE baaki hai
 router.post("/generate-timetable", async (req, res) => {
+  await TimeTable.deleteMany({});
   try {
     professorMapping = {};
     sectionBusyMapping = {};
