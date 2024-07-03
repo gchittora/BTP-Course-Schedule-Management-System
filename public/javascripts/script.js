@@ -2,7 +2,30 @@ document.addEventListener("DOMContentLoaded", function () {
     const courses = [];
     const courseForm = document.getElementById("courseForm");
     const courseTableBody = document.querySelector("#courseTable tbody");
+    const DeadLine=document.getElementById("deadLineButton");
 
+    document.getElementById('sendButton').onclick = function() {
+        const deadLineDate = document.getElementById('courseDateInput').value;
+        console.log(deadLineDate);
+        
+        fetch('/send-info', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+          },
+          body: `deadLineDate=${encodeURIComponent(deadLineDate)}`
+        })
+        .then(response => response.json())
+        .then(data => {
+          if (data.success) {
+            console.log('Deadline date saved successfully');
+            alert("DeadLine saved and sent successfully");
+          } else {
+            console.error('Failed to save deadline date');
+          }
+        })
+        .catch(error => console.error('Error:', error));
+    }
     // Load saved data when the page loads
     const savedData = localStorage.getItem("savedCourses");
     if (savedData) {
@@ -132,36 +155,6 @@ document.addEventListener("DOMContentLoaded", function () {
     
     // Call addEventListeners() after rendering courses initially
     addEventListeners();
-       
-        
-    document.getElementById("sendButton").addEventListener("click", function () {
-        if (courses.length === 0) {
-            alert("No courses to send.");
-            return;
-        }
-
-        fetch("/sendAllCourses", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(courses)
-        })
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error("Network response was not ok.");
-                }
-                return response.json();
-            })
-            .then(data => {
-                console.log("All courses sent successfully:", data);
-                alert("All courses sent and emails sent successfully.");
-            })
-            .catch(error => {
-                console.error("Error sending all courses:", error);
-                alert("Error occurred while sending all courses. Please try again.");
-            });
-    });
      
 
     function saveCourse(index) {
