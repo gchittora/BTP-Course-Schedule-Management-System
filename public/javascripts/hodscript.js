@@ -31,7 +31,7 @@ document.addEventListener("DOMContentLoaded", function () {
   saveButtons.forEach(function (button) {
     button.addEventListener("click", function () {
       const row = button.closest("tr");
-     
+
       const sharingTypeSelect = row.querySelector(".sharing-type-select");
       const professorsInputs = row.querySelectorAll(
         ".professors-container input"
@@ -39,12 +39,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
       const courseName = row.querySelector("td:nth-child(1)").textContent; // Assuming Course ID is in the second column
 
-      
+
       const sharingType = sharingTypeSelect.value;
       const professors = Array.from(professorsInputs).map(
         (input) => input.value
       );
-
+      const program = row.querySelector("td:nth-child(9)").textContent;
       if (confirm("Are you sure you want to save")) {
         fetch("/save-course", {
           method: "POST",
@@ -52,6 +52,7 @@ document.addEventListener("DOMContentLoaded", function () {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
+            program: program,
             courseName: courseName,
             sharingType: sharingType,
             professors: professors,
@@ -72,5 +73,31 @@ document.addEventListener("DOMContentLoaded", function () {
           });
       }
     });
+  });
+
+  const Submit = document.getElementById("HodSend");
+  document.getElementById("HodSend").addEventListener("click", async () => {
+    // Extract the department from the URL
+    const urlPath = window.location.pathname;
+
+    // Split the path into parts
+    const pathParts = urlPath.split('/');
+
+    // The department should be the second part of the path
+    const department = pathParts[2];
+
+    if (department) {
+      const response = await fetch(`/hod/${department}/saveFlag`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ department })
+      });
+      const result = await response.json();
+      console.log(result);
+    } else {
+      console.error("Department not specified in URL");
+    }
   });
 });

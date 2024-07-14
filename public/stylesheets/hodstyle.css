@@ -99,14 +99,16 @@ input[type="number"].credits-input {
   margin-top: 20px;
   padding: 10px 20px;
   background-color: #dc3545;
-  /* Red logout button background color */
-  color: #fff;
-  /* White text color */
-  border: none;
+  /*Redlogoutbuttonbackgroundcolor*/color: #fff;
+  /*Whitetextcolor*/border: none;
   border-radius: 4px;
   cursor: pointer;
   transition: background-color 0.3s ease;
-  /* Smooth transition */
+    /* Smooth transition */
+  -webkit-transition: background-color 0.3s ease;
+  -moz-transition: background-color 0.3s ease;
+  -ms-transition: background-color 0.3s ease;
+  -o-transition: background-color 0.3s ease;
 }
 
 .logout-button:hover {
