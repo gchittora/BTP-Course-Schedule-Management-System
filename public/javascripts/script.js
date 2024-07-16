@@ -432,6 +432,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     document.getElementById('viewTimetableButton').addEventListener('click', function() {
         // Redirect the user to the /timetable route
+        console.log("inside it");
         window.location.href = '/timetable';
     });
 

@@ -21,6 +21,45 @@ document.addEventListener("DOMContentLoaded", function() {
         event.target.addEventListener('click', saveChanges);
     }
 
+    document.getElementById('generatePdfBtn').addEventListener('click', function() {
+        alert('Button clicked, initiating PDF generation...');
+    
+        // Get the HTML content of the element with class 'content'
+        const contentElement = document.querySelector('.content');
+        const contentHTML = contentElement.innerHTML;
+    
+        // Define options for PDF generation
+        const opt = {
+            margin: [0.5, 0.01, 0.5, 0.01],
+            filename: 'timetable.pdf',
+            image: { 
+                type: 'jpeg', 
+                quality: 0.98, 
+                options: { 
+                    saturation: 2,
+                    exposure: 0.5
+                }  
+            },
+            html2canvas: { 
+                scale: 0.5,
+                useCORS: true 
+            },
+            jsPDF: { unit: 'in', format: 'a4', orientation: 'landscape' }
+        };
+    
+        // Generate PDF using html2pdf from the extracted HTML string
+        html2pdf().set(opt).from(element).save().then(() => {
+            console.log('PDF generated and download initiated');
+            alert('PDF generated and download initiated');
+        }).catch(error => {
+            console.error('Error generating PDF:', error);
+            alert('An error occurred while generating the PDF');
+        });
+    });
+    
+    
+    
+
     // Function to handle saving
     function saveChanges(event) {
         const row = event.target.closest('tr');
