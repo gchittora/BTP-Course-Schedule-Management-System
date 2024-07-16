@@ -6,134 +6,144 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Course Information</title>
   <link rel="stylesheet" href="stylesheets/style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
 </head>
 
 <body>
-  <div class="App" style="margin-left: 20px;">
+  <div class="App">
     <% if (typeof messages !=='undefined' && messages.error) { %>
       <div class="alert alert-danger">
         <%= messages.error %>
       </div>
-      <% } else if (typeof messages !=='undefined' && messages.success) { %>
-        <div class="alert alert-success">
-          <%= messages.success %>
-        </div>
-        <% } %>
-          <h1>Course Information</h1>
-          <div>
-            <button id="addEntryButton">Add Entry</button>
-          </div>
-          <form id="courseForm" style="display: none;">
-            <input type="text" id="courseNameInput"  placeholder="Course Name">
-            <input type="text" id="courseCodeInput" name="courseCode" placeholder="Course Code">
-            <select id="departmentSelect">
-              <option value="">Select Department</option>
-              <option value="CSE">CSE</option>
-              <option value="CCE">CCE</option>
-              <option value="MME">MME</option>
-              <option value="ECE">ECE</option>
-              <option value="HSS">HSS</option>
-              <option value="MTH">MTH</option>
-              <option value="PHY">PHY</option>  
-            </select>
-            <select id="ProgramSelect">
-              <option value="">Select Program</option>
-              <option value="B.Tech.">B.Tech.</option>
-              <option value="B.Tech.(Hons.)">B.Tech.(Hons.)</option>
-              <option value="Minors">Minors</option>
-              <option value="B.Tech.-M.Tech.(5-year Integrated DD)">B.Tech.-M.Tech.(5-year Integrated DD)</option>
-              <option value="M.Tech.">M.Tech.</option>
-              <option value="M.S.">M.S.</option>
-              <option value="M.Sc.">M.Sc.</option>
-              <option value="Ph.D.">Ph.D.</option>    
-            </select>
-            <input type="number" id="cseStudentsInput" name="numberOfStudents.CSE" placeholder="No. of CSE students">
-            <input type="number" id="cceStudentsInput" name="numberOfStudents.CCE" placeholder="No. of CCE students">
-            <input type="number" id="eceStudentsInput" name="numberOfStudents.ECE" placeholder="No. of ECE students">
-            <input type="number" id="cseDDStudentsInput" name="numberOfStudents.CSE_DD"
-              placeholder="No. of CSE DD students">
-            <input type="number" id="eceDDStudentsInput" name="numberOfStudents.ECE_DD"
-              placeholder="No. of ECE DD students">
-            <input type="number" id="mmeStudentsInput" name="numberOfStudents.MME" placeholder="No. of MME students">
-            <input type="number" id="mscPHYStudentsInput" name="numberOfStudents.MScPHY" placeholder="No. of MScPHY students">
-            <input type="number" id="mscMTHStudentsInput" name="numberOfStudents.MScMTH" placeholder="No. of MScMTH students">
+    <% } else if (typeof messages !=='undefined' && messages.success) { %>
+      <div class="alert alert-success">
+        <%= messages.success %>
+      </div>
+    <% } %>
 
+    <form action="/logout" method="POST" class="logout-form">
+      <button type="submit">Logout</button>
+    </form>
 
-            <input type="number" id="creditsInput" name="credits"placeholder="Credits">
-            <select id="semesterSelect">
-              <option value="">Select Semester</option>
-              <option value="Odd">Odd</option>
-              <option value="Even">Even</option>
-            </select>
-            <select id="courseTypeSelect">
-              <option value="">Select Course Type</option>
-              <option value="Institute Core">Institute Core</option>
-              <option value="Program Core">Program Core</option>
-              <option value="Basic Science Course">Basic Science Course</option>
-              <option value="Engineering Science Course">Engineering Science Course</option>
-              <option value="Mandatory Course">Mandatory Course</option>
-              <option value="Humanitites And Social Science And Management Course">Humanitites And Social Science And Management Course</option>
-              <option value="Program Elective">Program Specific Elective</option>
-              <option value="Open Elective">Open Elective</option>
-              <option value="Other Elective">Other Elective</option>
-            </select>
-            <div id="groupInputContainer" style="display: none;">
-              <input type="text" id="groupInput" name="groupInput"placeholder="Group">
-            </div>
-            <select id="sharingTypeSelect">
-              <option value="">Select Sharing Type</option>
-              <option value="Vertical">Vertical</option>
-              <option value="Horizontal">Horizontal</option>
-            </select>
-            <select id="yearSelect">
-              <option value="">Select Year</option>
-              <option value="1st">1st</option>
-              <option value="2nd">2nd</option>
-              <option value="3rd">3rd</option>
-              <option value="4th">4th</option>
-            </select>
-            <button id="addProfessorButton" type="button">Add Professor</button>
-            <button type="submit">Add</button>
-          </form>
-          <table id="courseTable">
-            <thead>
-              <tr>
-                <th>Course Name</th>
-                <th>Course ID</th>
-                <th>Department</th>
-                <th>Program</th>
-                <th>No. of CSE Students</th>
-                <th>No. of CCE Students</th>
-                <th>No. of ECE Students</th>
-                <th>No. of CSE DD Students</th>
-                <th>No. of ECE DD Students</th>
-                <th>No. of MME Students</th>
-                <th>No. of MSc PHY Students</th>
-                <th>No. of MSc MTH Students</th>
-                <th>Credits</th>
-                <th>Semester</th>
-                <th>Course Type</th>
-                <th>Group</th>
-                <th>Sharing Type</th>
-                <th>Year</th>
-                <th>Professors</th>
-                <th>Action</th>
-              </tr>
-            </thead>
-            <tbody>
-              <!-- Course entries will be inserted here dynamically -->
-            </tbody>
-          </table>
-          <button id="sendButton">Send</button>
-          <button id="generateButton" >Generate</button>
+    <h1>Course Information</h1>
+    <div>
+      <button id="addEntryButton">Add Entry</button>
+    </div>
 
-          
-          <button id="viewTimetableButton">View Timetable</button>
+    <form id="courseForm" style="display: none;">
+      <input type="text" id="courseNameInput" name="courseName" placeholder="Course Name">
+      <input type="text" id="courseCodeInput" name="courseCode" placeholder="Course Code">
 
-          <!-- Logout button -->
-          <form action="/logout" method="POST">
-            <button type="submit">Logout</button>
-          </form>
+      <select id="departmentSelect" name="department">
+        <option value="">Select Department</option>
+        <option value="CSE">CSE</option>
+        <option value="CCE">CCE</option>
+        <option value="MME">MME</option>
+        <option value="ECE">ECE</option>
+        <option value="HSS">HSS</option>
+        <option value="MTH">MTH</option>
+        <option value="PHY">PHY</option>
+      </select>
+
+      <select id="ProgramSelect" name="program">
+        <option value="">Select Program</option>
+        <option value="B.Tech.">B.Tech.</option>
+        <option value="B.Tech.(Hons.)">B.Tech.(Hons.)</option>
+        <option value="Minors">Minors</option>
+        <option value="B.Tech.-M.Tech.(5-year Integrated DD)">B.Tech.-M.Tech.(5-year Integrated DD)</option>
+        <option value="M.Tech.">M.Tech.</option>
+        <option value="M.S.">M.S.</option>
+        <option value="M.Sc.">M.Sc.</option>
+        <option value="Ph.D.">Ph.D.</option>
+      </select>
+
+      <input type="number" id="cseStudentsInput" name="numberOfStudents.CSE" placeholder="No. of CSE students">
+      <input type="number" id="cceStudentsInput" name="numberOfStudents.CCE" placeholder="No. of CCE students">
+      <input type="number" id="eceStudentsInput" name="numberOfStudents.ECE" placeholder="No. of ECE students">
+      <input type="number" id="cseDDStudentsInput" name="numberOfStudents.CSE_DD" placeholder="No. of CSE DD students">
+      <input type="number" id="eceDDStudentsInput" name="numberOfStudents.ECE_DD" placeholder="No. of ECE DD students">
+      <input type="number" id="mmeStudentsInput" name="numberOfStudents.MME" placeholder="No. of MME students">
+      <input type="number" id="mscPHYStudentsInput" name="numberOfStudents.MScPHY" placeholder="No. of MSc PHY students">
+      <input type="number" id="mscMTHStudentsInput" name="numberOfStudents.MScMTH" placeholder="No. of MSc MTH students">
+
+      <input type="number" id="creditsInput" name="credits" placeholder="Credits">
+
+      <select id="semesterSelect" name="semester">
+        <option value="">Select Semester</option>
+        <option value="Odd">Odd</option>
+        <option value="Even">Even</option>
+      </select>
+
+      <select id="courseTypeSelect" name="courseType">
+        <option value="">Select Course Type</option>
+        <option value="Institute Core">Institute Core</option>
+        <option value="Program Core">Program Core</option>
+        <option value="Basic Science Course">Basic Science Course</option>
+        <option value="Engineering Science Course">Engineering Science Course</option>
+        <option value="Mandatory Course">Mandatory Course</option>
+        <option value="Humanitites And Social Science And Management Course">Humanitites And Social Science And Management Course</option>
+        <option value="Program Elective">Program Specific Elective</option>
+        <option value="Open Elective">Open Elective</option>
+        <option value="Other Elective">Other Elective</option>
+      </select>
+
+      <div id="groupInputContainer" style="display: none;">
+        <input type="text" id="groupInput" name="groupInput" placeholder="Group">
+      </div>
+
+      <select id="sharingTypeSelect" name="sharingType">
+        <option value="">Select Sharing Type</option>
+        <option value="Vertical">Vertical</option>
+        <option value="Horizontal">Horizontal</option>
+      </select>
+
+      <select id="yearSelect" name="year">
+        <option value="">Select Year</option>
+        <option value="1st">1st</option>
+        <option value="2nd">2nd</option>
+        <option value="3rd">3rd</option>
+        <option value="4th">4th</option>
+      </select>
+
+      <button id="addProfessorButton" type="button">Add Professor</button>
+      <button type="submit">Add</button>
+    </form>
+
+    <table id="courseTable">
+      <thead>
+        <tr>
+          <th>Course Name</th>
+          <th>Course ID</th>
+          <th>Department</th>
+          <th>Program</th>
+          <th>No. of CSE Students</th>
+          <th>No. of CCE Students</th>
+          <th>No. of ECE Students</th>
+          <th>No. of CSE DD Students</th>
+          <th>No. of ECE DD Students</th>
+          <th>No. of MME Students</th>
+          <th>No. of MSc PHY Students</th>
+          <th>No. of MSc MTH Students</th>
+          <th>Credits</th>
+          <th>Semester</th>
+          <th>Course Type</th>
+          <th>Group</th>
+          <th>Sharing Type</th>
+          <th>Year</th>
+          <th>Professors</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Course entries will be inserted here dynamically -->
+      </tbody>
+    </table>
+
+    <label for="courseDateInput">Deadline</label>
+    <input type="date" id="courseDateInput" name="courseDate" placeholder="Course Date">
+    <button id="sendButton">Save Deadline and Send Mail</button>
+    <button id="generateButton">Generate Timetable</button>
+    <button id="viewTimetableButton">View Timetable</button>
   </div>
 
   <script src="javascripts/script.js"></script>

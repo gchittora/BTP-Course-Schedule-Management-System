@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Timetable</title>
+  <!-- Add your CSS links here -->
+  <link rel="stylesheet" href="/stylesheets/timetablestyle.css">
+</head>
+<body>
+  <h1>Timetable</h1>
+  <!-- Button to generate PDF -->
+  <button id="generatePdfBtn">Generate PDF</button>
+  <div class="content">
+    <h2>Monday, Wednesday, Friday</h2>
+    <table id="monWedFriTable">
+      <thead>
+        <tr>
+          <th>Course</th>
+          <th>Section</th>
+          <th>Professors</th>
+          <th>Lecture Hall</th>
+          <th>Start Time</th>
+          <th>End Time</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% timetableEntries.filter(entry=> entry.day === 'MON').forEach(entry => { %>
+          <tr>
+            <td>
+              <%= entry.course.name %>
+            </td>
+            <td>
+              <%= entry.section %>
+            </td>
+            <td>
+              <% entry.professors.forEach(professor=> { %>
+                <%= professor.name %><br>
+                  <% }) %>
+            </td>
+            <td>
+              <%= entry.lectureHall %>
+            </td>
+            <td>
+              <%= entry.startTime.hours %>:<%= entry.startTime.minutes %>
+            </td>
+            <td>
+              <%= entry.endTime.hours %>:<%= entry.endTime.minutes %>
+            </td>
+            <td><button class="edit-button">Edit</button></td>
+          </tr>
+          <% }) %>
+      </tbody>
+    </table>
+
+    <h2>Tuesday, Thursday</h2>
+    <table id="tueThuTable">
+      <thead>
+        <tr>
+          <th>Course</th>
+          <th>Section</th>
+          <th>Professors</th>
+          <th>Lecture Hall</th>
+          <th>Start Time</th>
+          <th>End Time</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% timetableEntries.filter(entry=> entry.day === 'TUE').forEach(entry => { %>
+          <tr>
+            <td>
+              <%= entry.course.name %>
+            </td>
+            <td>
+              <%= entry.section %>
+            </td>
+            <td>
+              <% entry.professors.forEach(professor=> { %>
+                <%= professor.name %><br>
+                  <% }) %>
+            </td>
+            <td>
+              <%= entry.lectureHall %>
+            </td>
+            <td>
+              <%= entry.startTime.hours %>:<%= entry.startTime.minutes %>
+            </td>
+            <td>
+              <%= entry.endTime.hours %>:<%= entry.endTime.minutes %>
+            </td>
+            <td><button class="edit-button">Edit</button></td>
+          </tr>
+          <% }) %>
+      </tbody>
+    </table>
+  </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.8.0/html2pdf.bundle.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <script src="javascripts/timetable_script.js"></script>
