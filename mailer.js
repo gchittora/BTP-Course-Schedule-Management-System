@@ -12,8 +12,8 @@ const transporter = nodemailer.createTransport({
     host: 'smtp.ethereal.email',
     port: 587,
     auth: {
-        user: "bennie.olson@ethereal.email",
-        pass: "NdG1tMD8hmhtvhnpB3",
+        user: "myles.dubuque@ethereal.email",
+        pass: "SEZJ5q4uKwgXx5yUGX",
     },
 });
 
@@ -103,6 +103,7 @@ async function notifyRegistrar(storing) {
 // Function to send initial email to HODs
 async function SendToHOD() {
     const hods = await User.find({ email: /HOD/ });
+    const storing = await Storing.findOne();
     hods.forEach(async (hod) => {
         const filePath = path.join(__dirname, 'views', 'NotifyHods.html');
         const html = fs.readFileSync(filePath, 'utf8');
@@ -110,7 +111,7 @@ async function SendToHOD() {
             from: "2joshua141@gmail.com",
             to: hod.email,
             subject: 'Notification for entering the course details',
-            html: html,
+            html: html.replace(/{{dead}}/g,storing.deadlinedate),
         };
         const info = await transporter.sendMail(message);
     });
