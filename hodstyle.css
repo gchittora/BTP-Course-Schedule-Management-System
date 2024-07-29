@@ -1,0 +1,128 @@
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f8f9fa;
+  /* Light gray background color */
+}
+
+/* Container styles */
+.App {
+  margin-left: 20px;
+}
+
+/* Heading styles */
+h1 {
+  margin-top: 20px;
+  margin-bottom: 30px;
+  color: #343a40;
+  /* Dark gray heading color */
+  text-align: center;
+}
+
+/* Table styles */
+#courseTable {
+  width: 100%;
+  margin-top: 20px;
+  border-collapse: collapse;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
+  /* Box shadow for table */
+}
+
+th,
+td {
+  padding: 12px;
+  border-bottom: 1px solid #dee2e6;
+  /* Light gray border color */
+  vertical-align: top;
+  /* Ensure top alignment for consistent appearance */
+  text-align: left;
+}
+
+/* Table header styles */
+thead {
+  background-color: #007bff;
+  /* Blue header background color */
+  color: #fff;
+  /* White text color */
+}
+
+/* Students list styles */
+.students-list {
+  list-style-type: none;
+  padding-left: 0;
+  margin: 0;
+}
+
+.students-list li {
+  margin-bottom: 5px;
+  padding-left: 0;
+  /* Ensures no padding to align properly */
+}
+
+/* Button styles */
+button {
+  padding: 10px 20px;
+  background-color: #007bff;
+  /* Blue button background color */
+  color: #fff;
+  /* White text color */
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  /* Smooth transition */
+}
+
+button:hover {
+  background-color: #0056b3;
+  /* Darker blue hover color */
+}
+
+/* Form styles */
+form {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+input[type="number"].credits-input {
+  padding: 10px;
+  border: 1px solid #ced4da;
+  /* Light gray border color */
+  border-radius: 4px;
+  font-size: 16px;
+}
+
+/* Logout button styles */
+.logout-button {
+  margin-top: 20px;
+  padding: 10px 20px;
+  background-color: #dc3545;
+  /*Redlogoutbuttonbackgroundcolor*/color: #fff;
+  /*Whitetextcolor*/border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+    /* Smooth transition */
+  -webkit-transition: background-color 0.3s ease;
+  -moz-transition: background-color 0.3s ease;
+  -ms-transition: background-color 0.3s ease;
+  -o-transition: background-color 0.3s ease;
+}
+
+.logout-button:hover {
+  background-color: #c82333;
+  /* Darker red hover color */
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
+  /* Firefox */
+}

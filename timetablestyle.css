@@ -1,0 +1,109 @@
+body {
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    background-color: #f2f2f2; /* gray-washed white */
+    color: #333333; /* slate gray */
+    margin: 0;
+    padding: 0;
+    animation: fadeIn 1s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    box-sizing: border-box;
+    animation: slideInFromTop 1s ease-in-out;
+}
+
+@keyframes slideInFromTop {
+    from {
+        transform: translateY(-50px);
+    }
+    to {
+        transform: translateY(0);
+    }
+}
+
+h1, h2 {
+    text-align: center;
+    color: #1d1d1d; /* dark slate gray */
+    animation: fadeIn 1s ease-in-out;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    animation: fadeIn 1s ease-in-out;
+    background-color: #ffffff; /* white background */
+    border-radius: 5px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+th, td {
+    border: 1px solid #dddddd;
+    padding: 15px;
+    text-align: left;
+    color: #333333; /* slate gray */
+}
+
+th {
+    background-color: #4a90e2; /* space blue */
+    color: #ffffff; /* white text */
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+tbody tr:nth-child(even) {
+    background-color: #f9f9f9; /* lighter gray for even rows */
+}
+
+tbody tr:hover {
+    background-color: #e9e9e9; /* slightly darker gray for hover */
+}
+
+.professors {
+    font-style: italic;
+    color: #666666; /* lighter slate gray */
+}
+
+.no-print {
+    display: none;
+}
+
+button, .edit-button {
+    background-color: #4a90e2; /* space blue */
+    color: #ffffff; /* white text */
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+button:hover, .edit-button:hover {
+    background-color: #357ab7; /* darker space blue */
+}
+
+@media print {
+    .no-print {
+        display: none;
+    }
+}
+.content {
+    margin: 20px;
+    opacity: 1;
+}
