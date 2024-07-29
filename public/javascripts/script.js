@@ -487,7 +487,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     loadingAnimation.style.display = 'none';
                     loadingAnimation.classList.remove('fade-out'); // Reset for next time
                     spinner.style.display = 'block'; // Reset spinner visibility
-                    messageParagraph.textContent = 'The process might take up to 90 sec'; // Reset message
+                    messageParagraph.textContent = 'The process might take up to 2 min'; // Reset message
                 }, 500); // Duration of the fade-out transition
             }, 1500);
     
