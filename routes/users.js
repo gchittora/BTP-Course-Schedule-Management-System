@@ -1,6 +1,5 @@
 const mongoose=require("mongoose")
 const plm=require('passport-local-mongoose')
-
 const userSchema=mongoose.Schema({
   username:String,
   name:String,

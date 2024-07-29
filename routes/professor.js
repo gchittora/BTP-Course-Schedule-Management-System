@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 const plm=require('passport-local-mongoose')
-mongoose.connect("mongodb+srv://gchittora123:HycP9127+@cluster1.3f48jss.mongodb.net/?retryWrites=true&w=majority&appName=Cluster1")
+mongoose.connect("mongodb://localhost:27017/pin");
 // Professor Model
 const professorSchema = new Schema({
     name: { type: String, required: true },

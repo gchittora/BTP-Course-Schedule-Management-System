@@ -2358,6 +2358,7 @@ router.post("/update-course", async (req, res) => {
     console.log("Received update request:", req.body);
     const {
       puranacourse,
+      puranaProgram,
       name,
       id,
       department,
@@ -2368,8 +2369,8 @@ router.post("/update-course", async (req, res) => {
       cseDDStudents,
       eceDDStudents,
       mmeStudents,
-      mscMTHStudents,
       mscPHYStudents,
+      mscMTHStudents,
       credits,
       semester,
       courseType,
@@ -2379,6 +2380,16 @@ router.post("/update-course", async (req, res) => {
       professors,
     } = req.body;
 
+    const parsedNumberOfStudents = {
+      CSE: parseInt(cseStudents),
+      CCE: parseInt(cceStudents),
+      ECE: parseInt(eceStudents),
+      CSE_DD: parseInt(cseDDStudents),
+      ECE_DD: parseInt(eceDDStudents),
+      MME: parseInt(mmeStudents),
+      MScPHY: parseInt(mscPHYStudents),
+      MScMTH: parseInt(mscMTHStudents)
+    };
     // Find the department ObjectId using the department name
     const departmentDoc = await Department.findOne({ name: department });
     if (!departmentDoc) {
@@ -2398,20 +2409,13 @@ router.post("/update-course", async (req, res) => {
 
     // Update the course in the database
     const updatedCourse = await Course.findOneAndUpdate(
-      { name: puranacourse }, // Assuming you're updating based on the course name
+      { name: puranacourse,program: puranaProgram }, // Assuming you're updating based on the course name
       {
         name: name,
         courseCode: id,
         department: departmentDoc,
         program: program,
-        cseStudents: cseStudents,
-        cceStudents: cceStudents,
-        eceStudents: eceStudents,
-        cseDDStudents: cseDDStudents,
-        eceDDStudents: eceDDStudents,
-        mmeStudents: mmeStudents,
-        mscMTHStudents: mscMTHStudents,
-        mscPHYStudents: mscPHYStudents,
+        numberOfStudents:parsedNumberOfStudents,
         credits: credits,
         semester: semester,
         courseType: courseType,
@@ -4337,7 +4341,7 @@ router.post("/generate-timetable", async (req, res) => {
       }
       await allocateTimSlots_II(iterator, 0, marker);
 
-      res.status(200).json({ message: "Timetable generation completed" });
+      res.status(200).json({ message: "Timetable generation completed. Please go to View TimeTable" });
     }
     //XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
     else {
