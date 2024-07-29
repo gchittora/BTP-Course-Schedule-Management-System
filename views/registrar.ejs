@@ -21,8 +21,8 @@
       </div>
     <% } %>
 
-    <form action="/logout" method="POST" class="logout-form">
-      <button type="submit">Logout</button>
+    <form action="/logout" method="POST" class="logout-form" id="logoutForm">
+      <button type="submit" title="Logging Out before closing the tab is highly recommended">Logout</button>
     </form>
 
     <h1>Course Information</h1>
@@ -112,7 +112,7 @@
     <table id="courseTable">
       <thead>
         <tr>
-          <th>Course Name</th>
+          <th title="Entering in this Format is highly appreciated:Full Name of Course(Short Form)">Course Name</th>
           <th>Course ID</th>
           <th>Department</th>
           <th>Program</th>
@@ -128,9 +128,9 @@
           <th>Semester</th>
           <th>Course Type</th>
           <th>Group</th>
-          <th>Sharing Type</th>
+          <th title="To be filled by the HOD of the respective department">Sharing Type</th>
           <th>Year</th>
-          <th>Professors</th>
+          <th title="To be filled by the HOD of the respective department">Professors</th>
           <th>Action</th>
         </tr>
       </thead>
@@ -141,11 +141,14 @@
 
     <label for="courseDateInput">Deadline</label>
     <input type="date" id="courseDateInput" name="courseDate" placeholder="Course Date">
-    <button id="sendButton">Save Deadline and Send Mail</button>
+    <button id="sendButton" title="Before clicking on this button, make sure that the deadline on the left is filled. If it is, then click this button. Clicking this button will save the entered deadline into the database, and a notification email will be sent to all the HODs, asking them to fill in the details before the given deadline. Once all the HODs have filled in their details, the registrar will receive an email notifying him/her that all the HODs have completed their submissions. If for some reason any HOD(s) do not fill in their details, a reminder email will be sent to the respective HOD(s) one day before the deadline as a reminder.">Save Deadline and Send Mail</button>
     <button id="generateButton">Generate Timetable</button>
     <button id="viewTimetableButton">View Timetable</button>
   </div>
-
+  <div id="loadingAnimation" class="loading-animation" style="display: none;">
+    <div class="spinner"></div>
+    <p>The process might take up to 90 sec</p>
+  </div>
   <script src="javascripts/script.js"></script>
 </body>
 

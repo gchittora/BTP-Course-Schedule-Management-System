@@ -1,18 +1,29 @@
 <% include ./partials/header.ejs %>
-<div class="w-full h-screen bg-zinc-300 flex flex-col items-center justify-center">
-  <img src="https://www.wonderskool.com//uploads/1587710975_LNMIIT.jpg" class="mt-8 mb-4 w-[30%] h-auto" alt="LNMIIT Image">
-  <div class="flex-grow bg-zinc-300">
-    <div class="w-[20vw] h-[60vh] bg-white mx-auto px-20 py-5 rounded-md flex flex-col items-center">
-      <h1 class="text-3xl tracking-tighter text-center capitalize font-semibold text-zinc-500 leading-none">Course Schedule Management System</h1>
-      <form action="/login" method="post" class="mt-4">
-        <input class="block border-4 mt-2 w-full px-3 py-2"type="text" name="username" placeholder="username">
-        <input class="block border-4 mt-2 w-full px-3 py-2"type="text" name="email" placeholder="email">
-        <input class="block border-4 mt-2 w-full px-3 py-2"type="password" name="password" placeholder="password">
-        <input class="block border-4 mt-2 w-full px-3 py-2 bg-red-600 text-white rounded-full"type="submit" value="Login">
-        <a class="font-bold mt-2 text-black-100 inline-block" href="">Forgot password?</a>
-      </form>
-      <a class="text-blue-400 font-semibold text-center mt-4" href="/register">Don't have an account? Sign Up</a>
-    </div>
+<link rel="stylesheet" href="stylesheets/loginPageStyles.css">
+<div class="container">
+  <img src="https://www.wonderskool.com//uploads/1587710975_LNMIIT.jpg" class="image" alt="LNMIIT Image">
+  <div class="content">
+    <h1 class="title">Course Schedule Management System</h1>
+    <form action="/login" method="post" class="form">
+      <input class="input" type="text" name="username" placeholder="username">
+      <input class="input" type="text" name="email" placeholder="email">
+      <input class="input" type="password" name="password" placeholder="password">
+      <input class="submit" type="submit" value="Login">
+      <a class="link" href="">Forgot password?</a>
+    </form>
+    <a class="register-link" href="/register">Don't have an account? Sign Up</a>
+  </div>
+</div>
+<div class="footer">
+  <div class="developers">
+    <h2 class="footer-title">Developers:</h2>
+    <p class="developer-info"><strong>Garvit Chittora</strong>, Roll Number: 21UCS079, Email: 21ucs079@lnmiit.ac.in</p>
+    <p class="developer-info"><strong>Joshua Joy</strong>, Roll Number: 21UCS100, Email: 21ucs100@lnmiit.ac.in</p>
+  </div>
+  <br>
+  <div class="footer-text">
+    <p>Course Schedule Management System is designed to streamline the scheduling process, making it efficient and user-friendly.</p>
+    <p>&copy; 2024 LNMIIT. All rights reserved.</p>
   </div>
 </div>
 <% include ./partials/footer.ejs %>
