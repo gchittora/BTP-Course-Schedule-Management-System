@@ -4,6 +4,12 @@ document.addEventListener("DOMContentLoaded", function () {
     const courseTableBody = document.querySelector("#courseTable tbody");
     const DeadLine=document.getElementById("deadLineButton");
 
+    document.getElementById('logoutForm').addEventListener('submit', function(event) {
+        if (!confirm('Are you sure you want to logout?')) {
+          event.preventDefault(); // Prevent form submission
+        }
+      });
+
     document.getElementById('sendButton').onclick = function() {
         const deadLineDate = document.getElementById('courseDateInput').value;
         console.log(deadLineDate);
@@ -230,10 +236,34 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 
+    /*
+    const newCourse = {
+            name: document.getElementById("courseNameInput").value,
+            id: document.getElementById("courseCodeInput").value,
+            department: document.getElementById("departmentSelect").value,
+            program:document.getElementById("ProgramSelect").value,
+            cseStudents: document.getElementById("cseStudentsInput").value,
+            cceStudents: document.getElementById("cceStudentsInput").value,
+            eceStudents: document.getElementById("eceStudentsInput").value,
+            cseDDStudents: document.getElementById("cseDDStudentsInput").value,
+            eceDDStudents: document.getElementById("eceDDStudentsInput").value,
+            mmeStudents: document.getElementById("mmeStudentsInput").value,
+            mscPHYStudents: document.getElementById("mscPHYStudentsInput").value,
+            mscMTHStudents: document.getElementById("mscMTHStudentsInput").value,
+            credits: document.getElementById("creditsInput").value,
+            semester: document.getElementById("semesterSelect").value,
+            courseType: document.getElementById("courseTypeSelect").value,
+            groupInput:document.getElementById("groupInput").value,
+            sharingType: document.getElementById("sharingTypeSelect").value,
+            year: document.getElementById("yearSelect").value,
+            professors: Array.from(document.querySelectorAll(".professors-container input")).map(input => input.value),
+        };
+    */
     function editCourse(index) {
         const course = courses[index];
         const row = document.querySelectorAll("#courseTable tbody tr")[index];
         const puranacourse=course.name;
+        const puranaProgram=course.program;
         // Replace the course data in the row with input fields for editing
         row.innerHTML = `
             <td><input type="text" id="editNameInput" value="${course.name}"></td>
@@ -252,7 +282,6 @@ document.addEventListener("DOMContentLoaded", function () {
             <td><input type="text" id="editSemesterInput" value="${course.semester}"></td>
             <td><input type="text" id="editCourseTypeInput" value="${course.courseType}"></td>
             <td><input type="text" id="editgroupInput" value="${course.groupInput}"></td>
-    
             <td><input type="text" id="editSharingTypeInput" value="${course.sharingType}"></td>
             <td><input type="text" id="editYearInput" value="${course.year}"></td>
             <td><input type="text" id="editProfessorsInput" value="${course.professors.join(", ")}"></td>
@@ -262,7 +291,7 @@ document.addEventListener("DOMContentLoaded", function () {
     
         // Add event listener for update button
         row.querySelector(".update-button").addEventListener("click", () => {
-            updateCourse(index,puranacourse);
+            updateCourse(index,puranacourse,puranaProgram);
         });
     
         // Add event listener for cancel button
@@ -271,12 +300,12 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
     
-    function updateCourse(index,puranacourse) {
+    function updateCourse(index,puranacourse,puranaProgram) {
         const row = document.querySelectorAll("#courseTable tbody tr")[index];
     
         // Get updated course data from input fields
         const updatedCourse = {
-            puranacourse,
+            puranacourse,puranaProgram,
             name: row.querySelector("#editNameInput").value,
             id: row.querySelector("#editCodeInput").value,
             department: row.querySelector("#editDepartmentInput").value,
@@ -321,10 +350,6 @@ document.addEventListener("DOMContentLoaded", function () {
             // Handle the error, e.g., show an alert to the user
         });
     }
-    
-    
-    
-    
 
     const addEntryButton = document.querySelector('#addEntryButton');
 
@@ -415,6 +440,11 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     document.getElementById('generateButton').addEventListener('click', async () => {
+        const loadingAnimation = document.getElementById('loadingAnimation');
+        const spinner = loadingAnimation.querySelector('.spinner');
+        const messageParagraph = loadingAnimation.querySelector('p');
+        loadingAnimation.style.display = 'flex'; // Show loading animation
+    
         try {
             const response = await fetch('/generate-timetable', {
                 method: 'POST',
@@ -423,12 +453,49 @@ document.addEventListener("DOMContentLoaded", function () {
                 }
             });
             const data = await response.json();
-            alert(data.message); // Display success message
+    
+            if (data) {
+                console.log("TESTING BUFFER");
+            }
+    
+            // Hide spinner and show the message
+            spinner.style.display = 'none';
+            messageParagraph.textContent = data.message;
+    
+            // Hide loading animation with a fade-out effect after 1.5 seconds
+            setTimeout(() => {
+                loadingAnimation.classList.add('fade-out');
+                setTimeout(() => {
+                    loadingAnimation.style.display = 'none';
+                    loadingAnimation.classList.remove('fade-out'); // Reset for next time
+                    spinner.style.display = 'block'; // Reset spinner visibility
+                    messageParagraph.textContent = 'The process might take up to 90 sec'; // Reset message
+                }, 500); // Duration of the fade-out transition
+            }, 1500);
+    
         } catch (error) {
             console.error('Error generating timetable:', error);
-            alert('Error generating timetable. Please try again.');
+    
+            // Hide spinner and show an error message
+            spinner.style.display = 'none';
+            messageParagraph.textContent = 'Error generating timetable. Please try again.';
+    
+            // Hide loading animation with a fade-out effect after 1.5 seconds
+            setTimeout(() => {
+                loadingAnimation.classList.add('fade-out');
+                setTimeout(() => {
+                    loadingAnimation.style.display = 'none';
+                    loadingAnimation.classList.remove('fade-out'); // Reset for next time
+                    spinner.style.display = 'block'; // Reset spinner visibility
+                    messageParagraph.textContent = 'The process might take up to 90 sec'; // Reset message
+                }, 500); // Duration of the fade-out transition
+            }, 1500);
+    
+        } finally {
+            loadingAnimation.style.display = 'flex'; // Ensure the animation is shown in case of error
         }
     });
+    
 
     document.getElementById('viewTimetableButton').addEventListener('click', function() {
         // Redirect the user to the /timetable route
