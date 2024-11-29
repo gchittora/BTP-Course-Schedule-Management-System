@@ -1,5 +1,5 @@
 # BTP-Course-Schedule-Management-System
-Intelligent Timetable Management System Using DFS Backtracking Efficient scheduling of
+Intelligent Timetable Management System using DFS Backtracking Efficient scheduling of
 academic timetables is a critical challenge for educational institutions, as it involves balancing
 multiple constraints while ensuring smooth operations. This paper introduces a Timetable
 Management System that utilizes the Depth-First Search (DFS) Backtracking algorithm to
