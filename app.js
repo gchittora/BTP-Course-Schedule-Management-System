@@ -5,12 +5,13 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const expressSession = require("express-session");
 const passport = require('passport');
-const favicon = require('serve-favicon');
+
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
 var app = express();
+
 
 // Static files middleware
 app.use(express.static(path.join(__dirname, 'public')));
