@@ -53,5 +53,3 @@ Joshua Joy, Roll Number: 21UCS100, Email: 21ucs100@lnmiit.ac.in
 Under the Guidance of
 
 Dr. Saurabh Kumar
-
-Link: https://btp-course-schedule-management-system-3.onrender.com/
