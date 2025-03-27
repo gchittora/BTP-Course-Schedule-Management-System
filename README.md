@@ -53,9 +53,8 @@ Joshua Joy, Roll Number: 21UCS100, Email: 21ucs100@lnmiit.ac.in
 Under the Guidance of
 
 Dr. Saurabh Kumar
-The application has been successfully deployed on an AWS EC2 instance and is accessible at:
+The application has been successfully deployed on an AWS EC2 instance
 
-🔗 http://65.1.201.1/
 Deployment Stack:
 
     EC2 Instance: Hosts the application
