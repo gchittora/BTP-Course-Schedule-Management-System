@@ -2932,8 +2932,6 @@ async function checkProfmapping(professorNames, it, timeSlot) {
     throw error;
   }
 }
-
-// async function allocateTimeSlotForDefaultSections(course) {
 //   try {
 //     // Specify the sections and their corresponding time slots
 //     const sectionsAndTimeSlots = [
@@ -2996,37 +2994,7 @@ async function checkProfmapping(professorNames, it, timeSlot) {
 //         sectionBusyMapping[section] = {};
 //       }
 //       if (!sectionBusyMapping[section][day]) {
-//         sectionBusyMapping[section][day] = [];
-//       }
-//       sectionBusyMapping[section][day].push(
-//         {
-//           startTime: startTime,
-//           endTime: endTime,
-//           group: course.group
-//         }
-//       )
-//       // Update professorMapping with the allocated time slot
-//       for (const professorName of professors) {
-//         if (!professorMapping[professorName]) {
-//           professorMapping[professorName] = {};
-//         }
-//         if (!professorMapping[professorName][day]) {
-//           professorMapping[professorName][day] = [];
-//         }
-//         professorMapping[professorName][day].push({
-//           startTime: item.startTime,
-//           endTime: item.endTime,
-//           sharingType: course.sharingType,
-//         });
-//       }
-//     }
-//   } catch (error) {
-//     console.error(
-//       `Error while allocating time slots for default sections: ${error}
-//     `);
-//     throw error;
-//   }
-// }
+// 
 
 
 async function allocateTimSlots_II_Even(iterator, i, marker) {
